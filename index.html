@@ -1,0 +1,4943 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>YORI - Ton refuge créatif</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=Outfit:wght@300;400;500;600;700&family=Caveat:wght@400;600&display=swap" rel="stylesheet">
+    <style>
+        /* ============================================
+           VARIABLES & RESET
+        ============================================ */
+        :root {
+            /* Colors */
+            --cream: #F5F1E8;
+            --ink: #3D3428;
+            --terracotta: #D4A589;
+            --terracotta-dark: #B8876E;
+            
+            --powder-blue: #B4C7D9;
+            --clay-pink: #E8C5C0;
+            --sage: #C9D1BC;
+            --honey: #F4E4C1;
+            --lavender: #D1C9D9;
+            
+            --success: #A8C69F;
+            --alert: #E8B4A0;
+            --neutral: #DDDAD3;
+            
+            /* Typography */
+            --font-display: 'DM Serif Display', serif;
+            --font-body: 'Outfit', sans-serif;
+            --font-handwritten: 'Caveat', cursive;
+            
+            /* Spacing */
+            --space-xs: 4px;
+            --space-sm: 8px;
+            --space-md: 16px;
+            --space-lg: 24px;
+            --space-xl: 32px;
+            --space-2xl: 48px;
+            
+            /* Border radius */
+            --radius-sm: 8px;
+            --radius-md: 12px;
+            --radius-lg: 20px;
+            --radius-full: 9999px;
+            
+            /* Shadows */
+            --shadow-sm: 0 2px 8px rgba(61, 52, 40, 0.06);
+            --shadow-md: 0 4px 16px rgba(61, 52, 40, 0.08);
+            --shadow-lg: 0 8px 32px rgba(61, 52, 40, 0.12);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            background-color: var(--cream);
+            color: var(--ink);
+            line-height: 1.6;
+            overflow-x: hidden;
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+        }
+        
+        /* ============================================
+           UTILITIES
+        ============================================ */
+        .hidden {
+            display: none !important;
+        }
+        
+        .fade-in {
+            animation: fadeIn 0.3s ease-in;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes slideUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-10px); }
+            75% { transform: translateX(10px); }
+        }
+        
+        /* ============================================
+           LAYOUT
+        ============================================ */
+        .container {
+            max-width: 430px;
+            min-height: 100vh;
+            margin: 0 auto;
+            background: var(--cream);
+            box-shadow: 0 0 40px rgba(0,0,0,0.1);
+        }
+        
+        .screen {
+            min-height: 100vh;
+            padding: var(--space-lg);
+            display: none;
+        }
+        
+        .screen.active {
+            display: flex;
+            flex-direction: column;
+        }
+        
+        /* ============================================
+           TYPOGRAPHY
+        ============================================ */
+        h1 {
+            font-family: var(--font-display);
+            font-size: 36px;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+        
+        h2 {
+            font-family: var(--font-display);
+            font-size: 28px;
+            line-height: 1.2;
+            margin-bottom: var(--space-md);
+        }
+        
+        h3 {
+            font-family: var(--font-display);
+            font-size: 22px;
+            line-height: 1.3;
+            margin-bottom: var(--space-sm);
+        }
+        
+        p {
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(61, 52, 40, 0.8);
+        }
+        
+        /* ============================================
+           COMPONENTS
+        ============================================ */
+        
+        /* Button */
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            padding: 14px 32px;
+            border: none;
+            border-radius: var(--radius-md);
+            font-family: var(--font-body);
+            font-weight: 500;
+            font-size: 16px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            white-space: nowrap;
+        }
+        
+        .btn-primary {
+            background: var(--terracotta);
+            color: var(--cream);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .btn-primary:hover {
+            background: var(--terracotta-dark);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+        
+        .btn-primary:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: var(--ink);
+            border: 1.5px solid rgba(61, 52, 40, 0.15);
+        }
+        
+        .btn-ghost {
+            background: transparent;
+            color: var(--terracotta);
+        }
+        
+        .btn-full {
+            width: 100%;
+        }
+        
+        /* Card */
+        .card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+        }
+        
+        .card-elevated {
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Badge */
+        .badge {
+            display: inline-block;
+            padding: 6px 16px;
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        
+        .badge-primary {
+            background: var(--terracotta);
+            color: var(--cream);
+        }
+        
+        .badge-success {
+            background: var(--success);
+            color: var(--ink);
+        }
+        
+        /* ============================================
+           SCREENS - ONBOARDING
+        ============================================ */
+        #onboarding-screen {
+            text-align: center;
+            justify-content: center;
+        }
+        
+        .onboarding-logo {
+            width: 120px;
+            height: 120px;
+            margin: 0 auto var(--space-xl);
+            background: var(--terracotta);
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 60px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .onboarding-title {
+            margin-bottom: var(--space-md);
+        }
+        
+        .onboarding-subtitle {
+            font-size: 18px;
+            margin-bottom: var(--space-2xl);
+            max-width: 320px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        /* ============================================
+           SCREENS - HOME
+        ============================================ */
+        #home-screen {
+            justify-content: flex-start;
+        }
+        
+        .header {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .greeting {
+            font-size: 32px;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .subtitle {
+            font-size: 16px;
+        }
+        
+        .daily-quote-card {
+            background: linear-gradient(135deg, rgba(201, 209, 188, 0.2), rgba(180, 199, 217, 0.2));
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+            border-radius: var(--radius-lg);
+        }
+        
+        .quote-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .quote-label {
+            font-size: 12px;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(61, 52, 40, 0.5);
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+        }
+        
+        .quote-text {
+            font-family: var(--font-display);
+            font-size: 18px;
+            line-height: 1.6;
+            color: var(--ink);
+            font-style: italic;
+        }
+        
+        .envelope-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-xl);
+            margin: var(--space-xl) 0;
+        }
+        
+        .envelope-card {
+            text-align: center;
+            width: 100%;
+        }
+        
+        .envelope-visual {
+            width: 200px;
+            height: 250px;
+            margin: 0 auto var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 120px;
+            cursor: pointer;
+            transition: transform 0.3s ease;
+            position: relative;
+        }
+        
+        .envelope-visual:hover {
+            transform: scale(1.05);
+        }
+        
+        .envelope-visual.shake {
+            animation: shake 0.5s ease;
+        }
+        
+        .envelope-title {
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .envelope-description {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .countdown {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--terracotta);
+            margin-top: var(--space-md);
+        }
+        
+        .streak-badge {
+            background: var(--honey);
+            padding: var(--space-sm) var(--space-md);
+            border-radius: var(--radius-full);
+            display: inline-block;
+            margin: var(--space-lg) auto;
+            font-weight: 500;
+        }
+        
+        .quick-actions {
+            display: flex;
+            justify-content: space-around;
+            margin-top: var(--space-xl);
+            gap: var(--space-md);
+        }
+        
+        .quick-action {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .quick-action:hover {
+            transform: translateY(-3px);
+        }
+        
+        .quick-action-icon {
+            font-size: 32px;
+        }
+        
+        .quick-action-text {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.7);
+        }
+        
+        /* ============================================
+           SCREENS - ENVELOPE OPENING
+        ============================================ */
+        #envelope-opening-screen {
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            background: var(--cream);
+        }
+        
+        .opening-title {
+            margin-bottom: var(--space-lg);
+        }
+        
+        .opening-envelope {
+            width: 300px;
+            height: 350px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 150px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: var(--space-xl) 0;
+        }
+        
+        .opening-envelope:hover {
+            transform: scale(1.1);
+        }
+        
+        .opening-envelope.tearing {
+            animation: tear 1.2s ease-out forwards;
+        }
+        
+        @keyframes tear {
+            0% { transform: scale(1) rotate(0deg); opacity: 1; }
+            50% { transform: scale(1.2) rotate(5deg); opacity: 0.8; }
+            100% { transform: scale(0.8) rotate(10deg); opacity: 0; }
+        }
+        
+        .hint-text {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.5);
+        }
+        
+        /* Reveal Cards */
+        .reveal-container {
+            width: 100%;
+        }
+        
+        .reveal-title {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .assets-grid {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .asset-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-md);
+            text-align: center;
+            animation: slideUp 0.5s ease-out forwards;
+            opacity: 0;
+        }
+        
+        .asset-card:nth-child(1) { animation-delay: 0.1s; }
+        .asset-card:nth-child(2) { animation-delay: 0.3s; }
+        .asset-card:nth-child(3) { animation-delay: 0.5s; }
+        
+        .rarity-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: var(--radius-md);
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .rarity-common {
+            background: var(--sage);
+            color: var(--ink);
+        }
+        
+        .rarity-rare {
+            background: var(--lavender);
+            color: var(--ink);
+        }
+        
+        .rarity-legendary {
+            background: var(--honey);
+            color: var(--ink);
+        }
+        
+        .asset-visual {
+            width: 120px;
+            height: 120px;
+            margin: var(--space-md) auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 80px;
+        }
+        
+        .asset-artist {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        /* ============================================
+           SCREENS - JOURNAL EDITOR
+        ============================================ */
+        #journal-editor-screen {
+            padding: 0;
+        }
+        
+        .editor-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            background: var(--cream);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .icon-btn {
+            width: 40px;
+            height: 40px;
+            border: none;
+            background: transparent;
+            cursor: pointer;
+            font-size: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: var(--radius-sm);
+            transition: background 0.2s ease;
+        }
+        
+        .icon-btn:hover {
+            background: rgba(61, 52, 40, 0.05);
+        }
+        
+        .editor-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .editor-canvas-container {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            padding: var(--space-lg);
+            overflow-y: auto;
+        }
+        
+        .formatting-toolbar {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: white;
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            overflow-x: auto;
+        }
+        
+        .toolbar-section {
+            display: flex;
+            gap: var(--space-xs);
+        }
+        
+        .toolbar-divider {
+            width: 1px;
+            height: 24px;
+            background: rgba(61, 52, 40, 0.15);
+        }
+        
+        .toolbar-btn {
+            width: 36px;
+            height: 36px;
+            border: 1px solid rgba(61, 52, 40, 0.15);
+            border-radius: var(--radius-sm);
+            background: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .toolbar-btn:hover {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+        }
+        
+        .toolbar-btn.active {
+            background: var(--terracotta);
+            color: white;
+            border-color: var(--terracotta);
+        }
+        
+        .toolbar-btn.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .toolbar-btn.locked:hover {
+            border-color: rgba(61, 52, 40, 0.15);
+            background: white;
+        }
+        
+        .canvas-wrapper {
+            background: white;
+            border-radius: var(--radius-md);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--space-lg);
+            position: relative;
+            overflow: hidden;
+            flex: 1;
+        }
+        
+        .canvas {
+            min-height: 400px;
+            padding: var(--space-lg);
+            position: relative;
+        }
+        
+        .canvas-background {
+            position: absolute;
+            inset: 0;
+            opacity: 0.3;
+            background-size: cover;
+            background-position: center;
+            pointer-events: none;
+        }
+        
+        .canvas-textarea {
+            width: 100%;
+            min-height: 200px;
+            border: none;
+            outline: none;
+            font-family: var(--font-handwritten);
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--ink);
+            background: transparent;
+            resize: none;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .canvas-textarea::placeholder {
+            color: rgba(61, 52, 40, 0.4);
+        }
+        
+        .canvas-stickers {
+            position: relative;
+            z-index: 2;
+            pointer-events: none;
+        }
+        
+        .sticker {
+            position: absolute;
+            cursor: move;
+            user-select: none;
+            pointer-events: all;
+            transition: transform 0.1s ease;
+        }
+        
+        .sticker:hover {
+            transform: scale(1.05);
+        }
+        
+        .sticker.dragging {
+            opacity: 0.7;
+            z-index: 1000;
+        }
+        
+        /* Asset Palette */
+        .asset-palette {
+            background: white;
+            border-top: 1px solid rgba(61, 52, 40, 0.08);
+            padding: var(--space-lg);
+        }
+        
+        .palette-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+        }
+        
+        .palette-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+        }
+        
+        .palette-tabs {
+            display: flex;
+            gap: var(--space-xs);
+            margin-bottom: var(--space-md);
+            overflow-x: auto;
+            padding-bottom: var(--space-xs);
+        }
+        
+        .palette-tab {
+            padding: 8px 12px;
+            border: 1px solid rgba(61, 52, 40, 0.15);
+            border-radius: var(--radius-md);
+            background: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        
+        .palette-tab:hover {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+        }
+        
+        .palette-tab.active {
+            background: var(--terracotta);
+            color: var(--cream);
+            border-color: var(--terracotta);
+        }
+        
+        .palette-tab.locked {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+        
+        .palette-tab.locked:hover {
+            border-color: rgba(61, 52, 40, 0.15);
+            background: white;
+        }
+        
+        .palette-collapsed .palette-grid,
+        .palette-collapsed .palette-tabs {
+            display: none;
+        }
+        
+        .palette-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(60px, 1fr));
+            gap: var(--space-sm);
+            max-height: 200px;
+            overflow-y: auto;
+        }
+        
+        .palette-item {
+            aspect-ratio: 1;
+            border: 1px solid rgba(61, 52, 40, 0.1);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            background: white;
+            font-size: 32px;
+        }
+        
+        .palette-item:hover {
+            border-color: var(--terracotta);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* ============================================
+           SCREENS - COLLECTION
+        ============================================ */
+        #collection-screen {
+            padding-top: var(--space-lg);
+        }
+        
+        .collection-header {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .collection-stats {
+            display: flex;
+            justify-content: space-between;
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .stat-card {
+            flex: 1;
+            text-align: center;
+        }
+        
+        .stat-number {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--terracotta);
+            display: block;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .stat-label {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .collection-item {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: transform 0.2s ease;
+            cursor: pointer;
+        }
+        
+        .collection-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .collection-item-icon {
+            font-size: 48px;
+            margin-bottom: var(--space-xs);
+        }
+        
+        .collection-item-name {
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.7);
+        }
+        
+        /* Navigation */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            max-width: 430px;
+            background: white;
+            border-top: 1px solid rgba(61, 52, 40, 0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: var(--space-sm) 0;
+            box-shadow: 0 -2px 10px rgba(0,0,0,0.05);
+        }
+        
+        .nav-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            cursor: pointer;
+            padding: var(--space-sm);
+            color: rgba(61, 52, 40, 0.5);
+            transition: color 0.2s ease;
+            text-decoration: none;
+        }
+        
+        .nav-item:hover,
+        .nav-item.active {
+            color: var(--terracotta);
+        }
+        
+        .nav-icon {
+            font-size: 24px;
+        }
+        
+        .nav-label {
+            font-size: 11px;
+            font-weight: 500;
+        }
+        
+        /* Modal */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            padding: var(--space-lg);
+        }
+        
+        .modal-overlay.active {
+            display: flex;
+        }
+        
+        .modal {
+            background: var(--cream);
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            max-width: 400px;
+            width: 100%;
+            box-shadow: var(--shadow-lg);
+            animation: slideUp 0.3s ease;
+        }
+        
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .modal-title {
+            font-size: 24px;
+        }
+        
+        .modal-close {
+            width: 32px;
+            height: 32px;
+            border: none;
+            background: rgba(61, 52, 40, 0.1);
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+        }
+        
+        .modal-body {
+            margin-bottom: var(--space-lg);
+        }
+        
+        /* Mood Picker */
+        .mood-colors {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .mood-color {
+            aspect-ratio: 1;
+            border-radius: 50%;
+            border: 3px solid transparent;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+        }
+        
+        .mood-color:hover {
+            transform: scale(1.1);
+        }
+        
+        .mood-color.selected {
+            border-color: var(--ink);
+            box-shadow: var(--shadow-md);
+        }
+        
+        /* Premium Badge */
+        .premium-badge {
+            background: linear-gradient(135deg, var(--honey), var(--terracotta));
+            color: var(--ink);
+            padding: 4px 12px;
+            border-radius: var(--radius-full);
+            font-size: 11px;
+            font-weight: 600;
+            display: inline-block;
+            margin-left: var(--space-sm);
+        }
+        
+        /* Loading */
+        .loading {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(245, 241, 232, 0.95);
+            z-index: 10000;
+            align-items: center;
+            justify-content: center;
+            flex-direction: column;
+            gap: var(--space-lg);
+        }
+        
+        .loading.active {
+            display: flex;
+        }
+        
+        .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid rgba(61, 52, 40, 0.1);
+            border-top-color: var(--terracotta);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+        
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+        
+        /* Responsive */
+        @media (max-width: 430px) {
+            .container {
+                box-shadow: none;
+            }
+        }
+        
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 100px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--ink);
+            color: var(--cream);
+            padding: var(--space-md) var(--space-lg);
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-lg);
+            z-index: 9998;
+            animation: slideUp 0.3s ease;
+            max-width: 90%;
+            text-align: center;
+        }
+        
+        /* ============================================
+           JOURNAL HISTORY
+        ============================================ */
+        .journal-entries-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .journal-entry-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            box-shadow: var(--shadow-sm);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border-left: 4px solid transparent;
+        }
+        
+        .journal-entry-card:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .entry-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .entry-date {
+            font-family: var(--font-display);
+            font-size: 16px;
+            color: var(--ink);
+        }
+        
+        .entry-mood-indicator {
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid rgba(61, 52, 40, 0.1);
+        }
+        
+        .entry-preview {
+            font-family: var(--font-handwritten);
+            font-size: 15px;
+            line-height: 1.6;
+            color: rgba(61, 52, 40, 0.7);
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        
+        .entry-preview.blurred {
+            filter: blur(4px);
+            user-select: none;
+        }
+        
+        .entry-stats {
+            display: flex;
+            gap: var(--space-md);
+            margin-top: var(--space-sm);
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.5);
+        }
+        
+        /* ============================================
+           PIXEL YEAR
+        ============================================ */
+        .pixel-year-grid {
+            display: grid;
+            grid-template-columns: repeat(52, 1fr);
+            gap: 3px;
+            padding: var(--space-md);
+            background: white;
+            border-radius: var(--radius-md);
+            overflow-x: auto;
+        }
+        
+        .pixel {
+            aspect-ratio: 1;
+            min-width: 6px;
+            border-radius: 2px;
+            background: var(--neutral);
+            cursor: pointer;
+            transition: transform 0.2s ease;
+        }
+        
+        .pixel:hover {
+            transform: scale(1.3);
+        }
+        
+        .pixel.filled {
+            box-shadow: 0 0 4px rgba(0,0,0,0.1);
+        }
+        
+        .mood-legend {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 14px;
+        }
+        
+        .legend-color {
+            width: 20px;
+            height: 20px;
+            border-radius: 4px;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        /* ============================================
+           SETTINGS
+        ============================================ */
+        .settings-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .setting-item {
+            background: white;
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+            box-shadow: var(--shadow-sm);
+            gap: var(--space-md);
+        }
+        
+        .setting-label {
+            font-weight: 500;
+            font-size: 15px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        
+        .setting-description {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 28px;
+            flex-shrink: 0;
+        }
+        
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+        
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            inset: 0;
+            background: rgba(61, 52, 40, 0.2);
+            border-radius: var(--radius-full);
+            transition: 0.3s;
+        }
+        
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 22px;
+            width: 22px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            border-radius: 50%;
+            transition: 0.3s;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider {
+            background: var(--terracotta);
+        }
+        
+        .toggle-switch input:checked + .toggle-slider:before {
+            transform: translateX(20px);
+        }
+        
+        .link-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+            cursor: pointer;
+            font-size: 15px;
+            transition: color 0.2s ease;
+        }
+        
+        .link-item:last-child {
+            border-bottom: none;
+        }
+        
+        .link-item:hover {
+            color: var(--terracotta);
+        }
+        
+        /* ============================================
+           PAYWALL
+        ============================================ */
+        .paywall-modal {
+            max-width: 500px;
+        }
+        
+        .paywall-header {
+            text-align: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .paywall-icon {
+            font-size: 60px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .paywall-features {
+            margin-bottom: var(--space-xl);
+        }
+        
+        .feature-row {
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            padding: var(--space-md) 0;
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .feature-row:last-child {
+            border-bottom: none;
+        }
+        
+        .feature-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--honey);
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+        
+        .feature-text {
+            flex: 1;
+        }
+        
+        .feature-title {
+            font-weight: 500;
+            margin-bottom: 2px;
+        }
+        
+        .feature-description {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .price-card {
+            background: white;
+            border: 2px solid var(--terracotta);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .price-amount {
+            font-family: var(--font-display);
+            font-size: 48px;
+            color: var(--terracotta);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .price-period {
+            font-size: 16px;
+            color: rgba(61, 52, 40, 0.7);
+            margin-bottom: var(--space-md);
+        }
+        
+        .price-description {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.5);
+        }
+        
+        /* ============================================
+           AMBIANCE PICKER
+        ============================================ */
+        .ambiance-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .ambiance-card {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            cursor: pointer;
+            border: 2px solid transparent;
+            transition: all 0.2s ease;
+        }
+        
+        .ambiance-card:hover {
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+        }
+        
+        .ambiance-card.active {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+        }
+        
+        .ambiance-card.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .ambiance-icon {
+            font-size: 40px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .ambiance-name {
+            font-weight: 500;
+            font-size: 15px;
+            margin-bottom: 4px;
+        }
+        
+        /* ============================================
+           ARTIST DETAIL MODAL
+        ============================================ */
+        .artist-modal {
+            max-width: 500px;
+            max-height: 80vh;
+            overflow-y: auto;
+        }
+        
+        .artist-detail-content {
+            text-align: center;
+        }
+        
+        .artist-avatar {
+            width: 100px;
+            height: 100px;
+            background: var(--terracotta);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            margin: 0 auto var(--space-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .artist-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .artist-location {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .artist-bio {
+            font-size: 15px;
+            line-height: 1.7;
+            color: rgba(61, 52, 40, 0.8);
+            margin-bottom: var(--space-xl);
+            text-align: left;
+            padding: 0 var(--space-md);
+        }
+        
+        .artist-stats {
+            display: flex;
+            justify-content: space-around;
+            margin-bottom: var(--space-xl);
+            padding: var(--space-lg) 0;
+            border-top: 1px solid rgba(61, 52, 40, 0.08);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .artist-stat {
+            text-align: center;
+        }
+        
+        .artist-stat-number {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--terracotta);
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .artist-stat-label {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .artist-assets-section {
+            text-align: left;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .artist-assets-title {
+            font-family: var(--font-display);
+            font-size: 18px;
+            margin-bottom: var(--space-md);
+            padding: 0 var(--space-md);
+        }
+        
+        .artist-assets-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: var(--space-sm);
+            padding: 0 var(--space-md);
+        }
+        
+        .artist-asset-item {
+            aspect-ratio: 1;
+            background: white;
+            border-radius: var(--radius-sm);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            border: 1px solid rgba(61, 52, 40, 0.1);
+        }
+        
+        .artist-social-links {
+            display: flex;
+            gap: var(--space-md);
+            justify-content: center;
+            margin-top: var(--space-xl);
+        }
+        
+        .social-link {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: rgba(212, 165, 137, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--terracotta);
+            transform: scale(1.1);
+        }
+        
+        /* ============================================
+           ASSET DETAIL MODAL
+        ============================================ */
+        .asset-detail-content {
+            text-align: center;
+        }
+        
+        .asset-detail-visual {
+            width: 150px;
+            height: 150px;
+            margin: 0 auto var(--space-lg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 100px;
+            background: white;
+            border-radius: var(--radius-lg);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .asset-detail-name {
+            font-family: var(--font-display);
+            font-size: 24px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .asset-detail-artist {
+            font-size: 15px;
+            color: rgba(61, 52, 40, 0.6);
+            margin-bottom: var(--space-md);
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        
+        .asset-detail-artist:hover {
+            color: var(--terracotta);
+        }
+        
+        .asset-detail-tags {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: var(--space-xl);
+        }
+        
+        .asset-tag {
+            padding: 6px 12px;
+            background: rgba(212, 165, 137, 0.1);
+            border-radius: var(--radius-full);
+            font-size: 12px;
+            color: var(--ink);
+        }
+        
+        .asset-usage-stats {
+            background: rgba(212, 165, 137, 0.05);
+            padding: var(--space-lg);
+            border-radius: var(--radius-md);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .usage-stat-item {
+            display: flex;
+            justify-content: space-between;
+            padding: var(--space-sm) 0;
+            font-size: 14px;
+        }
+        
+        .usage-stat-label {
+            color: rgba(61, 52, 40, 0.7);
+        }
+        
+        .usage-stat-value {
+            font-weight: 500;
+            color: var(--ink);
+        }
+        
+        /* ============================================
+           JOURNAL VIEWER MODAL
+        ============================================ */
+        .journal-viewer-modal {
+            max-width: 600px;
+            max-height: 90vh;
+            padding: 0;
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .viewer-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .viewer-actions {
+            display: flex;
+            gap: var(--space-sm);
+        }
+        
+        .viewer-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-xl);
+        }
+        
+        .viewer-page {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-xl);
+            box-shadow: var(--shadow-md);
+            min-height: 400px;
+            position: relative;
+        }
+        
+        .viewer-date {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--ink);
+            margin-bottom: var(--space-md);
+        }
+        
+        .viewer-mood {
+            display: inline-flex;
+            align-items: center;
+            gap: var(--space-xs);
+            padding: 6px 12px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .viewer-text {
+            font-family: var(--font-handwritten);
+            font-size: 18px;
+            line-height: 1.8;
+            color: var(--ink);
+            white-space: pre-wrap;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .viewer-text.hidden {
+            filter: blur(8px);
+            user-select: none;
+        }
+        
+        .viewer-stickers {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+        }
+        
+        .viewer-sticker {
+            position: absolute;
+            font-size: 40px;
+        }
+        
+        .viewer-navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: var(--space-lg);
+            border-top: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .nav-arrow {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 1px solid rgba(61, 52, 40, 0.15);
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+        
+        .nav-arrow:hover {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+        }
+        
+        .nav-arrow:disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+        
+        .page-indicator {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        /* ============================================
+           SHARE MODAL
+        ============================================ */
+        .share-preview {
+            background: var(--neutral);
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-lg);
+            min-height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .share-preview-canvas {
+            background: white;
+            border-radius: var(--radius-sm);
+            padding: var(--space-lg);
+            max-width: 100%;
+            box-shadow: var(--shadow-md);
+        }
+        
+        .share-options {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .share-option {
+            padding-bottom: var(--space-md);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .share-option:last-child {
+            border-bottom: none;
+        }
+        
+        .share-label {
+            display: flex;
+            align-items: center;
+            gap: var(--space-sm);
+            font-weight: 500;
+            cursor: pointer;
+            margin-bottom: 4px;
+        }
+        
+        .share-label input[type="checkbox"] {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        
+        .share-description {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+            margin-left: 28px;
+        }
+        
+        /* ============================================
+           ONBOARDING IMPROVEMENTS
+        ============================================ */
+        .onboarding-step {
+            text-align: center;
+            justify-content: center;
+            padding: var(--space-xl);
+        }
+        
+        .onboarding-step.hidden {
+            display: none;
+        }
+        
+        .onboarding-progress {
+            margin-bottom: var(--space-2xl);
+        }
+        
+        .progress-bar {
+            height: 4px;
+            background: rgba(61, 52, 40, 0.1);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+        }
+        
+        .progress-fill {
+            height: 100%;
+            background: var(--terracotta);
+            transition: width 0.3s ease;
+        }
+        
+        .onboarding-choices {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+            margin: var(--space-2xl) 0;
+        }
+        
+        .choice-card {
+            background: white;
+            border: 2px solid rgba(61, 52, 40, 0.1);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+        }
+        
+        .choice-card:hover {
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .choice-card.selected {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+        }
+        
+        .choice-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .choice-title {
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 4px;
+            color: var(--ink);
+        }
+        
+        .choice-description {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .time-picker-container {
+            margin: var(--space-2xl) 0;
+        }
+        
+        .time-picker {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: var(--space-sm);
+            font-size: 48px;
+            font-family: var(--font-display);
+        }
+        
+        .time-select {
+            font-size: 48px;
+            font-family: var(--font-display);
+            border: 2px solid rgba(61, 52, 40, 0.15);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            background: white;
+            cursor: pointer;
+        }
+        
+        .time-separator {
+            color: var(--terracotta);
+        }
+        
+        .onboarding-input {
+            width: 100%;
+            max-width: 300px;
+            padding: var(--space-md) var(--space-lg);
+            border: 2px solid rgba(61, 52, 40, 0.15);
+            border-radius: var(--radius-md);
+            font-size: 18px;
+            font-family: var(--font-body);
+            text-align: center;
+            transition: all 0.2s ease;
+            background: white;
+        }
+        
+        .onboarding-input:focus {
+            outline: none;
+            border-color: var(--terracotta);
+            box-shadow: 0 0 0 4px rgba(212, 165, 137, 0.1);
+        }
+        
+        .onboarding-input::placeholder {
+            color: rgba(61, 52, 40, 0.4);
+        }
+        
+        /* ============================================
+           WELLNESS DASHBOARD
+        ============================================ */
+        .wellness-summary {
+            background: linear-gradient(135deg, rgba(201, 209, 188, 0.3), rgba(209, 201, 217, 0.3));
+        }
+        
+        .wellness-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .wellness-stat {
+            text-align: center;
+        }
+        
+        .wellness-stat-icon {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-md);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            margin: 0 auto var(--space-sm);
+        }
+        
+        .wellness-stat-value {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        
+        .wellness-stat-label {
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .mood-distribution {
+            display: flex;
+            gap: var(--space-sm);
+            margin-bottom: var(--space-md);
+        }
+        
+        .mood-bar {
+            flex: 1;
+            height: 120px;
+            border-radius: var(--radius-sm);
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            align-items: center;
+            padding: var(--space-sm);
+            font-size: 20px;
+            position: relative;
+        }
+        
+        .mood-bar-fill {
+            width: 100%;
+            border-radius: var(--radius-sm);
+            transition: height 0.3s ease;
+        }
+        
+        .mood-bar-label {
+            position: absolute;
+            bottom: var(--space-xs);
+            font-size: 11px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .insights-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .insight-item {
+            display: flex;
+            gap: var(--space-md);
+            padding: var(--space-md);
+            background: rgba(212, 165, 137, 0.05);
+            border-radius: var(--radius-md);
+        }
+        
+        .insight-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .insight-text {
+            font-size: 14px;
+            line-height: 1.6;
+            color: rgba(61, 52, 40, 0.8);
+        }
+        
+        .progress-item {
+            margin-bottom: var(--space-md);
+        }
+        
+        .prompts-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-sm);
+        }
+        
+        .prompt-item {
+            background: white;
+            border: 1px solid rgba(61, 52, 40, 0.1);
+            border-radius: var(--radius-md);
+            padding: var(--space-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-align: left;
+            font-family: var(--font-handwritten);
+            font-size: 16px;
+            line-height: 1.6;
+            color: var(--ink);
+        }
+        
+        .prompt-item:hover {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.05);
+            transform: translateX(4px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- ============================================
+             ONBOARDING SCREEN - WELLNESS FOCUSED
+        ============================================ -->
+        <div id="onboarding-screen" class="screen active">
+            <!-- Step 1: Welcome -->
+            <div class="onboarding-step" id="onboarding-step-1">
+                <div class="onboarding-logo">🌸</div>
+                <h1 class="onboarding-title">Bienvenue sur YORI</h1>
+                <p class="onboarding-subtitle">Ton refuge créatif où chaque jour apporte une nouvelle surprise</p>
+                
+                <div style="margin: var(--space-2xl) 0;">
+                    <input 
+                        type="text" 
+                        id="onboarding-name" 
+                        placeholder="Comment t'appelles-tu ?"
+                        class="onboarding-input"
+                        maxlength="20"
+                    >
+                </div>
+                
+                <button class="btn btn-primary btn-full" onclick="app.nextOnboardingStep()" id="onboarding-start-btn">
+                    Commencer
+                </button>
+            </div>
+
+            <!-- Step 2: Purpose -->
+            <div class="onboarding-step hidden" id="onboarding-step-2">
+                <div class="onboarding-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 33%;"></div>
+                    </div>
+                </div>
+                
+                <h2 class="onboarding-title">Pourquoi écris-tu ?</h2>
+                <p class="onboarding-subtitle">Cela nous aidera à personnaliser ton expérience</p>
+                
+                <div class="onboarding-choices">
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('purpose', 'stress')">
+                        <div class="choice-icon">🧘</div>
+                        <div class="choice-title">Gérer mon stress</div>
+                        <div class="choice-description">Trouver du calme au quotidien</div>
+                    </div>
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('purpose', 'emotions')">
+                        <div class="choice-icon">💭</div>
+                        <div class="choice-title">Comprendre mes émotions</div>
+                        <div class="choice-description">Mettre des mots sur ce que je ressens</div>
+                    </div>
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('purpose', 'memory')">
+                        <div class="choice-icon">📖</div>
+                        <div class="choice-title">Garder mes souvenirs</div>
+                        <div class="choice-description">Créer mon journal personnel</div>
+                    </div>
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('purpose', 'creativity')">
+                        <div class="choice-icon">🎨</div>
+                        <div class="choice-title">Exprimer ma créativité</div>
+                        <div class="choice-description">Créer de belles pages</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 3: Frequency -->
+            <div class="onboarding-step hidden" id="onboarding-step-3">
+                <div class="onboarding-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 66%;"></div>
+                    </div>
+                </div>
+                
+                <h2 class="onboarding-title">À quelle fréquence souhaites-tu écrire ?</h2>
+                <p class="onboarding-subtitle">Nous t'enverrons des rappels bienveillants</p>
+                
+                <div class="onboarding-choices">
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('frequency', 'daily')">
+                        <div class="choice-icon">☀️</div>
+                        <div class="choice-title">Chaque jour</div>
+                        <div class="choice-description">Un rituel quotidien</div>
+                    </div>
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('frequency', 'often')">
+                        <div class="choice-icon">🌙</div>
+                        <div class="choice-title">Plusieurs fois par semaine</div>
+                        <div class="choice-description">Régulièrement, sans pression</div>
+                    </div>
+                    <div class="choice-card" onclick="app.selectOnboardingChoice('frequency', 'sometimes')">
+                        <div class="choice-icon">⭐</div>
+                        <div class="choice-title">Quand j'en ressens le besoin</div>
+                        <div class="choice-description">À mon rythme</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Step 4: Reminder Time -->
+            <div class="onboarding-step hidden" id="onboarding-step-4">
+                <div class="onboarding-progress">
+                    <div class="progress-bar">
+                        <div class="progress-fill" style="width: 100%;"></div>
+                    </div>
+                </div>
+                
+                <h2 class="onboarding-title">Quand veux-tu qu'on te rappelle ?</h2>
+                <p class="onboarding-subtitle">Tu pourras changer cela plus tard</p>
+                
+                <div class="time-picker-container">
+                    <div class="time-picker">
+                        <select id="reminder-hour" class="time-select">
+                            <option value="07">07</option>
+                            <option value="08">08</option>
+                            <option value="09" selected>09</option>
+                            <option value="10">10</option>
+                            <option value="11">11</option>
+                            <option value="12">12</option>
+                            <option value="18">18</option>
+                            <option value="19">19</option>
+                            <option value="20">20</option>
+                            <option value="21">21</option>
+                            <option value="22">22</option>
+                        </select>
+                        <span class="time-separator">:</span>
+                        <select id="reminder-minute" class="time-select">
+                            <option value="00" selected>00</option>
+                            <option value="15">15</option>
+                            <option value="30">30</option>
+                            <option value="45">45</option>
+                        </select>
+                    </div>
+                    
+                    <p style="text-align: center; color: rgba(61, 52, 40, 0.6); margin-top: var(--space-lg); font-size: 14px;">
+                        💌 Nous t'enverrons une notification douce chaque jour
+                    </p>
+                </div>
+                
+                <button class="btn btn-primary btn-full" onclick="app.completeOnboarding()">
+                    C'est parti !
+                </button>
+                
+                <button class="btn btn-ghost btn-full" onclick="app.skipReminder()">
+                    Passer cette étape
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             HOME SCREEN
+        ============================================ -->
+        <div id="home-screen" class="screen">
+            <div class="header">
+                <h1 class="greeting">Bonjour <span id="user-name-display">Marie</span> 🌸</h1>
+                <p class="subtitle" id="home-subtitle">Ton enveloppe quotidienne t'attend</p>
+            </div>
+
+            <!-- Daily Quote/Wellness Message -->
+            <div class="daily-quote-card card-elevated">
+                <div class="quote-icon">💭</div>
+                <div class="quote-label">Ta phrase du jour</div>
+                <div class="quote-text" id="daily-quote">
+                    <!-- Will be populated -->
+                </div>
+            </div>
+
+            <div class="envelope-container">
+                <div class="card card-elevated envelope-card">
+                    <div class="envelope-visual" id="envelope" onclick="app.canOpenEnvelope()">
+                        💌
+                    </div>
+                    <h2 class="envelope-title" id="envelope-title">Prête à découvrir ?</h2>
+                    <p class="envelope-description" id="envelope-description">
+                        Un nouveau trésor t'attend
+                    </p>
+                    <div id="countdown" class="countdown hidden"></div>
+                </div>
+
+                <button class="btn btn-primary btn-full" id="open-envelope-btn" onclick="app.openEnvelope()">
+                    Ouvrir mon enveloppe
+                </button>
+
+                <div class="streak-badge" id="streak-badge">
+                    🔥 3 jours d'affilée
+                </div>
+            </div>
+
+            <div class="quick-actions">
+                <div class="quick-action" onclick="app.navigateTo('journal-editor')">
+                    <div class="quick-action-icon">✍️</div>
+                    <div class="quick-action-text">Écrire</div>
+                </div>
+                <div class="quick-action" onclick="app.navigateTo('collection')">
+                    <div class="quick-action-icon">🎨</div>
+                    <div class="quick-action-text">Collection</div>
+                </div>
+                <div class="quick-action" onclick="app.showMoodPicker()">
+                    <div class="quick-action-icon">😊</div>
+                    <div class="quick-action-text">Humeur</div>
+                </div>
+                <div class="quick-action" onclick="app.navigateTo('pixel-year')">
+                    <div class="quick-action-icon">📊</div>
+                    <div class="quick-action-text">Pixel Year</div>
+                </div>
+            </div>
+            
+            <!-- Debug: Reset button (remove in production) -->
+            <div style="text-align: center; margin-top: 2rem;">
+                <button class="btn btn-ghost" onclick="app.resetApp()" style="font-size: 12px; opacity: 0.5;">
+                    🔄 Réinitialiser (debug)
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             ENVELOPE OPENING SCREEN
+        ============================================ -->
+        <div id="envelope-opening-screen" class="screen">
+            <div id="opening-phase">
+                <h2 class="opening-title">Ton enveloppe quotidienne</h2>
+                <div class="opening-envelope" id="opening-envelope" onclick="app.tearEnvelope()">
+                    💌
+                </div>
+                <p class="hint-text">👆 Tape pour ouvrir</p>
+            </div>
+
+            <div id="reveal-phase" class="reveal-container hidden">
+                <h2 class="reveal-title">Tu as débloqué ce trésor ✨</h2>
+                <div class="assets-grid" id="revealed-assets">
+                    <!-- Assets will be injected here -->
+                </div>
+                <button class="btn btn-primary btn-full" onclick="app.navigateTo('home')">
+                    C'est parti !
+                </button>
+            </div>
+        </div>
+
+        <!-- ============================================
+             JOURNAL EDITOR SCREEN
+        ============================================ -->
+        <div id="journal-editor-screen" class="screen">
+            <div class="editor-header">
+                <button class="icon-btn" onclick="app.confirmExitEditor()">✕</button>
+                <div class="editor-actions">
+                    <button class="icon-btn" onclick="app.showAmbiancePicker()" title="Ambiance">
+                        🎵
+                    </button>
+                    <button class="icon-btn" onclick="app.showBackgroundPicker()" title="Fond">
+                        🎨
+                    </button>
+                    <button class="icon-btn" onclick="app.saveJournalEntry()" title="Sauvegarder">
+                        ✓
+                    </button>
+                </div>
+            </div>
+
+            <div class="editor-canvas-container">
+                <!-- Formatting Toolbar -->
+                <div class="formatting-toolbar">
+                    <div class="toolbar-section">
+                        <button class="toolbar-btn" onclick="app.changeTextStyle('handwritten')" title="Écriture à la main">
+                            ✍️
+                        </button>
+                        <button class="toolbar-btn" onclick="app.changeTextStyle('typed')" title="Machine à écrire">
+                            ⌨️
+                        </button>
+                        <button class="toolbar-btn" onclick="app.changeTextStyle('elegant')" title="Élégant">
+                            ✨
+                        </button>
+                    </div>
+                    
+                    <div class="toolbar-divider"></div>
+                    
+                    <div class="toolbar-section">
+                        <button class="toolbar-btn" onclick="app.changeTextSize('small')" title="Petit">
+                            A
+                        </button>
+                        <button class="toolbar-btn" onclick="app.changeTextSize('medium')" title="Moyen">
+                            <span style="font-size: 18px;">A</span>
+                        </button>
+                        <button class="toolbar-btn" onclick="app.changeTextSize('large')" title="Grand">
+                            <span style="font-size: 20px;">A</span>
+                        </button>
+                    </div>
+                    
+                    <div class="toolbar-divider"></div>
+                    
+                    <div class="toolbar-section">
+                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('bold')" title="Gras">
+                            <strong>B</strong>
+                        </button>
+                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('italic')" title="Italique">
+                            <em>I</em>
+                        </button>
+                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('underline')" title="Souligné">
+                            <u>U</u>
+                        </button>
+                    </div>
+                    
+                    <div class="toolbar-divider"></div>
+                    
+                    <div class="toolbar-section">
+                        <button class="toolbar-btn" onclick="app.addPhoto()" title="Ajouter photo">
+                            📷
+                        </button>
+                        <button class="toolbar-btn locked" onclick="app.showLockedFeature('drawing')" title="Dessiner">
+                            ✏️
+                            <span class="premium-badge" style="font-size: 8px; position: absolute; top: -4px; right: -4px;">Pro</span>
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="canvas-wrapper">
+                    <div class="canvas" id="canvas">
+                        <div class="canvas-background" id="canvas-background"></div>
+                        <textarea 
+                            class="canvas-textarea" 
+                            id="journal-text"
+                            placeholder="Écris tes pensées..."
+                        ></textarea>
+                        <div class="canvas-stickers" id="canvas-stickers">
+                            <!-- Stickers will be added here -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="asset-palette">
+                <div class="palette-header">
+                    <h3 class="palette-title">Ta collection</h3>
+                    <button class="icon-btn" onclick="app.togglePalette()">
+                        <span id="palette-toggle-icon">−</span>
+                    </button>
+                </div>
+                
+                <!-- Asset Type Tabs -->
+                <div class="palette-tabs" id="palette-tabs">
+                    <button class="palette-tab active" data-type="all" onclick="app.filterPaletteByType('all')">
+                        Tout
+                    </button>
+                    <button class="palette-tab" data-type="sticker" onclick="app.filterPaletteByType('sticker')">
+                        🎨 Stickers
+                    </button>
+                    <button class="palette-tab locked" data-type="paper" onclick="app.showLockedFeature('paper')">
+                        📄 Papiers
+                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
+                    </button>
+                    <button class="palette-tab locked" data-type="washi" onclick="app.showLockedFeature('washi')">
+                        🎀 Washi
+                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
+                    </button>
+                    <button class="palette-tab locked" data-type="frame" onclick="app.showLockedFeature('frame')">
+                        🖼️ Cadres
+                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
+                    </button>
+                </div>
+                
+                <div class="palette-grid" id="palette-grid">
+                    <!-- Will be populated from user collection -->
+                </div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             COLLECTION SCREEN
+        ============================================ -->
+        <div id="collection-screen" class="screen">
+            <div class="collection-header">
+                <h1>Ma Collection</h1>
+                <p>Tous tes trésors débloqués</p>
+            </div>
+
+            <div class="collection-stats">
+                <div class="card stat-card">
+                    <span class="stat-number" id="total-assets">12</span>
+                    <span class="stat-label">Assets</span>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-number" id="rare-count">2</span>
+                    <span class="stat-label">Rares</span>
+                </div>
+                <div class="card stat-card">
+                    <span class="stat-number" id="legendary-count">0</span>
+                    <span class="stat-label">Légendaires</span>
+                </div>
+            </div>
+
+            <div class="collection-grid" id="collection-grid">
+                <!-- Will be populated dynamically -->
+            </div>
+
+            <div style="height: 80px;"></div> <!-- Spacer for nav -->
+        </div>
+
+        <!-- ============================================
+             JOURNAL HISTORY SCREEN
+        ============================================ -->
+        <div id="journal-history-screen" class="screen">
+            <div class="editor-header">
+                <button class="icon-btn" onclick="app.navigateTo('home')">←</button>
+                <h3 style="margin: 0; font-family: var(--font-display);">Mon Journal</h3>
+                <div style="width: 40px;"></div>
+            </div>
+
+            <div style="padding: var(--space-lg); flex: 1; overflow-y: auto;">
+                <!-- Filters -->
+                <div style="display: flex; gap: var(--space-sm); margin-bottom: var(--space-xl); overflow-x: auto;">
+                    <button class="btn btn-secondary" style="white-space: nowrap; padding: 8px 16px; font-size: 14px;" onclick="app.filterJournal('all')">
+                        Tout
+                    </button>
+                    <button class="btn btn-secondary" style="white-space: nowrap; padding: 8px 16px; font-size: 14px;" onclick="app.filterJournal('this-week')">
+                        Cette semaine
+                    </button>
+                    <button class="btn btn-secondary" style="white-space: nowrap; padding: 8px 16px; font-size: 14px;" onclick="app.filterJournal('this-month')">
+                        Ce mois
+                    </button>
+                </div>
+
+                <!-- Entries List -->
+                <div id="journal-entries-list" class="journal-entries-list">
+                    <!-- Will be populated -->
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             PIXEL YEAR SCREEN
+        ============================================ -->
+        <div id="pixel-year-screen" class="screen">
+            <div class="editor-header">
+                <button class="icon-btn" onclick="app.navigateTo('home')">←</button>
+                <h3 style="margin: 0; font-family: var(--font-display);">Pixel Year</h3>
+                <button class="icon-btn" onclick="app.sharePixelYear()">↗</button>
+            </div>
+
+            <div style="padding: var(--space-lg); flex: 1; overflow-y: auto;">
+                <div class="card" style="text-align: center; margin-bottom: var(--space-xl);">
+                    <h2 style="margin-bottom: var(--space-sm);">2026</h2>
+                    <p style="font-size: 14px; color: rgba(61, 52, 40, 0.6);">
+                        Chaque jour, une couleur représente ton humeur
+                    </p>
+                </div>
+
+                <!-- Pixel Grid -->
+                <div class="pixel-year-grid" id="pixel-year-grid">
+                    <!-- 365 pixels will be generated -->
+                </div>
+
+                <!-- Legend -->
+                <div class="card" style="margin-top: var(--space-xl);">
+                    <h3 style="margin-bottom: var(--space-md); font-size: 16px;">Légende</h3>
+                    <div class="mood-legend">
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #B4C7D9;"></div>
+                            <span>Calme</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #F4E4C1;"></div>
+                            <span>Joyeux</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #D1C9D9;"></div>
+                            <span>Triste</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #E8C5C0;"></div>
+                            <span>Énergique</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #C9D1BC;"></div>
+                            <span>Paisible</span>
+                        </div>
+                        <div class="legend-item">
+                            <div class="legend-color" style="background: #DDDAD3;"></div>
+                            <span>Anxieux</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             SETTINGS SCREEN
+        ============================================ -->
+        <div id="settings-screen" class="screen">
+            <div class="editor-header">
+                <button class="icon-btn" onclick="app.navigateTo('home')">←</button>
+                <h3 style="margin: 0; font-family: var(--font-display);">Paramètres</h3>
+                <div style="width: 40px;"></div>
+            </div>
+
+            <div style="padding: var(--space-lg); flex: 1; overflow-y: auto;">
+                <!-- Profile Section -->
+                <div class="card" style="margin-bottom: var(--space-lg);">
+                    <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
+                        <div style="width: 60px; height: 60px; background: var(--terracotta); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">
+                            👤
+                        </div>
+                        <div>
+                            <h3 style="margin-bottom: 4px;" id="settings-name">Marie</h3>
+                            <p style="font-size: 14px; color: rgba(61, 52, 40, 0.6); margin: 0;" id="settings-email">marie@exemple.com</p>
+                        </div>
+                    </div>
+                    
+                    <div id="subscription-badge">
+                        <div class="badge badge-primary" style="font-size: 11px;">Gratuit</div>
+                        <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-md);" onclick="app.showPaywall()">
+                            Passer Premium
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Settings List -->
+                <div class="settings-list">
+                    <div class="setting-item" onclick="app.toggleNotifications()">
+                        <div>
+                            <div class="setting-label">Notifications quotidiennes</div>
+                            <div class="setting-description">Rappel pour ouvrir ton enveloppe</div>
+                        </div>
+                        <div class="toggle-switch" id="notif-toggle">
+                            <input type="checkbox" id="notif-checkbox" checked>
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+
+                    <div class="setting-item" onclick="app.toggleAmbiance()">
+                        <div>
+                            <div class="setting-label">Ambiances sonores</div>
+                            <div class="setting-description">Sons relaxants pendant l'écriture</div>
+                        </div>
+                        <div class="toggle-switch" id="ambiance-toggle">
+                            <input type="checkbox" id="ambiance-checkbox">
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+
+                    <div class="setting-item" onclick="app.toggleMagicBlur()">
+                        <div>
+                            <div class="setting-label">Magic Blur</div>
+                            <div class="setting-description">Floute automatiquement tes textes</div>
+                        </div>
+                        <div class="toggle-switch" id="blur-toggle">
+                            <input type="checkbox" id="blur-checkbox">
+                            <span class="toggle-slider"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Links -->
+                <div class="card" style="margin-top: var(--space-xl);">
+                    <div class="link-item" onclick="app.navigateTo('wellness')">
+                        <span>💚 Mon bien-être</span>
+                        <span>→</span>
+                    </div>
+                    <div class="link-item" onclick="app.showPrivacyPolicy()">
+                        <span>🔒 Confidentialité</span>
+                        <span>→</span>
+                    </div>
+                    <div class="link-item" onclick="app.exportData()">
+                        <span>📥 Exporter mes données</span>
+                        <span>→</span>
+                    </div>
+                    <div class="link-item" onclick="app.contactSupport()">
+                        <span>💌 Nous contacter</span>
+                        <span>→</span>
+                    </div>
+                    <div class="link-item" style="color: var(--alert);" onclick="app.deleteAccount()">
+                        <span>🗑️ Supprimer mon compte</span>
+                        <span>→</span>
+                    </div>
+                </div>
+
+                <div style="text-align: center; margin-top: var(--space-xl); color: rgba(61, 52, 40, 0.4); font-size: 12px;">
+                    YORI v1.0.0 POC<br>
+                    Fait avec 🌸 par ton équipe
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             WELLNESS DASHBOARD SCREEN
+        ============================================ -->
+        <div id="wellness-screen" class="screen">
+            <div class="editor-header">
+                <button class="icon-btn" onclick="app.navigateTo('settings')">←</button>
+                <h3 style="margin: 0; font-family: var(--font-display);">Mon Bien-être</h3>
+                <div style="width: 40px;"></div>
+            </div>
+
+            <div style="padding: var(--space-lg); flex: 1; overflow-y: auto;">
+                <!-- Wellness Summary -->
+                <div class="card wellness-summary">
+                    <h3 style="margin-bottom: var(--space-lg);">Comment vas-tu ?</h3>
+                    
+                    <div class="wellness-stats-grid">
+                        <div class="wellness-stat">
+                            <div class="wellness-stat-icon" style="background: var(--honey);">🔥</div>
+                            <div class="wellness-stat-value" id="wellness-streak">3</div>
+                            <div class="wellness-stat-label">jours d'affilée</div>
+                        </div>
+                        
+                        <div class="wellness-stat">
+                            <div class="wellness-stat-icon" style="background: var(--sage);">📝</div>
+                            <div class="wellness-stat-value" id="wellness-entries">12</div>
+                            <div class="wellness-stat-label">pages écrites</div>
+                        </div>
+                        
+                        <div class="wellness-stat">
+                            <div class="wellness-stat-icon" style="background: var(--lavender);">😊</div>
+                            <div class="wellness-stat-value" id="wellness-mood">Calme</div>
+                            <div class="wellness-stat-label">humeur dominante</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Mood Distribution -->
+                <div class="card" style="margin-top: var(--space-lg);">
+                    <h3 style="margin-bottom: var(--space-md);">Tes humeurs cette semaine</h3>
+                    <div class="mood-distribution" id="mood-distribution">
+                        <!-- Will be populated -->
+                    </div>
+                </div>
+
+                <!-- Emotional Insights -->
+                <div class="card" style="margin-top: var(--space-lg);">
+                    <h3 style="margin-bottom: var(--space-md);">💡 Insights</h3>
+                    <div class="insights-list" id="insights-list">
+                        <!-- Will be populated -->
+                    </div>
+                </div>
+
+                <!-- Progress This Month -->
+                <div class="card" style="margin-top: var(--space-lg);">
+                    <h3 style="margin-bottom: var(--space-md);">Ce mois-ci</h3>
+                    <div class="progress-item">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: var(--space-xs);">
+                            <span>Jours d'écriture</span>
+                            <span id="month-progress-text">8 / 30</span>
+                        </div>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 27%; background: var(--terracotta);" id="month-progress-bar"></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Quick Actions -->
+                <div style="margin-top: var(--space-xl); display: flex; gap: var(--space-md);">
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="app.navigateTo('pixel-year')">
+                        📊 Voir Pixel Year
+                    </button>
+                    <button class="btn btn-secondary" style="flex: 1;" onclick="app.navigateTo('journal-history')">
+                        📖 Mon journal
+                    </button>
+                </div>
+
+                <div style="height: 80px;"></div>
+            </div>
+        </div>
+
+        <!-- ============================================
+             BOTTOM NAVIGATION
+        ============================================ -->
+        <nav class="bottom-nav" id="bottom-nav">
+            <a class="nav-item active" onclick="app.navigateTo('home')" data-screen="home">
+                <div class="nav-icon">🏠</div>
+                <div class="nav-label">Accueil</div>
+            </a>
+            <a class="nav-item" onclick="app.navigateTo('journal-history')" data-screen="journal-history">
+                <div class="nav-icon">📖</div>
+                <div class="nav-label">Journal</div>
+            </a>
+            <a class="nav-item" onclick="app.navigateTo('collection')" data-screen="collection">
+                <div class="nav-icon">🎨</div>
+                <div class="nav-label">Collection</div>
+            </a>
+            <a class="nav-item" onclick="app.navigateTo('settings')" data-screen="settings">
+                <div class="nav-icon">⚙️</div>
+                <div class="nav-label">Réglages</div>
+            </a>
+        </nav>
+
+        <!-- ============================================
+             MODALS
+        ============================================ -->
+        
+        <!-- Mood Picker Modal -->
+        <div class="modal-overlay" id="mood-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Comment te sens-tu ?</h3>
+                    <button class="modal-close" onclick="app.closeMoodPicker()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="mood-colors">
+                        <div class="mood-color" style="background: #B4C7D9;" data-mood="calm" onclick="app.selectMood('calm', '#B4C7D9')">
+                            ☁️
+                        </div>
+                        <div class="mood-color" style="background: #F4E4C1;" data-mood="happy" onclick="app.selectMood('happy', '#F4E4C1')">
+                            😊
+                        </div>
+                        <div class="mood-color" style="background: #D1C9D9;" data-mood="sad" onclick="app.selectMood('sad', '#D1C9D9')">
+                            😢
+                        </div>
+                        <div class="mood-color" style="background: #E8C5C0;" data-mood="energetic" onclick="app.selectMood('energetic', '#E8C5C0')">
+                            ⚡
+                        </div>
+                        <div class="mood-color" style="background: #C9D1BC;" data-mood="peaceful" onclick="app.selectMood('peaceful', '#C9D1BC')">
+                            🧘
+                        </div>
+                        <div class="mood-color" style="background: #DDDAD3;" data-mood="anxious" onclick="app.selectMood('anxious', '#DDDAD3')">
+                            😰
+                        </div>
+                    </div>
+                </div>
+                <button class="btn btn-primary btn-full" onclick="app.saveMood()">
+                    Enregistrer
+                </button>
+            </div>
+        </div>
+
+        <!-- Paywall Modal -->
+        <div class="modal-overlay" id="paywall-modal">
+            <div class="modal paywall-modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Passe Premium</h3>
+                    <button class="modal-close" onclick="app.closePaywall()">✕</button>
+                </div>
+                
+                <div class="paywall-header">
+                    <div class="paywall-icon">✨</div>
+                    <h2 style="margin-bottom: var(--space-sm);">Accélère ta collection</h2>
+                    <p style="color: rgba(61, 52, 40, 0.7);">
+                        Débloque 3× plus vite et accède à toutes les fonctionnalités
+                    </p>
+                </div>
+
+                <div class="paywall-features">
+                    <div class="feature-row">
+                        <div class="feature-icon">💌</div>
+                        <div class="feature-text">
+                            <div class="feature-title">3 enveloppes / jour</div>
+                            <div class="feature-description">Au lieu d'une seule</div>
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon">🎨</div>
+                        <div class="feature-text">
+                            <div class="feature-title">Pokedex complet</div>
+                            <div class="feature-description">Vois tous les assets disponibles</div>
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon">🎵</div>
+                        <div class="feature-text">
+                            <div class="feature-title">Ambiances illimitées</div>
+                            <div class="feature-description">Tous les sons relaxants</div>
+                        </div>
+                    </div>
+                    <div class="feature-row">
+                        <div class="feature-icon">📥</div>
+                        <div class="feature-text">
+                            <div class="feature-title">Export HD</div>
+                            <div class="feature-description">Sauvegarde tes pages en haute qualité</div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="price-card">
+                    <div class="price-amount">4,99€</div>
+                    <div class="price-period">/ mois</div>
+                    <div class="price-description">
+                        Annule à tout moment • Sans engagement
+                    </div>
+                </div>
+
+                <button class="btn btn-primary btn-full" onclick="app.purchasePremium()">
+                    Commencer l'essai gratuit (7 jours)
+                </button>
+                
+                <p style="text-align: center; font-size: 12px; color: rgba(61, 52, 40, 0.5); margin-top: var(--space-md);">
+                    Essai gratuit de 7 jours, puis 4,99€/mois
+                </p>
+            </div>
+        </div>
+
+        <!-- Ambiance Picker Modal -->
+        <div class="modal-overlay" id="ambiance-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Ambiances sonores</h3>
+                    <button class="modal-close" onclick="app.closeAmbiancePicker()">✕</button>
+                </div>
+                <div class="modal-body">
+                    <div class="ambiance-grid">
+                        <div class="ambiance-card" data-ambiance="rain" onclick="app.selectAmbiance('rain')">
+                            <div class="ambiance-icon">🌧️</div>
+                            <div class="ambiance-name">Pluie</div>
+                        </div>
+                        <div class="ambiance-card" data-ambiance="fireplace" onclick="app.selectAmbiance('fireplace')">
+                            <div class="ambiance-icon">🔥</div>
+                            <div class="ambiance-name">Cheminée</div>
+                        </div>
+                        <div class="ambiance-card" data-ambiance="forest" onclick="app.selectAmbiance('forest')">
+                            <div class="ambiance-icon">🌲</div>
+                            <div class="ambiance-name">Forêt</div>
+                        </div>
+                        <div class="ambiance-card locked" data-ambiance="ocean">
+                            <div class="ambiance-icon">🌊</div>
+                            <div class="ambiance-name">Océan</div>
+                            <div class="premium-badge">Premium</div>
+                        </div>
+                        <div class="ambiance-card locked" data-ambiance="cafe">
+                            <div class="ambiance-icon">☕</div>
+                            <div class="ambiance-name">Café</div>
+                            <div class="premium-badge">Premium</div>
+                        </div>
+                        <div class="ambiance-card locked" data-ambiance="night">
+                            <div class="ambiance-icon">🌙</div>
+                            <div class="ambiance-name">Nuit</div>
+                            <div class="premium-badge">Premium</div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-secondary btn-full" onclick="app.stopAmbiance()">
+                        Arrêter le son
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Artist Detail Modal -->
+        <div class="modal-overlay" id="artist-modal">
+            <div class="modal artist-modal">
+                <div class="modal-header">
+                    <button class="modal-close" onclick="app.closeArtistModal()">✕</button>
+                </div>
+                
+                <div class="artist-detail-content" id="artist-detail-content">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Asset Detail Modal -->
+        <div class="modal-overlay" id="asset-detail-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <button class="modal-close" onclick="app.closeAssetDetail()">✕</button>
+                </div>
+                
+                <div class="asset-detail-content" id="asset-detail-content">
+                    <!-- Will be populated dynamically -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Journal Page Viewer Modal -->
+        <div class="modal-overlay" id="journal-viewer-modal">
+            <div class="modal journal-viewer-modal">
+                <div class="viewer-header">
+                    <button class="icon-btn" onclick="app.closeJournalViewer()">✕</button>
+                    <div class="viewer-actions">
+                        <button class="icon-btn" onclick="app.toggleTextVisibility()" id="toggle-text-btn" title="Masquer/Afficher le texte">
+                            👁️
+                        </button>
+                        <button class="icon-btn" onclick="app.shareJournalPage()" title="Partager">
+                            ↗️
+                        </button>
+                        <button class="icon-btn" onclick="app.editJournalPage()" title="Modifier">
+                            ✏️
+                        </button>
+                    </div>
+                </div>
+                
+                <div class="viewer-content" id="viewer-content">
+                    <!-- Will be populated dynamically -->
+                </div>
+                
+                <div class="viewer-navigation">
+                    <button class="nav-arrow" onclick="app.previousJournalPage()" id="prev-page-btn">
+                        ←
+                    </button>
+                    <span class="page-indicator" id="page-indicator">1 / 5</span>
+                    <button class="nav-arrow" onclick="app.nextJournalPage()" id="next-page-btn">
+                        →
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Share Modal -->
+        <div class="modal-overlay" id="share-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">Partager ma page</h3>
+                    <button class="modal-close" onclick="app.closeShareModal()">✕</button>
+                </div>
+                
+                <div class="modal-body">
+                    <!-- Preview -->
+                    <div class="share-preview" id="share-preview">
+                        <div class="share-preview-canvas">
+                            <!-- Will show page preview -->
+                        </div>
+                    </div>
+                    
+                    <!-- Options -->
+                    <div class="share-options">
+                        <div class="share-option">
+                            <label class="share-label">
+                                <input type="checkbox" id="share-hide-text" checked>
+                                <span>Masquer mon texte</span>
+                            </label>
+                            <p class="share-description">Seuls les stickers et le fond seront visibles</p>
+                        </div>
+                        
+                        <div class="share-option">
+                            <label class="share-label">
+                                <input type="checkbox" id="share-show-mood">
+                                <span>Afficher mon humeur</span>
+                            </label>
+                            <p class="share-description">La couleur de ton humeur du jour</p>
+                        </div>
+                        
+                        <div class="share-option">
+                            <label class="share-label">
+                                <input type="checkbox" id="share-show-date">
+                                <span>Afficher la date</span>
+                            </label>
+                            <p class="share-description">Le jour de cette entrée</p>
+                        </div>
+                    </div>
+                    
+                    <button class="btn btn-primary btn-full" onclick="app.generateShareImage()">
+                        📸 Générer l'image
+                    </button>
+                    
+                    <div class="share-actions" style="display: none;" id="share-actions">
+                        <p style="text-align: center; color: var(--success); margin-bottom: var(--space-md);">
+                            ✓ Image générée !
+                        </p>
+                        <div style="display: flex; gap: var(--space-sm);">
+                            <button class="btn btn-secondary" style="flex: 1;" onclick="app.downloadShare()">
+                                📥 Télécharger
+                            </button>
+                            <button class="btn btn-secondary" style="flex: 1;" onclick="app.copyShareLink()">
+                                🔗 Copier lien
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Inspiration Prompt Modal -->
+        <div class="modal-overlay" id="inspiration-modal">
+            <div class="modal">
+                <div class="modal-header">
+                    <h3 class="modal-title">As-tu de l'inspiration aujourd'hui ?</h3>
+                    <button class="modal-close" onclick="app.closeInspirationModal()">✕</button>
+                </div>
+                
+                <div class="modal-body">
+                    <p style="text-align: center; margin-bottom: var(--space-xl); color: rgba(61, 52, 40, 0.7);">
+                        Si tu ne sais pas par où commencer, je peux t'aider 💭
+                    </p>
+                    
+                    <div style="display: flex; gap: var(--space-md); margin-bottom: var(--space-xl);">
+                        <button class="btn btn-primary" style="flex: 1;" onclick="app.startWritingWithoutPrompt()">
+                            Oui, j'ai des idées ✨
+                        </button>
+                        <button class="btn btn-secondary" style="flex: 1;" onclick="app.showWritingPrompts()">
+                            Non, aide-moi 🙏
+                        </button>
+                    </div>
+                    
+                    <div id="writing-prompts" class="hidden">
+                        <p style="font-size: 14px; color: rgba(61, 52, 40, 0.6); margin-bottom: var(--space-md); text-align: center;">
+                            Choisis une phrase pour commencer :
+                        </p>
+                        <div class="prompts-list" id="prompts-list">
+                            <!-- Will be populated based on mood -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Loading -->
+        <div class="loading" id="loading">
+            <div class="spinner"></div>
+            <p>Chargement...</p>
+        </div>
+    </div>
+
+    <script>
+        // ============================================
+        // DATA & STATE
+        // ============================================
+        
+        const app = {
+            // User state
+            user: {
+                name: 'Marie',
+                email: 'marie@exemple.com',
+                isPremium: false,
+                streak: 3,
+                lastEnvelopeOpened: null,
+                collection: [],
+                journalEntries: [],
+                moods: {}, // { '2026-01-15': { mood: 'happy', color: '#F4E4C1' } }
+                currentMood: null,
+                settings: {
+                    notifications: true,
+                    notificationTime: '09:00',
+                    ambianceEnabled: false,
+                    currentAmbiance: null,
+                    magicBlurEnabled: false,
+                },
+            },
+            
+            // Available assets database (simplified)
+            availableAssets: [
+                { id: 1, icon: '🌸', name: 'Fleur rose', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
+                { id: 2, icon: '🌿', name: 'Feuille', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature' },
+                { id: 3, icon: '☕', name: 'Café', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'cozy' },
+                { id: 4, icon: '📖', name: 'Livre', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'cozy' },
+                { id: 5, icon: '🌙', name: 'Lune', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'celestial' },
+                { id: 6, icon: '⭐', name: 'Étoile', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'celestial' },
+                { id: 7, icon: '🎨', name: 'Palette', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'art' },
+                { id: 8, icon: '🕯️', name: 'Bougie', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'cozy' },
+                { id: 9, icon: '🌺', name: 'Hibiscus', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature' },
+                { id: 10, icon: '🦋', name: 'Papillon', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
+                { id: 11, icon: '🍃', name: 'Branche', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature' },
+                { id: 12, icon: '💫', name: 'Éclat', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'celestial' },
+                { id: 13, icon: '🌻', name: 'Tournesol', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
+                { id: 14, icon: '🎭', name: 'Masque', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'art' },
+                { id: 15, icon: '🎪', name: 'Tente', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'fun' },
+                
+                // Paper backgrounds (locked for demo)
+                { id: 16, icon: '📄', name: 'Papier vintage', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'paper', locked: true },
+                { id: 17, icon: '📃', name: 'Parchemin', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'paper', locked: true },
+                
+                // Washi tape (locked for demo)
+                { id: 18, icon: '🎀', name: 'Washi floral', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'decoration', locked: true },
+                { id: 19, icon: '🎗️', name: 'Washi étoiles', type: 'washi', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'decoration', locked: true },
+                
+                // Frames (locked for demo)
+                { id: 20, icon: '🖼️', name: 'Cadre polaroid', type: 'frame', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'photo', locked: true },
+                { id: 21, icon: '🔲', name: 'Cadre floral', type: 'frame', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'photo', locked: true },
+            ],
+            
+            // Artists database
+            artists: {
+                'artist_1': {
+                    id: 'artist_1',
+                    name: 'Sophie Martin',
+                    avatar: '👩‍🎨',
+                    location: 'Paris, France',
+                    bio: 'Illustratrice passionnée par la nature et les émotions douces. J\'explore les formes organiques et les couleurs apaisantes pour créer des univers contemplatifs.',
+                    instagram: '@sophie.creates',
+                    website: 'sophiemartin.art',
+                    joinedDate: '2024-03-15',
+                    totalAssets: 6,
+                },
+                'artist_2': {
+                    id: 'artist_2',
+                    name: 'Lucas Bernard',
+                    avatar: '👨‍🎨',
+                    location: 'Lyon, France',
+                    bio: 'Designer graphique et amoureux des nuits étoilées. Je crée des assets minimalistes qui racontent des histoires silencieuses.',
+                    instagram: '@lucas.designs',
+                    website: 'lucasbernard.com',
+                    joinedDate: '2024-04-20',
+                    totalAssets: 5,
+                },
+                'artist_3': {
+                    id: 'artist_3',
+                    name: 'Emma Laurent',
+                    avatar: '👩‍🎨',
+                    location: 'Bordeaux, France',
+                    bio: 'Artiste autodidacte spécialisée dans l\'aquarelle digitale. Mes créations célèbrent la beauté du quotidien et les petits bonheurs.',
+                    instagram: '@emmalaurent.art',
+                    website: 'emmalaurent.fr',
+                    joinedDate: '2024-02-10',
+                    totalAssets: 6,
+                },
+            },
+            
+            // Daily wellness quotes
+            dailyQuotes: [
+                "Chaque jour est une page blanche, prête à accueillir tes pensées.",
+                "L'écriture est un acte de douceur envers soi-même.",
+                "Tes mots ont le pouvoir de transformer ton quotidien.",
+                "Prends le temps de t'écouter aujourd'hui.",
+                "Il n'y a pas de bonne ou mauvaise façon d'écrire, juste ta façon.",
+                "L'important n'est pas la perfection, mais la présence.",
+                "Ton journal est un espace sans jugement, juste pour toi.",
+                "Écrire, c'est créer un dialogue avec ton cœur.",
+                "Chaque mot posé est un pas vers la clarté.",
+                "Ta voix intérieure mérite d'être entendue.",
+                "L'écriture est un refuge où tu peux être complètement toi.",
+                "Tes pensées sont précieuses, prends le temps de les accueillir.",
+                "Il n'y a rien de trop petit ou trop grand pour être écrit.",
+                "L'écriture t'aide à mieux comprendre qui tu es.",
+                "Aujourd'hui, sois douce avec toi-même.",
+            ],
+            
+            // Current screen
+            currentScreen: 'onboarding',
+            
+            // Onboarding state
+            onboarding: {
+                step: 1,
+                purpose: null,
+                frequency: null,
+                reminderTime: '09:00',
+            },
+            
+            // Journal viewer state
+            viewer: {
+                currentIndex: 0,
+                entries: [],
+                textVisible: true,
+            },
+            
+            // Editor state
+            editor: {
+                currentBackground: null,
+                stickers: [],
+                draggedSticker: null,
+            },
+            
+            // ============================================
+            // INITIALIZATION
+            // ============================================
+            
+            init() {
+                console.log('🌸 YORI POC initialized');
+                this.loadFromStorage();
+                this.setupEventListeners();
+            },
+            
+            loadFromStorage() {
+                const stored = localStorage.getItem('yori_data');
+                if (stored) {
+                    const data = JSON.parse(stored);
+                    this.user = { ...this.user, ...data };
+                    console.log('Loaded user data:', this.user);
+                }
+            },
+            
+            saveToStorage() {
+                localStorage.setItem('yori_data', JSON.stringify(this.user));
+            },
+            
+            setupEventListeners() {
+                // Auto-save journal
+                const journalText = document.getElementById('journal-text');
+                if (journalText) {
+                    let timeout;
+                    journalText.addEventListener('input', () => {
+                        clearTimeout(timeout);
+                        timeout = setTimeout(() => {
+                            this.autoSaveJournal();
+                        }, 2000);
+                    });
+                }
+            },
+            
+            // ============================================
+            // NAVIGATION
+            // ============================================
+            
+            startApp() {
+                this.navigateTo('home');
+                
+                // Give starter pack if new user
+                if (this.user.collection.length === 0) {
+                    this.giveStarterPack();
+                }
+            },
+            
+            // ============================================
+            // ONBOARDING FLOW
+            // ============================================
+            
+            nextOnboardingStep() {
+                // Save name from step 1
+                if (this.onboarding.step === 1) {
+                    const nameInput = document.getElementById('onboarding-name');
+                    const name = nameInput.value.trim();
+                    
+                    if (name) {
+                        this.user.name = name;
+                        this.saveToStorage();
+                    } else {
+                        this.user.name = 'toi'; // Fallback si pas de nom
+                    }
+                }
+                
+                this.onboarding.step++;
+                document.getElementById(`onboarding-step-${this.onboarding.step - 1}`).classList.add('hidden');
+                document.getElementById(`onboarding-step-${this.onboarding.step}`).classList.remove('hidden');
+            },
+            
+            selectOnboardingChoice(type, value) {
+                this.onboarding[type] = value;
+                
+                // Visual feedback
+                const cards = document.querySelectorAll('.choice-card');
+                cards.forEach(card => card.classList.remove('selected'));
+                event.target.closest('.choice-card').classList.add('selected');
+                
+                // Auto-advance after 500ms
+                setTimeout(() => {
+                    this.nextOnboardingStep();
+                }, 500);
+            },
+            
+            skipReminder() {
+                this.user.settings.notifications = false;
+                this.completeOnboarding();
+            },
+            
+            completeOnboarding() {
+                // Save onboarding choices
+                const hour = document.getElementById('reminder-hour').value;
+                const minute = document.getElementById('reminder-minute').value;
+                this.user.settings.notificationTime = `${hour}:${minute}`;
+                
+                this.user.onboardingCompleted = true;
+                this.user.onboardingData = {
+                    purpose: this.onboarding.purpose,
+                    frequency: this.onboarding.frequency,
+                    completedAt: new Date().toISOString(),
+                };
+                
+                this.saveToStorage();
+                this.startApp();
+            },
+            
+            navigateTo(screenId) {
+                // Hide all screens
+                document.querySelectorAll('.screen').forEach(s => {
+                    s.classList.remove('active');
+                });
+                
+                // Show target screen
+                const screen = document.getElementById(screenId + '-screen');
+                if (screen) {
+                    screen.classList.add('active');
+                    screen.classList.add('fade-in');
+                    this.currentScreen = screenId;
+                    
+                    // Update nav
+                    this.updateNav(screenId);
+                    
+                    // Screen-specific actions
+                    if (screenId === 'home') {
+                        this.updateHomeScreen();
+                    } else if (screenId === 'collection') {
+                        this.renderCollection();
+                    } else if (screenId === 'journal-editor') {
+                        // Show inspiration prompt first
+                        this.showInspirationPrompt();
+                        return; // Don't navigate yet
+                    } else if (screenId === 'envelope-opening') {
+                        this.resetEnvelopeScreen();
+                    } else if (screenId === 'journal-history') {
+                        this.renderJournalHistory();
+                    } else if (screenId === 'pixel-year') {
+                        this.renderPixelYear();
+                    } else if (screenId === 'settings') {
+                        this.updateSettingsUI();
+                    } else if (screenId === 'wellness') {
+                        this.renderWellnessDashboard();
+                    }
+                    
+                    // Hide nav for some screens
+                    const nav = document.getElementById('bottom-nav');
+                    if (['envelope-opening', 'journal-editor', 'pixel-year', 'journal-history', 'wellness'].includes(screenId)) {
+                        nav.style.display = 'none';
+                    } else {
+                        nav.style.display = 'flex';
+                    }
+                }
+            },
+            
+            updateNav(activeScreen) {
+                document.querySelectorAll('.nav-item').forEach(item => {
+                    item.classList.remove('active');
+                    if (item.dataset.screen === activeScreen) {
+                        item.classList.add('active');
+                    }
+                });
+            },
+            
+            resetEnvelopeScreen() {
+                // Make sure we're in the right state
+                document.getElementById('opening-phase').classList.remove('hidden');
+                document.getElementById('reveal-phase').classList.add('hidden');
+                const envelope = document.getElementById('opening-envelope');
+                envelope.classList.remove('tearing');
+            },
+            
+            // ============================================
+            // HOME SCREEN
+            // ============================================
+            
+            updateHomeScreen() {
+                // Update name display
+                const nameDisplay = document.getElementById('user-name-display');
+                if (nameDisplay) {
+                    nameDisplay.textContent = this.user.name || 'toi';
+                }
+                
+                // Display daily quote
+                this.displayDailyQuote();
+                
+                const canOpen = this.canUserOpenEnvelope();
+                const btn = document.getElementById('open-envelope-btn');
+                const title = document.getElementById('envelope-title');
+                const desc = document.getElementById('envelope-description');
+                const subtitle = document.getElementById('home-subtitle');
+                const countdown = document.getElementById('countdown');
+                
+                if (canOpen) {
+                    btn.disabled = false;
+                    title.textContent = 'Prête à découvrir ?';
+                    desc.textContent = this.user.isPremium ? '3 nouveaux trésors t\'attendent' : 'Un nouveau trésor t\'attend';
+                    subtitle.textContent = 'Ton enveloppe quotidienne t\'attend';
+                    countdown.classList.add('hidden');
+                } else {
+                    btn.disabled = true;
+                    btn.textContent = 'Reviens demain';
+                    title.textContent = 'À demain';
+                    desc.textContent = 'Ton prochain trésor arrive dans';
+                    subtitle.textContent = 'Reviens demain pour une nouvelle surprise';
+                    countdown.classList.remove('hidden');
+                    this.updateCountdown();
+                }
+            },
+            
+            displayDailyQuote() {
+                // Use date as seed for consistent quote per day
+                const today = new Date();
+                const dayOfYear = Math.floor((today - new Date(today.getFullYear(), 0, 0)) / 86400000);
+                const quoteIndex = dayOfYear % this.dailyQuotes.length;
+                
+                const quoteElement = document.getElementById('daily-quote');
+                if (quoteElement) {
+                    quoteElement.textContent = `"${this.dailyQuotes[quoteIndex]}"`;
+                }
+            },
+            
+            canUserOpenEnvelope() {
+                if (!this.user.lastEnvelopeOpened) return true;
+                
+                const lastOpened = new Date(this.user.lastEnvelopeOpened);
+                const now = new Date();
+                
+                return !this.isSameDay(lastOpened, now);
+            },
+            
+            isSameDay(date1, date2) {
+                return date1.getFullYear() === date2.getFullYear() &&
+                       date1.getMonth() === date2.getMonth() &&
+                       date1.getDate() === date2.getDate();
+            },
+            
+            updateCountdown() {
+                const countdown = document.getElementById('countdown');
+                const now = new Date();
+                const tomorrow = new Date(now);
+                tomorrow.setDate(tomorrow.getDate() + 1);
+                tomorrow.setHours(0, 0, 0, 0);
+                
+                const diff = tomorrow - now;
+                const hours = Math.floor(diff / (1000 * 60 * 60));
+                const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                
+                countdown.textContent = `${hours}h ${minutes}min`;
+                
+                // Update every minute
+                setTimeout(() => this.updateCountdown(), 60000);
+            },
+            
+            canOpenEnvelope() {
+                if (!this.canUserOpenEnvelope()) {
+                    // Shake animation
+                    const envelope = document.getElementById('envelope');
+                    envelope.classList.add('shake');
+                    setTimeout(() => envelope.classList.remove('shake'), 500);
+                    this.showToast('Ton enveloppe s\'ouvrira demain 💌');
+                    return;
+                }
+                
+                this.openEnvelope();
+            },
+            
+            // ============================================
+            // ENVELOPE SYSTEM
+            // ============================================
+            
+            openEnvelope() {
+                if (!this.canUserOpenEnvelope()) {
+                    this.showToast('Tu as déjà ouvert ton enveloppe aujourd\'hui');
+                    return;
+                }
+                
+                this.navigateTo('envelope-opening');
+            },
+            
+            tearEnvelope() {
+                const envelope = document.getElementById('opening-envelope');
+                envelope.classList.add('tearing');
+                
+                // Show loading
+                this.showLoading(true);
+                
+                setTimeout(() => {
+                    try {
+                        // Select random assets
+                        const count = this.user.isPremium ? 3 : 1;
+                        const newAssets = this.selectRandomAssets(count);
+                        
+                        // Check if we got assets
+                        if (newAssets.length === 0) {
+                            this.showLoading(false);
+                            this.showToast('Tu as déjà tous les assets ! 🎉');
+                            this.navigateTo('home');
+                            return;
+                        }
+                        
+                        // Add to collection with tracking data
+                        newAssets.forEach(asset => {
+                            if (!this.user.collection.find(c => c.id === asset.id)) {
+                                this.user.collection.push({
+                                    ...asset,
+                                    unlockedAt: new Date().toISOString(),
+                                    timesUsed: 0,
+                                });
+                            }
+                        });
+                        this.user.lastEnvelopeOpened = new Date().toISOString();
+                        
+                        // Update streak
+                        this.updateStreak();
+                        
+                        this.saveToStorage();
+                        this.showLoading(false);
+                        
+                        // Show reveal
+                        this.showReveal(newAssets);
+                    } catch (error) {
+                        console.error('Error opening envelope:', error);
+                        this.showLoading(false);
+                        this.showToast('Une erreur est survenue 😕');
+                        this.navigateTo('home');
+                    }
+                }, 1200);
+            },
+            
+            selectRandomAssets(count) {
+                // Get assets not in collection
+                const available = this.availableAssets.filter(asset => 
+                    !this.user.collection.find(c => c.id === asset.id)
+                );
+                
+                console.log(`Available assets: ${available.length}, Requested: ${count}`);
+                
+                if (available.length === 0) {
+                    console.log('No more assets to unlock!');
+                    return [];
+                }
+                
+                // If not enough assets, return what we have
+                if (available.length <= count) {
+                    console.log('Returning all remaining assets');
+                    return available;
+                }
+                
+                // Weighted selection by rarity
+                const weighted = [];
+                available.forEach(asset => {
+                    const weight = asset.rarity === 'common' ? 7 :
+                                  asset.rarity === 'rare' ? 2 : 1;
+                    for (let i = 0; i < weight; i++) {
+                        weighted.push(asset);
+                    }
+                });
+                
+                // Shuffle and select unique assets
+                const selected = [];
+                const usedIds = new Set();
+                let attempts = 0;
+                const maxAttempts = 100;
+                
+                while (selected.length < count && attempts < maxAttempts) {
+                    attempts++;
+                    const randomIndex = Math.floor(Math.random() * weighted.length);
+                    const asset = weighted[randomIndex];
+                    
+                    if (!usedIds.has(asset.id)) {
+                        selected.push({ ...asset }); // Clone to avoid reference issues
+                        usedIds.add(asset.id);
+                    }
+                }
+                
+                console.log(`Selected ${selected.length} assets:`, selected.map(a => a.name));
+                return selected;
+            },
+            
+            showReveal(assets) {
+                if (!assets || assets.length === 0) {
+                    console.error('No assets to reveal!');
+                    this.navigateTo('home');
+                    return;
+                }
+                
+                document.getElementById('opening-phase').classList.add('hidden');
+                const revealPhase = document.getElementById('reveal-phase');
+                revealPhase.classList.remove('hidden');
+                
+                const container = document.getElementById('revealed-assets');
+                container.innerHTML = '';
+                
+                assets.forEach((asset, index) => {
+                    const card = document.createElement('div');
+                    card.className = 'asset-card';
+                    card.innerHTML = `
+                        <div class="rarity-badge rarity-${asset.rarity}">${asset.rarity.toUpperCase()}</div>
+                        <div class="asset-visual">${asset.icon}</div>
+                        <h3>${asset.name}</h3>
+                        <p class="asset-artist">Par ${asset.artist}</p>
+                    `;
+                    container.appendChild(card);
+                });
+            },
+            
+            updateStreak() {
+                // Simplified streak logic
+                this.user.streak++;
+                document.getElementById('streak-badge').textContent = 
+                    `🔥 ${this.user.streak} jour${this.user.streak > 1 ? 's' : ''} d'affilée`;
+            },
+            
+            giveStarterPack() {
+                const starter = this.selectRandomAssets(10);
+                
+                // Add proper tracking data
+                starter.forEach(asset => {
+                    if (!this.user.collection.find(c => c.id === asset.id)) {
+                        this.user.collection.push({
+                            ...asset,
+                            unlockedAt: new Date().toISOString(),
+                            timesUsed: 0,
+                        });
+                    }
+                });
+                
+                // Add demo journal entries
+                this.generateDemoData();
+                
+                this.saveToStorage();
+                this.showToast('🎁 10 trésors de bienvenue débloqués !');
+            },
+            
+            generateDemoData() {
+                // Generate some demo journal entries and moods for the past week
+                const moods = ['calm', 'happy', 'sad', 'energetic', 'peaceful', 'anxious'];
+                const colors = ['#B4C7D9', '#F4E4C1', '#D1C9D9', '#E8C5C0', '#C9D1BC', '#DDDAD3'];
+                
+                for (let i = 7; i > 0; i--) {
+                    const date = new Date();
+                    date.setDate(date.getDate() - i);
+                    const dateKey = this.getDateKey(date);
+                    
+                    // Add mood
+                    const randomMood = moods[Math.floor(Math.random() * moods.length)];
+                    const randomColor = colors[moods.indexOf(randomMood)];
+                    this.user.moods[dateKey] = { mood: randomMood, color: randomColor };
+                    
+                    // Add journal entry (every other day)
+                    if (i % 2 === 0) {
+                        const demoTexts = [
+                            "Aujourd'hui était une journée douce. J'ai pris le temps de me poser avec un thé et mes pensées.",
+                            "Sentiment d'accomplissement après avoir terminé ce projet. Je suis fière de moi.",
+                            "Un peu anxieuse ces derniers temps, mais l'écriture m'aide à mettre les choses en perspective.",
+                            "Belle balade en forêt ce matin. La nature a ce pouvoir d'apaiser mon esprit.",
+                        ];
+                        
+                        this.user.journalEntries.push({
+                            id: Date.now() - (i * 100000),
+                            date: date.toISOString(),
+                            text: demoTexts[Math.floor(Math.random() * demoTexts.length)],
+                            background: null,
+                            mood: { mood: randomMood, color: randomColor },
+                            stickers: [],
+                        });
+                    }
+                }
+            },
+            
+            // ============================================
+            // JOURNAL EDITOR
+            // ============================================
+            
+            setupEditor() {
+                this.renderPalette();
+                this.setupCanvasDragDrop();
+                
+                // Reset toolbar state
+                this.editor.textStyle = 'handwritten';
+                this.editor.textSize = 'medium';
+                this.editor.currentFilter = 'all';
+                
+                // Load last entry if exists
+                const lastEntry = this.user.journalEntries[this.user.journalEntries.length - 1];
+                if (lastEntry && this.isSameDay(new Date(lastEntry.date), new Date())) {
+                    document.getElementById('journal-text').value = lastEntry.text;
+                    if (lastEntry.background) {
+                        this.setCanvasBackground(lastEntry.background);
+                    }
+                    // Restore stickers
+                    if (lastEntry.stickers) {
+                        lastEntry.stickers.forEach(sticker => {
+                            this.addStickerToCanvas(sticker.icon, sticker.x, sticker.y);
+                        });
+                    }
+                }
+            },
+            
+            // Text formatting functions
+            changeTextStyle(style) {
+                const textarea = document.getElementById('journal-text');
+                const styles = {
+                    'handwritten': { fontFamily: 'var(--font-handwritten)', fontSize: '18px' },
+                    'typed': { fontFamily: 'Courier, monospace', fontSize: '15px' },
+                    'elegant': { fontFamily: 'var(--font-display)', fontSize: '16px' },
+                };
+                
+                if (styles[style]) {
+                    textarea.style.fontFamily = styles[style].fontFamily;
+                    textarea.style.fontSize = styles[style].fontSize;
+                    this.editor.textStyle = style;
+                }
+                
+                // Update active button
+                document.querySelectorAll('.toolbar-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.closest('.toolbar-btn').classList.add('active');
+            },
+            
+            changeTextSize(size) {
+                const textarea = document.getElementById('journal-text');
+                const sizes = {
+                    'small': '14px',
+                    'medium': '18px',
+                    'large': '22px',
+                };
+                
+                if (sizes[size]) {
+                    textarea.style.fontSize = sizes[size];
+                    this.editor.textSize = size;
+                }
+                
+                // Update active button
+                document.querySelectorAll('.toolbar-btn').forEach(btn => btn.classList.remove('active'));
+                event.target.closest('.toolbar-btn').classList.add('active');
+            },
+            
+            toggleTextDecoration(decoration) {
+                const textarea = document.getElementById('journal-text');
+                const currentStyle = window.getComputedStyle(textarea);
+                
+                if (decoration === 'bold') {
+                    textarea.style.fontWeight = currentStyle.fontWeight === 'bold' ? 'normal' : 'bold';
+                } else if (decoration === 'italic') {
+                    textarea.style.fontStyle = currentStyle.fontStyle === 'italic' ? 'normal' : 'italic';
+                } else if (decoration === 'underline') {
+                    textarea.style.textDecoration = currentStyle.textDecoration.includes('underline') ? 'none' : 'underline';
+                }
+                
+                event.target.closest('.toolbar-btn').classList.toggle('active');
+            },
+            
+            addPhoto() {
+                // Simulate photo picker
+                const photos = ['📸', '🖼️', '🌅', '🌃', '🏞️'];
+                const randomPhoto = photos[Math.floor(Math.random() * photos.length)];
+                this.addStickerToCanvas(randomPhoto, Math.random() * 200 + 50, Math.random() * 200 + 50);
+                this.showToast('Photo ajoutée ! (demo)');
+            },
+            
+            showLockedFeature(feature) {
+                const featureNames = {
+                    'paper': 'Papiers de fond',
+                    'washi': 'Washi tapes',
+                    'frame': 'Cadres photo',
+                    'drawing': 'Outils de dessin',
+                };
+                this.showToast(`${featureNames[feature]} disponible en Premium ✨`);
+                setTimeout(() => {
+                    if (confirm(`${featureNames[feature]} est disponible en Premium. Découvrir ?`)) {
+                        this.showPaywall();
+                    }
+                }, 1000);
+            },
+            
+            togglePalette() {
+                const palette = document.querySelector('.asset-palette');
+                const icon = document.getElementById('palette-toggle-icon');
+                palette.classList.toggle('palette-collapsed');
+                icon.textContent = palette.classList.contains('palette-collapsed') ? '+' : '−';
+            },
+            
+            filterPaletteByType(type) {
+                this.editor.currentFilter = type;
+                
+                // Update active tab
+                document.querySelectorAll('.palette-tab').forEach(tab => {
+                    tab.classList.remove('active');
+                });
+                document.querySelector(`.palette-tab[data-type="${type}"]`).classList.add('active');
+                
+                // Re-render palette
+                this.renderPalette(type);
+            },
+            
+            renderPalette(filterType = 'all') {
+                const grid = document.getElementById('palette-grid');
+                grid.innerHTML = '';
+                
+                let assetsToShow = this.user.collection;
+                
+                // Filter by type
+                if (filterType !== 'all') {
+                    assetsToShow = assetsToShow.filter(a => a.type === filterType);
+                }
+                
+                if (assetsToShow.length === 0) {
+                    grid.innerHTML = '<p style="grid-column: 1/-1; text-align: center; color: rgba(61, 52, 40, 0.5); font-size: 13px; padding: var(--space-lg);">Aucun asset de ce type</p>';
+                    return;
+                }
+                
+                assetsToShow.forEach(asset => {
+                    const item = document.createElement('div');
+                    item.className = 'palette-item';
+                    item.textContent = asset.icon;
+                    item.draggable = true;
+                    item.dataset.assetId = asset.id;
+                    item.title = asset.name;
+                    
+                    item.addEventListener('dragstart', (e) => {
+                        e.dataTransfer.setData('assetId', asset.id);
+                        e.dataTransfer.setData('icon', asset.icon);
+                    });
+                    
+                    item.addEventListener('click', () => {
+                        this.addStickerToCanvas(asset.icon);
+                        
+                        // Increment usage count
+                        const userAsset = this.user.collection.find(a => a.id === asset.id);
+                        if (userAsset) {
+                            userAsset.timesUsed = (userAsset.timesUsed || 0) + 1;
+                            this.saveToStorage();
+                        }
+                    });
+                    
+                    grid.appendChild(item);
+                });
+            },
+            
+            setupCanvasDragDrop() {
+                const canvas = document.getElementById('canvas');
+                
+                canvas.addEventListener('dragover', (e) => {
+                    e.preventDefault();
+                });
+                
+                canvas.addEventListener('drop', (e) => {
+                    e.preventDefault();
+                    const icon = e.dataTransfer.getData('icon');
+                    if (icon) {
+                        const rect = canvas.getBoundingClientRect();
+                        const x = e.clientX - rect.left;
+                        const y = e.clientY - rect.top;
+                        this.addStickerToCanvas(icon, x, y);
+                    }
+                });
+            },
+            
+            addStickerToCanvas(icon, x = null, y = null) {
+                const canvas = document.getElementById('canvas-stickers');
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker';
+                sticker.textContent = icon;
+                sticker.style.fontSize = '40px';
+                sticker.style.left = (x || Math.random() * 200 + 50) + 'px';
+                sticker.style.top = (y || Math.random() * 200 + 50) + 'px';
+                
+                // Make draggable
+                this.makeDraggable(sticker);
+                
+                // Double-tap to remove
+                let tapCount = 0;
+                sticker.addEventListener('click', () => {
+                    tapCount++;
+                    if (tapCount === 2) {
+                        sticker.remove();
+                        tapCount = 0;
+                    }
+                    setTimeout(() => tapCount = 0, 300);
+                });
+                
+                canvas.appendChild(sticker);
+            },
+            
+            makeDraggable(element) {
+                let pos1 = 0, pos2 = 0, pos3 = 0, pos4 = 0;
+                
+                element.onmousedown = dragMouseDown;
+                element.ontouchstart = dragTouchStart;
+                
+                function dragMouseDown(e) {
+                    e.preventDefault();
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    document.onmouseup = closeDragElement;
+                    document.onmousemove = elementDrag;
+                    element.classList.add('dragging');
+                }
+                
+                function dragTouchStart(e) {
+                    pos3 = e.touches[0].clientX;
+                    pos4 = e.touches[0].clientY;
+                    document.ontouchend = closeDragElement;
+                    document.ontouchmove = elementTouchDrag;
+                    element.classList.add('dragging');
+                }
+                
+                function elementDrag(e) {
+                    e.preventDefault();
+                    pos1 = pos3 - e.clientX;
+                    pos2 = pos4 - e.clientY;
+                    pos3 = e.clientX;
+                    pos4 = e.clientY;
+                    element.style.top = (element.offsetTop - pos2) + "px";
+                    element.style.left = (element.offsetLeft - pos1) + "px";
+                }
+                
+                function elementTouchDrag(e) {
+                    pos1 = pos3 - e.touches[0].clientX;
+                    pos2 = pos4 - e.touches[0].clientY;
+                    pos3 = e.touches[0].clientX;
+                    pos4 = e.touches[0].clientY;
+                    element.style.top = (element.offsetTop - pos2) + "px";
+                    element.style.left = (element.offsetLeft - pos1) + "px";
+                }
+                
+                function closeDragElement() {
+                    document.onmouseup = null;
+                    document.onmousemove = null;
+                    document.ontouchend = null;
+                    document.ontouchmove = null;
+                    element.classList.remove('dragging');
+                }
+            },
+            
+            setCanvasBackground(bg) {
+                const canvas = document.getElementById('canvas-background');
+                // Simplified: just set color
+                const colors = ['#F4E4C1', '#E8C5C0', '#C9D1BC', '#D1C9D9', '#B4C7D9'];
+                canvas.style.background = colors[Math.floor(Math.random() * colors.length)];
+                this.editor.currentBackground = bg;
+            },
+            
+            showBackgroundPicker() {
+                // Simplified: random background
+                this.setCanvasBackground('random');
+                this.showToast('Fond changé ! 🎨');
+            },
+            
+            saveJournalEntry() {
+                const text = document.getElementById('journal-text').value;
+                
+                if (!text.trim()) {
+                    this.showToast('Écris quelque chose d\'abord 📝');
+                    return;
+                }
+                
+                // Get stickers from canvas
+                const stickerElements = document.querySelectorAll('.sticker');
+                const stickers = Array.from(stickerElements).map(el => ({
+                    icon: el.textContent,
+                    x: parseInt(el.style.left),
+                    y: parseInt(el.style.top),
+                }));
+                
+                const today = this.getDateKey(new Date());
+                
+                const entry = {
+                    id: Date.now(),
+                    date: new Date().toISOString(),
+                    text: text,
+                    background: this.editor.currentBackground,
+                    mood: this.user.moods[today] || null,
+                    stickers: stickers,
+                };
+                
+                // Remove today's entry if exists
+                this.user.journalEntries = this.user.journalEntries.filter(e => 
+                    !this.isSameDay(new Date(e.date), new Date())
+                );
+                
+                this.user.journalEntries.push(entry);
+                this.saveToStorage();
+                
+                this.showToast('Page enregistrée ✨');
+                setTimeout(() => this.navigateTo('home'), 1000);
+            },
+            
+            autoSaveJournal() {
+                console.log('Auto-saving journal...');
+                // Silent save
+            },
+            
+            confirmExitEditor() {
+                const text = document.getElementById('journal-text').value;
+                if (text.trim()) {
+                    if (confirm('Sauvegarder cette page avant de partir ?')) {
+                        this.saveJournalEntry();
+                    } else {
+                        this.navigateTo('home');
+                    }
+                } else {
+                    this.navigateTo('home');
+                }
+            },
+            
+            // ============================================
+            // COLLECTION
+            // ============================================
+            
+            renderCollection() {
+                const grid = document.getElementById('collection-grid');
+                grid.innerHTML = '';
+                
+                // Update stats
+                document.getElementById('total-assets').textContent = this.user.collection.length;
+                document.getElementById('rare-count').textContent = 
+                    this.user.collection.filter(a => a.rarity === 'rare').length;
+                document.getElementById('legendary-count').textContent = 
+                    this.user.collection.filter(a => a.rarity === 'legendary').length;
+                
+                // Render items
+                this.user.collection.forEach(asset => {
+                    const item = document.createElement('div');
+                    item.className = 'collection-item';
+                    item.innerHTML = `
+                        <div class="collection-item-icon">${asset.icon}</div>
+                        <div class="collection-item-name">${asset.name}</div>
+                    `;
+                    
+                    item.addEventListener('click', () => {
+                        this.showAssetDetail(asset);
+                    });
+                    
+                    grid.appendChild(item);
+                });
+            },
+            
+            showAssetDetail(asset) {
+                const content = document.getElementById('asset-detail-content');
+                const artist = this.artists[asset.artistId];
+                
+                // Check if user owns this asset
+                const owned = this.user.collection.find(a => a.id === asset.id);
+                const timesUsed = owned ? (owned.timesUsed || 0) : 0;
+                const unlockedDate = owned ? new Date(owned.unlockedAt) : null;
+                
+                content.innerHTML = `
+                    <div class="asset-detail-visual">${asset.icon}</div>
+                    
+                    <div class="rarity-badge rarity-${asset.rarity}" style="margin: 0 auto var(--space-md); display: inline-block;">
+                        ${asset.rarity.toUpperCase()}
+                    </div>
+                    
+                    <h2 class="asset-detail-name">${asset.name}</h2>
+                    
+                    <div class="asset-detail-artist" onclick="app.showArtistDetail('${asset.artistId}')">
+                        Par ${asset.artist} →
+                    </div>
+                    
+                    <div class="asset-detail-tags">
+                        <span class="asset-tag">${this.getAssetTypeLabel(asset.type)}</span>
+                        <span class="asset-tag">${asset.theme}</span>
+                    </div>
+                    
+                    ${owned ? `
+                        <div class="asset-usage-stats">
+                            <div class="usage-stat-item">
+                                <span class="usage-stat-label">Débloqué le</span>
+                                <span class="usage-stat-value">${this.formatDate(unlockedDate)}</span>
+                            </div>
+                            <div class="usage-stat-item">
+                                <span class="usage-stat-label">Utilisé</span>
+                                <span class="usage-stat-value">${timesUsed} fois</span>
+                            </div>
+                        </div>
+                    ` : `
+                        <div class="card" style="background: rgba(212, 165, 137, 0.1); padding: var(--space-lg); margin-bottom: var(--space-lg);">
+                            <p style="font-size: 14px; color: rgba(61, 52, 40, 0.7);">
+                                🔒 Asset non débloqué<br>
+                                ${asset.locked ? 'Disponible prochainement' : 'Continue à ouvrir des enveloppes pour le débloquer'}
+                            </p>
+                        </div>
+                    `}
+                    
+                    ${owned && !asset.locked ? `
+                        <button class="btn btn-primary btn-full" onclick="app.useAssetInEditor('${asset.id}')">
+                            Utiliser dans mon journal
+                        </button>
+                    ` : ''}
+                `;
+                
+                document.getElementById('asset-detail-modal').classList.add('active');
+            },
+            
+            getAssetTypeLabel(type) {
+                const labels = {
+                    'sticker': 'Sticker',
+                    'paper': 'Papier',
+                    'washi': 'Washi Tape',
+                    'frame': 'Cadre',
+                    'stamp': 'Tampon',
+                };
+                return labels[type] || type;
+            },
+            
+            closeAssetDetail() {
+                document.getElementById('asset-detail-modal').classList.remove('active');
+            },
+            
+            useAssetInEditor(assetId) {
+                this.closeAssetDetail();
+                this.navigateTo('journal-editor');
+                // Asset will be available in palette
+                this.showToast('Ouvre la palette pour utiliser cet asset 🎨');
+            },
+            
+            showArtistDetail(artistId) {
+                const artist = this.artists[artistId];
+                if (!artist) return;
+                
+                // Get all assets by this artist
+                const artistAssets = this.availableAssets.filter(a => a.artistId === artistId);
+                const ownedAssets = artistAssets.filter(a => 
+                    this.user.collection.find(c => c.id === a.id)
+                );
+                
+                const content = document.getElementById('artist-detail-content');
+                content.innerHTML = `
+                    <div class="artist-avatar">${artist.avatar}</div>
+                    <h2 class="artist-name">${artist.name}</h2>
+                    <div class="artist-location">📍 ${artist.location}</div>
+                    
+                    <div class="artist-bio">${artist.bio}</div>
+                    
+                    <div class="artist-stats">
+                        <div class="artist-stat">
+                            <span class="artist-stat-number">${artistAssets.length}</span>
+                            <span class="artist-stat-label">Assets créés</span>
+                        </div>
+                        <div class="artist-stat">
+                            <span class="artist-stat-number">${ownedAssets.length}</span>
+                            <span class="artist-stat-label">Possédés</span>
+                        </div>
+                        <div class="artist-stat">
+                            <span class="artist-stat-number">${artistAssets.filter(a => a.rarity === 'legendary').length}</span>
+                            <span class="artist-stat-label">Légendaires</span>
+                        </div>
+                    </div>
+                    
+                    <div class="artist-assets-section">
+                        <h3 class="artist-assets-title">Ses créations</h3>
+                        <div class="artist-assets-grid">
+                            ${artistAssets.map(asset => {
+                                const owned = ownedAssets.find(a => a.id === asset.id);
+                                return `
+                                    <div class="artist-asset-item" 
+                                         style="opacity: ${owned ? '1' : '0.3'};"
+                                         onclick="app.closeArtistModal(); app.showAssetDetail(app.availableAssets.find(a => a.id === ${asset.id}))">
+                                        ${asset.icon}
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    
+                    <div class="artist-social-links">
+                        <a class="social-link" onclick="app.openArtistSocial('${artist.instagram}')" title="Instagram">
+                            📷
+                        </a>
+                        <a class="social-link" onclick="app.openArtistSocial('${artist.website}')" title="Site web">
+                            🌐
+                        </a>
+                    </div>
+                `;
+                
+                // Close asset detail if open
+                this.closeAssetDetail();
+                
+                document.getElementById('artist-modal').classList.add('active');
+            },
+            
+            closeArtistModal() {
+                document.getElementById('artist-modal').classList.remove('active');
+            },
+            
+            openArtistSocial(handle) {
+                this.showToast(`Ouverture de ${handle}... (demo)`);
+            },
+            
+            // ============================================
+            // MOOD PICKER
+            // ============================================
+            
+            showMoodPicker() {
+                document.getElementById('mood-modal').classList.add('active');
+            },
+            
+            closeMoodPicker() {
+                document.getElementById('mood-modal').classList.remove('active');
+            },
+            
+            selectMood(mood, color) {
+                // Remove previous selection
+                document.querySelectorAll('.mood-color').forEach(m => {
+                    m.classList.remove('selected');
+                });
+                
+                // Select this one
+                document.querySelector(`.mood-color[data-mood="${mood}"]`).classList.add('selected');
+                
+                this.user.currentMood = { mood, color };
+            },
+            
+            saveMood() {
+                if (!this.user.currentMood) {
+                    this.showToast('Choisis une humeur d\'abord');
+                    return;
+                }
+                
+                // Save to moods object with today's date
+                const today = this.getDateKey(new Date());
+                this.user.moods[today] = this.user.currentMood;
+                
+                this.saveToStorage();
+                this.closeMoodPicker();
+                this.showToast('Humeur enregistrée 😊');
+            },
+            
+            // ============================================
+            // JOURNAL HISTORY
+            // ============================================
+            
+            filterJournal(filter) {
+                console.log('Filter journal:', filter);
+                this.renderJournalHistory(filter);
+            },
+            
+            renderJournalHistory(filter = 'all') {
+                const list = document.getElementById('journal-entries-list');
+                list.innerHTML = '';
+                
+                let entries = [...this.user.journalEntries];
+                
+                // Filter
+                const now = new Date();
+                if (filter === 'this-week') {
+                    const weekAgo = new Date(now.getTime() - 7 * 24 * 60 * 60 * 1000);
+                    entries = entries.filter(e => new Date(e.date) >= weekAgo);
+                } else if (filter === 'this-month') {
+                    entries = entries.filter(e => {
+                        const entryDate = new Date(e.date);
+                        return entryDate.getMonth() === now.getMonth() && 
+                               entryDate.getFullYear() === now.getFullYear();
+                    });
+                }
+                
+                // Sort by date desc
+                entries.sort((a, b) => new Date(b.date) - new Date(a.date));
+                
+                if (entries.length === 0) {
+                    list.innerHTML = '<p style="text-align: center; color: rgba(61, 52, 40, 0.5); padding: var(--space-xl);">Aucune entrée pour cette période</p>';
+                    return;
+                }
+                
+                entries.forEach(entry => {
+                    const card = document.createElement('div');
+                    card.className = 'journal-entry-card';
+                    
+                    const date = new Date(entry.date);
+                    const dateStr = this.formatDate(date);
+                    
+                    const moodColor = entry.mood ? entry.mood.color : 'transparent';
+                    const moodBorderColor = entry.mood ? moodColor : 'rgba(61, 52, 40, 0.1)';
+                    
+                    const previewClass = this.user.settings.magicBlurEnabled ? 'entry-preview blurred' : 'entry-preview';
+                    
+                    const stickerCount = entry.stickers ? entry.stickers.length : 0;
+                    
+                    card.style.borderLeftColor = moodBorderColor;
+                    
+                    card.innerHTML = `
+                        <div class="entry-header">
+                            <div class="entry-date">${dateStr}</div>
+                            <div class="entry-mood-indicator" style="background: ${moodColor}; border-color: ${moodBorderColor};"></div>
+                        </div>
+                        <div class="${previewClass}">${entry.text}</div>
+                        <div class="entry-stats">
+                            <span>🎨 ${stickerCount} stickers</span>
+                            ${entry.mood ? `<span>${this.getMoodEmoji(entry.mood.mood)}</span>` : ''}
+                        </div>
+                    `;
+                    
+                    card.addEventListener('click', () => {
+                        this.viewJournalEntry(entry);
+                    });
+                    
+                    list.appendChild(card);
+                });
+            },
+            
+            viewJournalEntry(entry) {
+                // Find all entries and the index of this one
+                const allEntries = [...this.user.journalEntries].sort((a, b) => 
+                    new Date(b.date) - new Date(a.date)
+                );
+                
+                const index = allEntries.findIndex(e => e.id === entry.id);
+                
+                this.viewer.entries = allEntries;
+                this.viewer.currentIndex = index;
+                this.viewer.textVisible = true;
+                
+                this.renderJournalViewer();
+                document.getElementById('journal-viewer-modal').classList.add('active');
+            },
+            
+            renderJournalViewer() {
+                const entry = this.viewer.entries[this.viewer.currentIndex];
+                if (!entry) return;
+                
+                const content = document.getElementById('viewer-content');
+                const date = new Date(entry.date);
+                
+                const moodDisplay = entry.mood ? `
+                    <div class="viewer-mood" style="background: ${entry.mood.color};">
+                        ${this.getMoodEmoji(entry.mood.mood)} ${entry.mood.mood}
+                    </div>
+                ` : '';
+                
+                const stickersHTML = (entry.stickers || []).map(sticker => `
+                    <div class="viewer-sticker" style="left: ${sticker.x}px; top: ${sticker.y}px;">
+                        ${sticker.icon}
+                    </div>
+                `).join('');
+                
+                content.innerHTML = `
+                    <div class="viewer-page">
+                        <div class="viewer-date">${this.formatDate(date)}</div>
+                        ${moodDisplay}
+                        <div class="viewer-text ${!this.viewer.textVisible ? 'hidden' : ''}" id="viewer-text">
+                            ${entry.text}
+                        </div>
+                        <div class="viewer-stickers">
+                            ${stickersHTML}
+                        </div>
+                    </div>
+                `;
+                
+                // Update navigation
+                const indicator = document.getElementById('page-indicator');
+                indicator.textContent = `${this.viewer.currentIndex + 1} / ${this.viewer.entries.length}`;
+                
+                const prevBtn = document.getElementById('prev-page-btn');
+                const nextBtn = document.getElementById('next-page-btn');
+                prevBtn.disabled = this.viewer.currentIndex === 0;
+                nextBtn.disabled = this.viewer.currentIndex === this.viewer.entries.length - 1;
+            },
+            
+            closeJournalViewer() {
+                document.getElementById('journal-viewer-modal').classList.remove('active');
+            },
+            
+            previousJournalPage() {
+                if (this.viewer.currentIndex > 0) {
+                    this.viewer.currentIndex--;
+                    this.renderJournalViewer();
+                }
+            },
+            
+            nextJournalPage() {
+                if (this.viewer.currentIndex < this.viewer.entries.length - 1) {
+                    this.viewer.currentIndex++;
+                    this.renderJournalViewer();
+                }
+            },
+            
+            toggleTextVisibility() {
+                this.viewer.textVisible = !this.viewer.textVisible;
+                const text = document.getElementById('viewer-text');
+                if (text) {
+                    text.classList.toggle('hidden');
+                }
+                
+                const btn = document.getElementById('toggle-text-btn');
+                btn.textContent = this.viewer.textVisible ? '👁️' : '🙈';
+            },
+            
+            editJournalPage() {
+                const entry = this.viewer.entries[this.viewer.currentIndex];
+                this.closeJournalViewer();
+                this.navigateTo('journal-editor');
+                this.showToast('Mode édition (à implémenter)');
+            },
+            
+            shareJournalPage() {
+                this.closeJournalViewer();
+                document.getElementById('share-modal').classList.add('active');
+                
+                // Populate preview
+                const entry = this.viewer.entries[this.viewer.currentIndex];
+                this.currentShareEntry = entry;
+            },
+            
+            closeShareModal() {
+                document.getElementById('share-modal').classList.remove('active');
+                document.getElementById('share-actions').style.display = 'none';
+            },
+            
+            generateShareImage() {
+                const hideText = document.getElementById('share-hide-text').checked;
+                const showMood = document.getElementById('share-show-mood').checked;
+                const showDate = document.getElementById('share-show-date').checked;
+                
+                this.showLoading(true);
+                
+                // Simulate image generation
+                setTimeout(() => {
+                    this.showLoading(false);
+                    document.getElementById('share-actions').style.display = 'block';
+                    this.showToast('✨ Image générée !');
+                }, 1500);
+            },
+            
+            downloadShare() {
+                this.showToast('📥 Téléchargement... (demo)');
+                setTimeout(() => {
+                    this.closeShareModal();
+                }, 1000);
+            },
+            
+            copyShareLink() {
+                // Simulate copy
+                this.showToast('🔗 Lien copié ! (demo)');
+                setTimeout(() => {
+                    this.closeShareModal();
+                }, 1000);
+            },
+            
+            // ============================================
+            // INSPIRATION PROMPTS
+            // ============================================
+            
+            showInspirationPrompt() {
+                document.getElementById('inspiration-modal').classList.add('active');
+                document.getElementById('writing-prompts').classList.add('hidden');
+            },
+            
+            closeInspirationModal() {
+                document.getElementById('inspiration-modal').classList.remove('active');
+            },
+            
+            startWritingWithoutPrompt() {
+                this.closeInspirationModal();
+                // Now actually navigate to editor
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('journal-editor-screen').classList.add('active');
+                this.currentScreen = 'journal-editor';
+                this.setupEditor();
+                document.getElementById('bottom-nav').style.display = 'none';
+            },
+            
+            showWritingPrompts() {
+                // Get today's mood or use a default
+                const today = this.getDateKey(new Date());
+                const todayMood = this.user.moods[today]?.mood || this.getMostRecentMood() || 'calm';
+                
+                const prompts = this.getWritingPromptsForMood(todayMood);
+                
+                const promptsList = document.getElementById('prompts-list');
+                promptsList.innerHTML = prompts.map(prompt => `
+                    <div class="prompt-item" onclick="app.useWritingPrompt(\`${prompt}\`)">
+                        ${prompt}
+                    </div>
+                `).join('');
+                
+                document.getElementById('writing-prompts').classList.remove('hidden');
+            },
+            
+            getMostRecentMood() {
+                const moodEntries = Object.entries(this.user.moods).sort((a, b) => b[0].localeCompare(a[0]));
+                return moodEntries.length > 0 ? moodEntries[0][1].mood : null;
+            },
+            
+            getWritingPromptsForMood(mood) {
+                const promptsByMood = {
+                    calm: [
+                        "Aujourd'hui, j'ai ressenti une paix intérieure quand...",
+                        "Ce qui m'apaise en ce moment, c'est...",
+                        "Un moment de calme que j'ai savouré aujourd'hui...",
+                        "Je me sens apaisée parce que...",
+                    ],
+                    happy: [
+                        "Ce qui m'a fait sourire aujourd'hui...",
+                        "Je suis reconnaissante pour...",
+                        "Un petit bonheur du jour...",
+                        "Ce qui illumine ma journée...",
+                    ],
+                    sad: [
+                        "Aujourd'hui, j'ai besoin de...",
+                        "Ce qui pèse sur mon cœur...",
+                        "Si je pouvais m'envoyer un message de réconfort...",
+                        "Ce dont j'ai besoin pour me sentir mieux...",
+                    ],
+                    energetic: [
+                        "Aujourd'hui, je déborde d'énergie et je veux...",
+                        "Ce qui me motive en ce moment...",
+                        "J'ai envie de réaliser...",
+                        "Cette énergie m'inspire à...",
+                    ],
+                    peaceful: [
+                        "Je me sens en harmonie avec...",
+                        "Ce moment de sérénité où...",
+                        "La paix que je ressens vient de...",
+                        "Dans cet instant de tranquillité...",
+                    ],
+                    anxious: [
+                        "Ce qui m'inquiète aujourd'hui...",
+                        "Pour apaiser mon anxiété, je peux...",
+                        "Ces pensées qui tournent en boucle...",
+                        "J'aimerais me libérer de...",
+                    ],
+                };
+                
+                return promptsByMood[mood] || promptsByMood.calm;
+            },
+            
+            useWritingPrompt(prompt) {
+                this.closeInspirationModal();
+                
+                // Navigate to editor
+                document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
+                document.getElementById('journal-editor-screen').classList.add('active');
+                this.currentScreen = 'journal-editor';
+                this.setupEditor();
+                document.getElementById('bottom-nav').style.display = 'none';
+                
+                // Pre-fill with prompt
+                setTimeout(() => {
+                    const textarea = document.getElementById('journal-text');
+                    if (textarea) {
+                        textarea.value = prompt;
+                        textarea.focus();
+                        // Place cursor at end
+                        textarea.setSelectionRange(prompt.length, prompt.length);
+                    }
+                }, 100);
+            },
+            
+            formatDate(date) {
+                const options = { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' };
+                return date.toLocaleDateString('fr-FR', options);
+            },
+            
+            getMoodEmoji(mood) {
+                const emojis = {
+                    'calm': '☁️',
+                    'happy': '😊',
+                    'sad': '😢',
+                    'energetic': '⚡',
+                    'peaceful': '🧘',
+                    'anxious': '😰',
+                };
+                return emojis[mood] || '😊';
+            },
+            
+            getDateKey(date) {
+                return date.toISOString().split('T')[0];
+            },
+            
+            // ============================================
+            // PIXEL YEAR
+            // ============================================
+            
+            renderPixelYear() {
+                const grid = document.getElementById('pixel-year-grid');
+                grid.innerHTML = '';
+                
+                // Generate 365 pixels
+                const year = 2026;
+                for (let day = 1; day <= 365; day++) {
+                    const pixel = document.createElement('div');
+                    pixel.className = 'pixel';
+                    
+                    // Calculate date for this pixel
+                    const date = new Date(year, 0, day);
+                    const dateKey = this.getDateKey(date);
+                    
+                    // Check if we have a mood for this day
+                    if (this.user.moods[dateKey]) {
+                        pixel.style.background = this.user.moods[dateKey].color;
+                        pixel.classList.add('filled');
+                        pixel.title = `${this.formatDate(date)} - ${this.user.moods[dateKey].mood}`;
+                    } else {
+                        pixel.title = this.formatDate(date);
+                    }
+                    
+                    pixel.addEventListener('click', () => {
+                        if (this.user.moods[dateKey]) {
+                            alert(`${this.formatDate(date)}\n${this.getMoodEmoji(this.user.moods[dateKey].mood)} ${this.user.moods[dateKey].mood}`);
+                        } else {
+                            alert(`${this.formatDate(date)}\nPas d'humeur enregistrée`);
+                        }
+                    });
+                    
+                    grid.appendChild(pixel);
+                }
+            },
+            
+            sharePixelYear() {
+                this.showToast('Export Pixel Year... (à implémenter)');
+            },
+            
+            // ============================================
+            // SETTINGS
+            // ============================================
+            
+            toggleNotifications() {
+                const checkbox = document.getElementById('notif-checkbox');
+                this.user.settings.notifications = !checkbox.checked;
+                checkbox.checked = this.user.settings.notifications;
+                this.saveToStorage();
+                this.showToast(this.user.settings.notifications ? 'Notifications activées 🔔' : 'Notifications désactivées');
+            },
+            
+            toggleAmbiance() {
+                const checkbox = document.getElementById('ambiance-checkbox');
+                this.user.settings.ambianceEnabled = !checkbox.checked;
+                checkbox.checked = this.user.settings.ambianceEnabled;
+                this.saveToStorage();
+                
+                if (this.user.settings.ambianceEnabled) {
+                    this.showAmbiancePicker();
+                } else {
+                    this.stopAmbiance();
+                }
+            },
+            
+            toggleMagicBlur() {
+                const checkbox = document.getElementById('blur-checkbox');
+                this.user.settings.magicBlurEnabled = !checkbox.checked;
+                checkbox.checked = this.user.settings.magicBlurEnabled;
+                this.saveToStorage();
+                this.showToast(this.user.settings.magicBlurEnabled ? 'Magic Blur activé ✨' : 'Magic Blur désactivé');
+            },
+            
+            updateSettingsUI() {
+                document.getElementById('settings-name').textContent = this.user.name;
+                document.getElementById('settings-email').textContent = this.user.email;
+                document.getElementById('notif-checkbox').checked = this.user.settings.notifications;
+                document.getElementById('ambiance-checkbox').checked = this.user.settings.ambianceEnabled;
+                document.getElementById('blur-checkbox').checked = this.user.settings.magicBlurEnabled;
+                
+                const subscriptionBadge = document.getElementById('subscription-badge');
+                if (this.user.isPremium) {
+                    subscriptionBadge.innerHTML = '<div class="badge badge-success">Premium ✨</div>';
+                }
+            },
+            
+            // ============================================
+            // WELLNESS DASHBOARD
+            // ============================================
+            
+            renderWellnessDashboard() {
+                // Update stats
+                document.getElementById('wellness-streak').textContent = this.user.streak;
+                document.getElementById('wellness-entries').textContent = this.user.journalEntries.length;
+                
+                // Calculate dominant mood
+                const moodCounts = {};
+                Object.values(this.user.moods).forEach(mood => {
+                    moodCounts[mood.mood] = (moodCounts[mood.mood] || 0) + 1;
+                });
+                
+                const dominantMood = Object.keys(moodCounts).reduce((a, b) => 
+                    moodCounts[a] > moodCounts[b] ? a : b, 'Calme'
+                );
+                document.getElementById('wellness-mood').textContent = dominantMood;
+                
+                // Render mood distribution (last 7 days)
+                this.renderMoodDistribution();
+                
+                // Render insights
+                this.renderInsights();
+                
+                // Month progress
+                const now = new Date();
+                const daysInMonth = new Date(now.getFullYear(), now.getMonth() + 1, 0).getDate();
+                const daysWritten = this.user.journalEntries.filter(e => {
+                    const entryDate = new Date(e.date);
+                    return entryDate.getMonth() === now.getMonth() && 
+                           entryDate.getFullYear() === now.getFullYear();
+                }).length;
+                
+                const percentage = (daysWritten / daysInMonth) * 100;
+                document.getElementById('month-progress-text').textContent = `${daysWritten} / ${daysInMonth}`;
+                document.getElementById('month-progress-bar').style.width = `${percentage}%`;
+            },
+            
+            renderMoodDistribution() {
+                const container = document.getElementById('mood-distribution');
+                const moods = ['calm', 'happy', 'sad', 'energetic', 'peaceful', 'anxious'];
+                const colors = ['#B4C7D9', '#F4E4C1', '#D1C9D9', '#E8C5C0', '#C9D1BC', '#DDDAD3'];
+                
+                // Count moods in last 7 days
+                const sevenDaysAgo = new Date();
+                sevenDaysAgo.setDate(sevenDaysAgo.getDate() - 7);
+                
+                const moodCounts = {};
+                moods.forEach(mood => moodCounts[mood] = 0);
+                
+                Object.entries(this.user.moods).forEach(([dateKey, moodData]) => {
+                    const date = new Date(dateKey);
+                    if (date >= sevenDaysAgo) {
+                        moodCounts[moodData.mood]++;
+                    }
+                });
+                
+                const maxCount = Math.max(...Object.values(moodCounts), 1);
+                
+                container.innerHTML = moods.map((mood, index) => {
+                    const count = moodCounts[mood];
+                    const height = (count / maxCount) * 100;
+                    
+                    return `
+                        <div class="mood-bar" style="background: ${colors[index]}20;">
+                            <div style="flex: 1; display: flex; align-items: flex-end;">
+                                <div class="mood-bar-fill" style="height: ${height}%; background: ${colors[index]}; width: 100%;"></div>
+                            </div>
+                            <div style="margin-top: var(--space-xs);">${this.getMoodEmoji(mood)}</div>
+                            <div class="mood-bar-label">${count}</div>
+                        </div>
+                    `;
+                }).join('');
+            },
+            
+            renderInsights() {
+                const container = document.getElementById('insights-list');
+                const insights = this.generateInsights();
+                
+                if (insights.length === 0) {
+                    container.innerHTML = '<p style="text-align: center; color: rgba(61, 52, 40, 0.5);">Continue d\'écrire pour voir des insights</p>';
+                    return;
+                }
+                
+                container.innerHTML = insights.map(insight => `
+                    <div class="insight-item">
+                        <div class="insight-icon">${insight.icon}</div>
+                        <div class="insight-text">${insight.text}</div>
+                    </div>
+                `).join('');
+            },
+            
+            generateInsights() {
+                const insights = [];
+                
+                // Streak insight
+                if (this.user.streak >= 7) {
+                    insights.push({
+                        icon: '🔥',
+                        text: `Bravo ! Tu as écrit ${this.user.streak} jours d'affilée. L'écriture régulière aide à réduire le stress de 30%.`
+                    });
+                } else if (this.user.streak >= 3) {
+                    insights.push({
+                        icon: '⭐',
+                        text: `${this.user.streak} jours d'affilée ! Continue comme ça, tu crées une belle habitude.`
+                    });
+                }
+                
+                // Mood insight
+                const recentMoods = Object.entries(this.user.moods)
+                    .sort((a, b) => new Date(b[0]) - new Date(a[0]))
+                    .slice(0, 7);
+                
+                const calmDays = recentMoods.filter(([_, m]) => m.mood === 'calm' || m.mood === 'peaceful').length;
+                
+                if (calmDays >= 5) {
+                    insights.push({
+                        icon: '😌',
+                        text: 'Tu sembles être dans une période apaisée. Profite de cette sérénité pour créer de belles pages.'
+                    });
+                }
+                
+                // Entries insight
+                if (this.user.journalEntries.length >= 10) {
+                    insights.push({
+                        icon: '📚',
+                        text: `Tu as déjà ${this.user.journalEntries.length} pages ! Relire son journal aide à mieux se comprendre.`
+                    });
+                }
+                
+                // Collection insight
+                const legendary = this.user.collection.filter(a => a.rarity === 'legendary').length;
+                if (legendary > 0) {
+                    insights.push({
+                        icon: '✨',
+                        text: `Tu as ${legendary} asset${legendary > 1 ? 's' : ''} légendaire${legendary > 1 ? 's' : ''} ! Ces créations rares rendent tes pages uniques.`
+                    });
+                }
+                
+                return insights;
+            },
+            
+            showPrivacyPolicy() {
+                alert('Politique de confidentialité\n\nYORI respecte ta vie privée. Tes données sont chiffrées et ne sont jamais partagées.');
+            },
+            
+            exportData() {
+                const data = {
+                    user: this.user.name,
+                    entries: this.user.journalEntries.length,
+                    collection: this.user.collection.length,
+                    exportDate: new Date().toISOString(),
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = 'yori-export.json';
+                a.click();
+                
+                this.showToast('Données exportées 📥');
+            },
+            
+            contactSupport() {
+                window.open('mailto:support@yori.app?subject=Question depuis le POC', '_blank');
+            },
+            
+            deleteAccount() {
+                if (confirm('Es-tu sûre de vouloir supprimer ton compte ? Cette action est irréversible.')) {
+                    if (confirm('Vraiment sûre ? Toutes tes données seront perdues.')) {
+                        this.resetApp();
+                    }
+                }
+            },
+            
+            // ============================================
+            // PAYWALL
+            // ============================================
+            
+            showPaywall() {
+                document.getElementById('paywall-modal').classList.add('active');
+            },
+            
+            closePaywall() {
+                document.getElementById('paywall-modal').classList.remove('active');
+            },
+            
+            purchasePremium() {
+                // Simulate purchase
+                this.showLoading(true);
+                
+                setTimeout(() => {
+                    this.user.isPremium = true;
+                    this.saveToStorage();
+                    this.showLoading(false);
+                    this.closePaywall();
+                    this.showToast('Bienvenue dans Premium ! ✨');
+                    this.updateSettingsUI();
+                    this.updateHomeScreen();
+                }, 1500);
+            },
+            
+            // ============================================
+            // AMBIANCE SOUNDS
+            // ============================================
+            
+            showAmbiancePicker() {
+                document.getElementById('ambiance-modal').classList.add('active');
+            },
+            
+            closeAmbiancePicker() {
+                document.getElementById('ambiance-modal').classList.remove('active');
+            },
+            
+            selectAmbiance(ambiance) {
+                // Check if premium required
+                const premiumAmbiances = ['ocean', 'cafe', 'night'];
+                if (premiumAmbiances.includes(ambiance) && !this.user.isPremium) {
+                    this.closeAmbiancePicker();
+                    this.showPaywall();
+                    return;
+                }
+                
+                // Remove previous active
+                document.querySelectorAll('.ambiance-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                // Set active
+                document.querySelector(`.ambiance-card[data-ambiance="${ambiance}"]`).classList.add('active');
+                
+                this.user.settings.currentAmbiance = ambiance;
+                this.saveToStorage();
+                
+                // Simulate playing sound
+                this.showToast(`Ambiance "${ambiance}" en cours 🎵`);
+                
+                // Auto-close after selection
+                setTimeout(() => {
+                    this.closeAmbiancePicker();
+                }, 800);
+            },
+            
+            stopAmbiance() {
+                this.user.settings.currentAmbiance = null;
+                this.user.settings.ambianceEnabled = false;
+                document.getElementById('ambiance-checkbox').checked = false;
+                this.saveToStorage();
+                
+                document.querySelectorAll('.ambiance-card').forEach(card => {
+                    card.classList.remove('active');
+                });
+                
+                this.showToast('Ambiance arrêtée');
+                this.closeAmbiancePicker();
+            },
+            
+            // ============================================
+            // UTILITIES
+            // ============================================
+            
+            showLoading(show) {
+                const loading = document.getElementById('loading');
+                if (show) {
+                    loading.classList.add('active');
+                } else {
+                    loading.classList.remove('active');
+                }
+            },
+            
+            showToast(message) {
+                // Remove existing toast
+                const existing = document.querySelector('.toast');
+                if (existing) existing.remove();
+                
+                const toast = document.createElement('div');
+                toast.className = 'toast';
+                toast.textContent = message;
+                document.body.appendChild(toast);
+                
+                setTimeout(() => {
+                    toast.remove();
+                }, 3000);
+            },
+            
+            // Debug function to reset everything
+            resetApp() {
+                if (confirm('Réinitialiser toutes les données ? (debug)')) {
+                    localStorage.removeItem('yori_data');
+                    location.reload();
+                }
+            },
+        };
+        
+        // Initialize on load
+        document.addEventListener('DOMContentLoaded', () => {
+            app.init();
+        });
+    </script>
+</body>
+</html>
