@@ -329,6 +329,295 @@
             font-style: italic;
         }
         
+        /* ============================================
+           JOURNAL HERO CTA (MAIN FOCUS)
+        ============================================ */
+        .journal-hero-cta {
+            background: linear-gradient(135deg, rgba(212, 165, 137, 0.15), rgba(201, 209, 188, 0.15));
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+            box-shadow: 0 4px 20px rgba(61, 52, 40, 0.08);
+            border: 2px solid rgba(212, 165, 137, 0.2);
+        }
+        
+        .journal-hero-content {
+            text-align: center;
+        }
+        
+        .hero-icon-large {
+            font-size: 64px;
+            margin-bottom: var(--space-md);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .hero-title {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--ink);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .hero-description {
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(61, 52, 40, 0.7);
+            margin-bottom: var(--space-xl);
+            max-width: 400px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .btn-large {
+            padding: var(--space-lg) var(--space-2xl);
+            font-size: 18px;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: var(--space-sm);
+            box-shadow: 0 4px 12px rgba(212, 165, 137, 0.3);
+        }
+        
+        .btn-large:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(212, 165, 137, 0.4);
+        }
+        
+        .btn-icon {
+            font-size: 22px;
+        }
+        
+        .btn-arrow {
+            font-size: 20px;
+            transition: transform 0.2s ease;
+        }
+        
+        .btn-large:hover .btn-arrow {
+            transform: translateX(4px);
+        }
+        
+        .quick-mood-selector {
+            margin-top: var(--space-xl);
+            padding-top: var(--space-lg);
+            border-top: 1px solid rgba(61, 52, 40, 0.1);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-md);
+        }
+        
+        .mood-label {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+            font-weight: 500;
+        }
+        
+        .mood-quick-buttons {
+            display: flex;
+            gap: var(--space-sm);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .mood-quick-btn {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid rgba(61, 52, 40, 0.1);
+            background: white;
+            font-size: 24px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .mood-quick-btn:hover {
+            transform: scale(1.1);
+            border-color: var(--terracotta);
+        }
+        
+        .mood-quick-btn.selected {
+            border-color: var(--terracotta);
+            border-width: 3px;
+            box-shadow: 0 0 0 3px rgba(212, 165, 137, 0.2);
+        }
+        
+        /* ============================================
+           TODAY'S ENTRY PREVIEW
+        ============================================ */
+        .today-entry-card {
+            background: rgba(244, 228, 193, 0.2);
+            border: 2px solid rgba(244, 228, 193, 0.5);
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .entry-card-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: var(--space-md);
+            font-weight: 600;
+            color: var(--ink);
+        }
+        
+        .entry-card-preview {
+            font-family: var(--font-handwritten);
+            font-size: 16px;
+            line-height: 1.6;
+            color: rgba(61, 52, 40, 0.8);
+            margin-bottom: var(--space-md);
+            max-height: 80px;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .entry-card-preview::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 30px;
+            background: linear-gradient(transparent, rgba(244, 228, 193, 0.2));
+        }
+        
+        .entry-card-actions {
+            display: flex;
+            justify-content: flex-end;
+        }
+        
+        .btn-small {
+            padding: var(--space-sm) var(--space-md);
+            font-size: 14px;
+        }
+        
+        /* ============================================
+           SECTION HEADERS
+        ============================================ */
+        .section-header {
+            margin: var(--space-xl) 0 var(--space-lg) 0;
+        }
+        
+        .section-header h3 {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--ink);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .section-header p {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        /* ============================================
+           COMPACT ENVELOPE (SECONDARY)
+        ============================================ */
+        .envelope-card-compact {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            margin-bottom: var(--space-xl);
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 2px solid transparent;
+        }
+        
+        .envelope-card-compact:hover {
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .envelope-visual-small {
+            font-size: 40px;
+            flex-shrink: 0;
+        }
+        
+        .envelope-content-small {
+            flex: 1;
+        }
+        
+        .envelope-title-small {
+            font-family: var(--font-display);
+            font-size: 18px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        
+        .envelope-description-small {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+            margin: 0;
+        }
+        
+        .envelope-arrow {
+            font-size: 24px;
+            color: var(--terracotta);
+            flex-shrink: 0;
+            transition: transform 0.2s ease;
+        }
+        
+        .envelope-card-compact:hover .envelope-arrow {
+            transform: translateX(4px);
+        }
+        
+        /* ============================================
+           QUICK NAVIGATION
+        ============================================ */
+        .home-quick-nav {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .quick-nav-item {
+            background: white;
+            border-radius: var(--radius-md);
+            padding: var(--space-lg);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .quick-nav-item:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .quick-nav-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .quick-nav-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        
+        .quick-nav-count {
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.5);
+        }
+        
         .envelope-container {
             flex: 1;
             display: flex;
@@ -2186,12 +2475,12 @@
         </div>
 
         <!-- ============================================
-             HOME SCREEN
+             HOME SCREEN - JOURNALING FIRST
         ============================================ -->
         <div id="home-screen" class="screen">
             <div class="header">
                 <h1 class="greeting">Bonjour <span id="user-name-display">Marie</span> 🌸</h1>
-                <p class="subtitle" id="home-subtitle">Ton enveloppe quotidienne t'attend</p>
+                <p class="subtitle">Comment vas-tu aujourd'hui ?</p>
             </div>
 
             <!-- Daily Quote/Wellness Message -->
@@ -2203,43 +2492,97 @@
                 </div>
             </div>
 
-            <div class="envelope-container">
-                <div class="card card-elevated envelope-card">
-                    <div class="envelope-visual" id="envelope" onclick="app.canOpenEnvelope()">
-                        💌
-                    </div>
-                    <h2 class="envelope-title" id="envelope-title">Prête à découvrir ?</h2>
-                    <p class="envelope-description" id="envelope-description">
-                        Un nouveau trésor t'attend
+            <!-- HERO: WRITE YOUR JOURNAL - MAIN CTA -->
+            <div class="journal-hero-cta">
+                <div class="journal-hero-content">
+                    <div class="hero-icon-large">✍️</div>
+                    <h2 class="hero-title">Écris ta page du jour</h2>
+                    <p class="hero-description">
+                        Prends un moment pour toi. Exprime ce que tu ressens, 
+                        ce que tu vis, ce dont tu rêves.
                     </p>
-                    <div id="countdown" class="countdown hidden"></div>
-                </div>
-
-                <button class="btn btn-primary btn-full" id="open-envelope-btn" onclick="app.openEnvelope()">
-                    Ouvrir mon enveloppe
-                </button>
-
-                <div class="streak-badge" id="streak-badge">
-                    🔥 3 jours d'affilée
+                    <button class="btn btn-primary btn-large btn-full" onclick="app.navigateTo('journal-editor')">
+                        <span class="btn-icon">✨</span>
+                        Commencer à écrire
+                        <span class="btn-arrow">→</span>
+                    </button>
+                    
+                    <!-- Quick mood selector -->
+                    <div class="quick-mood-selector">
+                        <span class="mood-label">Mon humeur :</span>
+                        <div class="mood-quick-buttons">
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('calm', '#B4C7D9')" title="Calme">☁️</button>
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('happy', '#F4E4C1')" title="Joyeux">😊</button>
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('sad', '#D1C9D9')" title="Triste">😢</button>
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('energetic', '#E8C5C0')" title="Énergique">⚡</button>
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('peaceful', '#C9D1BC')" title="Paisible">🧘</button>
+                            <button class="mood-quick-btn" onclick="app.quickSelectMood('anxious', '#DDDAD3')" title="Anxieux">😰</button>
+                        </div>
+                    </div>
                 </div>
             </div>
 
-            <div class="quick-actions">
-                <div class="quick-action" onclick="app.navigateTo('journal-editor')">
-                    <div class="quick-action-icon">✍️</div>
-                    <div class="quick-action-text">Écrire</div>
+            <!-- Today's journal entry preview if exists -->
+            <div id="today-entry-preview" class="hidden">
+                <div class="today-entry-card">
+                    <div class="entry-card-header">
+                        <span>📖 Ta page d'aujourd'hui</span>
+                        <button class="btn btn-ghost btn-small" onclick="app.editTodayEntry()">Modifier</button>
+                    </div>
+                    <div class="entry-card-preview" id="today-entry-text">
+                        <!-- Preview text -->
+                    </div>
+                    <div class="entry-card-actions">
+                        <button class="btn btn-secondary btn-small" onclick="app.viewTodayEntry()">
+                            Voir la page complète →
+                        </button>
+                    </div>
                 </div>
-                <div class="quick-action" onclick="app.navigateTo('collection')">
-                    <div class="quick-action-icon">🎨</div>
-                    <div class="quick-action-text">Collection</div>
+            </div>
+
+            <!-- Streak Motivation -->
+            <div class="streak-card">
+                <div class="streak-flame">🔥</div>
+                <div class="streak-content">
+                    <div class="streak-number" id="streak-display">3 jours</div>
+                    <div class="streak-label">d'affilée ! Continue comme ça</div>
                 </div>
-                <div class="quick-action" onclick="app.showMoodPicker()">
-                    <div class="quick-action-icon">😊</div>
-                    <div class="quick-action-text">Humeur</div>
+            </div>
+
+            <!-- Secondary: Daily Envelope (below journaling) -->
+            <div class="section-header">
+                <h3>Ta surprise quotidienne</h3>
+                <p>Débloque de nouveaux trésors pour embellir tes pages</p>
+            </div>
+
+            <div class="envelope-card-compact" id="envelope-card" onclick="app.openEnvelope()">
+                <div class="envelope-visual-small">💌</div>
+                <div class="envelope-content-small">
+                    <h4 class="envelope-title-small" id="envelope-title">Prête à découvrir ?</h4>
+                    <p class="envelope-description-small" id="envelope-description">Un nouveau trésor t'attend</p>
+                    <div class="countdown hidden" id="countdown">
+                        <span id="countdown-text">23:45:12</span>
+                    </div>
                 </div>
-                <div class="quick-action" onclick="app.navigateTo('pixel-year')">
-                    <div class="quick-action-icon">📊</div>
-                    <div class="quick-action-text">Pixel Year</div>
+                <div class="envelope-arrow">→</div>
+            </div>
+
+            <!-- Quick navigation -->
+            <div class="home-quick-nav">
+                <div class="quick-nav-item" onclick="app.navigateTo('journal-history')">
+                    <div class="quick-nav-icon">📚</div>
+                    <div class="quick-nav-label">Mon journal</div>
+                    <div class="quick-nav-count" id="journal-count">12 pages</div>
+                </div>
+                <div class="quick-nav-item" onclick="app.navigateTo('collection')">
+                    <div class="quick-nav-icon">🎨</div>
+                    <div class="quick-nav-label">Collection</div>
+                    <div class="quick-nav-count" id="collection-count">15 assets</div>
+                </div>
+                <div class="quick-nav-item" onclick="app.navigateTo('pixel-year')">
+                    <div class="quick-nav-icon">📊</div>
+                    <div class="quick-nav-label">Pixel Year</div>
+                    <div class="quick-nav-count" id="mood-count">8 humeurs</div>
                 </div>
             </div>
             
@@ -3363,27 +3706,116 @@
                 // Display daily quote
                 this.displayDailyQuote();
                 
+                // Check if today's entry exists and show preview
+                this.updateTodayEntryPreview();
+                
+                // Update counts
+                document.getElementById('journal-count').textContent = `${this.user.journalEntries.length} pages`;
+                document.getElementById('collection-count').textContent = `${this.user.collection.length} assets`;
+                
+                const moodsCount = Object.keys(this.user.moods).length;
+                document.getElementById('mood-count').textContent = `${moodsCount} humeurs`;
+                
+                // Update streak
+                document.getElementById('streak-display').textContent = `${this.user.streak} jours`;
+                
+                // Update selected mood buttons
+                const today = this.getDateKey(new Date());
+                const todayMood = this.user.moods[today]?.mood;
+                document.querySelectorAll('.mood-quick-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                if (todayMood) {
+                    const moodBtn = document.querySelector(`.mood-quick-btn[onclick*="${todayMood}"]`);
+                    if (moodBtn) moodBtn.classList.add('selected');
+                }
+                
+                // Update envelope status
                 const canOpen = this.canUserOpenEnvelope();
-                const btn = document.getElementById('open-envelope-btn');
                 const title = document.getElementById('envelope-title');
                 const desc = document.getElementById('envelope-description');
-                const subtitle = document.getElementById('home-subtitle');
                 const countdown = document.getElementById('countdown');
+                const envelopeCard = document.getElementById('envelope-card');
                 
                 if (canOpen) {
-                    btn.disabled = false;
                     title.textContent = 'Prête à découvrir ?';
                     desc.textContent = this.user.isPremium ? '3 nouveaux trésors t\'attendent' : 'Un nouveau trésor t\'attend';
-                    subtitle.textContent = 'Ton enveloppe quotidienne t\'attend';
                     countdown.classList.add('hidden');
+                    envelopeCard.style.pointerEvents = 'auto';
+                    envelopeCard.style.opacity = '1';
                 } else {
-                    btn.disabled = true;
-                    btn.textContent = 'Reviens demain';
                     title.textContent = 'À demain';
                     desc.textContent = 'Ton prochain trésor arrive dans';
-                    subtitle.textContent = 'Reviens demain pour une nouvelle surprise';
                     countdown.classList.remove('hidden');
                     this.updateCountdown();
+                    envelopeCard.style.pointerEvents = 'none';
+                    envelopeCard.style.opacity = '0.6';
+                }
+            },
+            
+            updateTodayEntryPreview() {
+                const today = this.getDateKey(new Date());
+                const todayEntry = this.user.journalEntries.find(e => 
+                    this.getDateKey(new Date(e.date)) === today
+                );
+                
+                const preview = document.getElementById('today-entry-preview');
+                
+                if (todayEntry) {
+                    // Show preview
+                    preview.classList.remove('hidden');
+                    const previewText = document.getElementById('today-entry-text');
+                    previewText.textContent = todayEntry.text.substring(0, 120) + (todayEntry.text.length > 120 ? '...' : '');
+                    
+                    // Update hero CTA to show "Continue writing"
+                    const heroTitle = document.querySelector('.hero-title');
+                    const heroDesc = document.querySelector('.hero-description');
+                    const heroBtn = document.querySelector('.journal-hero-cta .btn-large');
+                    
+                    heroTitle.textContent = 'Continue ta page';
+                    heroDesc.textContent = 'Tu as déjà commencé à écrire aujourd\'hui. Continue ton écriture ou relis ce que tu as écrit.';
+                    heroBtn.innerHTML = '<span class="btn-icon">✏️</span>Continuer à écrire<span class="btn-arrow">→</span>';
+                } else {
+                    // Hide preview
+                    preview.classList.add('hidden');
+                    
+                    // Reset hero CTA
+                    const heroTitle = document.querySelector('.hero-title');
+                    const heroDesc = document.querySelector('.hero-description');
+                    const heroBtn = document.querySelector('.journal-hero-cta .btn-large');
+                    
+                    heroTitle.textContent = 'Écris ta page du jour';
+                    heroDesc.textContent = 'Prends un moment pour toi. Exprime ce que tu ressens, ce que tu vis, ce dont tu rêves.';
+                    heroBtn.innerHTML = '<span class="btn-icon">✨</span>Commencer à écrire<span class="btn-arrow">→</span>';
+                }
+            },
+            
+            quickSelectMood(mood, color) {
+                const today = this.getDateKey(new Date());
+                this.user.moods[today] = { mood, color };
+                this.saveToStorage();
+                
+                // Update UI
+                document.querySelectorAll('.mood-quick-btn').forEach(btn => {
+                    btn.classList.remove('selected');
+                });
+                event.target.closest('.mood-quick-btn').classList.add('selected');
+                
+                this.showToast(`Humeur enregistrée : ${this.getMoodEmoji(mood)}`);
+            },
+            
+            editTodayEntry() {
+                this.navigateTo('journal-editor');
+            },
+            
+            viewTodayEntry() {
+                const today = this.getDateKey(new Date());
+                const todayEntry = this.user.journalEntries.find(e => 
+                    this.getDateKey(new Date(e.date)) === today
+                );
+                
+                if (todayEntry) {
+                    this.viewJournalEntry(todayEntry);
                 }
             },
             
