@@ -523,6 +523,49 @@
         /* ============================================
            COMPACT ENVELOPE (SECONDARY)
         ============================================ */
+        .envelope-hero-card {
+            background: linear-gradient(135deg, rgba(244, 228, 193, 0.3), rgba(232, 197, 192, 0.3));
+            border-radius: var(--radius-lg);
+            padding: var(--space-2xl);
+            margin-bottom: var(--space-xl);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 2px solid rgba(244, 228, 193, 0.5);
+            box-shadow: 0 4px 20px rgba(244, 228, 193, 0.3);
+        }
+        
+        .envelope-hero-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 8px 30px rgba(244, 228, 193, 0.5);
+            border-color: var(--honey);
+        }
+        
+        .envelope-hero-visual {
+            font-size: 80px;
+            margin-bottom: var(--space-md);
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        .envelope-hero-title {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--ink);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .envelope-hero-description {
+            font-size: 15px;
+            color: rgba(61, 52, 40, 0.7);
+            margin-bottom: var(--space-xl);
+            line-height: 1.6;
+        }
+        
         .envelope-card-compact {
             background: white;
             border-radius: var(--radius-lg);
@@ -1125,6 +1168,92 @@
         .stat-label {
             font-size: 13px;
             color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .collection-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: var(--space-md);
+            padding: 0 var(--space-lg) var(--space-lg);
+        }
+        
+        /* ============================================
+           COLLECTION FILTERS (2 LEVELS)
+        ============================================ */
+        .collection-filters-level1 {
+            display: flex;
+            gap: var(--space-md);
+            padding: 0 var(--space-lg) var(--space-lg);
+            overflow-x: auto;
+        }
+        
+        .filter-btn-level1 {
+            flex: 1;
+            min-width: 100px;
+            padding: var(--space-md);
+            border-radius: var(--radius-lg);
+            border: 2px solid rgba(61, 52, 40, 0.1);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+        }
+        
+        .filter-btn-level1:hover {
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+        }
+        
+        .filter-btn-level1.active {
+            border-color: var(--terracotta);
+            background: rgba(212, 165, 137, 0.1);
+        }
+        
+        .filter-icon {
+            font-size: 28px;
+        }
+        
+        .filter-label {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        
+        .collection-filters-level2 {
+            display: flex;
+            gap: var(--space-sm);
+            padding: 0 var(--space-lg) var(--space-lg);
+            overflow-x: auto;
+        }
+        
+        .collection-filters-level2.hidden {
+            display: none;
+        }
+        
+        .filter-btn-level2 {
+            padding: var(--space-sm) var(--space-lg);
+            border-radius: var(--radius-full);
+            border: 1px solid rgba(61, 52, 40, 0.15);
+            background: white;
+            font-size: 13px;
+            font-weight: 500;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            color: var(--ink);
+        }
+        
+        .filter-btn-level2:hover {
+            border-color: var(--terracotta);
+        }
+        
+        .filter-btn-level2.active {
+            background: var(--terracotta);
+            color: white;
+            border-color: var(--terracotta);
         }
         
         .collection-grid {
@@ -2611,6 +2740,340 @@
         .btn-link:hover {
             color: var(--ink);
         }
+        
+        /* ============================================
+           PROFILE SCREEN
+        ============================================ */
+        .profile-header {
+            text-align: center;
+            padding: var(--space-2xl) var(--space-lg) var(--space-lg);
+            background: linear-gradient(180deg, rgba(212, 165, 137, 0.1), transparent);
+        }
+        
+        .profile-avatar-large {
+            position: relative;
+            display: inline-block;
+            margin-bottom: var(--space-md);
+        }
+        
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background: var(--terracotta);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 48px;
+            box-shadow: 0 4px 12px rgba(212, 165, 137, 0.3);
+        }
+        
+        .level-badge {
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: linear-gradient(135deg, var(--honey), var(--terracotta));
+            color: white;
+            padding: 4px 16px;
+            border-radius: var(--radius-full);
+            font-size: 13px;
+            font-weight: 600;
+            box-shadow: var(--shadow-md);
+            white-space: nowrap;
+        }
+        
+        .profile-name {
+            font-family: var(--font-display);
+            font-size: 28px;
+            color: var(--ink);
+            margin-bottom: 4px;
+        }
+        
+        .profile-subtitle {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+            font-style: italic;
+        }
+        
+        /* ============================================
+           HARMONIE CARD
+        ============================================ */
+        .harmonie-card {
+            margin: var(--space-lg);
+            padding: var(--space-xl);
+            background: linear-gradient(135deg, rgba(201, 209, 188, 0.2), rgba(244, 228, 193, 0.2));
+        }
+        
+        .harmonie-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: var(--space-lg);
+        }
+        
+        .harmonie-icon {
+            font-size: 40px;
+        }
+        
+        .level-progress {
+            margin-bottom: var(--space-md);
+        }
+        
+        .level-progress-bar {
+            height: 12px;
+            background: rgba(61, 52, 40, 0.1);
+            border-radius: var(--radius-full);
+            overflow: hidden;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .level-progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, var(--terracotta), var(--honey));
+            border-radius: var(--radius-full);
+            transition: width 0.6s ease;
+        }
+        
+        .level-progress-text {
+            text-align: center;
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.7);
+            font-weight: 500;
+        }
+        
+        .level-info {
+            display: flex;
+            justify-content: space-between;
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+            padding-top: var(--space-sm);
+            border-top: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        /* ============================================
+           INTENTIONS
+        ============================================ */
+        .intentions-section {
+            padding: 0 var(--space-lg) var(--space-lg);
+        }
+        
+        .section-title {
+            font-family: var(--font-display);
+            font-size: 20px;
+            color: var(--ink);
+            margin-bottom: var(--space-xs);
+        }
+        
+        .section-description {
+            font-size: 14px;
+            color: rgba(61, 52, 40, 0.6);
+            margin-bottom: var(--space-lg);
+        }
+        
+        .intentions-list {
+            display: flex;
+            flex-direction: column;
+            gap: var(--space-md);
+        }
+        
+        .intention-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            display: flex;
+            align-items: center;
+            gap: var(--space-md);
+            box-shadow: var(--shadow-sm);
+            position: relative;
+            transition: all 0.2s ease;
+        }
+        
+        .intention-card.completed {
+            background: rgba(201, 209, 188, 0.2);
+            border: 2px solid var(--sage);
+        }
+        
+        .intention-card.completed .intention-check {
+            opacity: 1;
+        }
+        
+        .intention-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: rgba(212, 165, 137, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+        
+        .intention-content {
+            flex: 1;
+        }
+        
+        .intention-title {
+            font-weight: 600;
+            font-size: 15px;
+            color: var(--ink);
+            margin-bottom: 2px;
+        }
+        
+        .intention-description {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        .intention-progress {
+            font-size: 12px;
+            color: var(--terracotta);
+            font-weight: 600;
+            margin-top: 4px;
+        }
+        
+        .intention-reward {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            flex-shrink: 0;
+        }
+        
+        .reward-value {
+            font-weight: 700;
+            font-size: 16px;
+            color: var(--terracotta);
+        }
+        
+        .reward-icon {
+            font-size: 18px;
+        }
+        
+        .intention-check {
+            position: absolute;
+            top: var(--space-sm);
+            right: var(--space-sm);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--sage);
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 16px;
+            font-weight: bold;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        /* ============================================
+           PROFILE STATS GRID
+        ============================================ */
+        .profile-stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+            padding: 0 var(--space-lg) var(--space-lg);
+        }
+        
+        .profile-stat-card {
+            background: white;
+            border-radius: var(--radius-lg);
+            padding: var(--space-lg);
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+        }
+        
+        .profile-stat-card .stat-icon {
+            font-size: 32px;
+            margin-bottom: var(--space-sm);
+        }
+        
+        .profile-stat-card .stat-value {
+            font-family: var(--font-display);
+            font-size: 24px;
+            color: var(--terracotta);
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .profile-stat-card .stat-label {
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.6);
+        }
+        
+        /* ============================================
+           SETTINGS SECTION IN PROFILE
+        ============================================ */
+        .settings-section {
+            padding: 0 var(--space-lg) var(--space-lg);
+        }
+        
+        /* ============================================
+           LEVEL UP MODAL
+        ============================================ */
+        .levelup-modal {
+            text-align: center;
+            max-width: 400px;
+        }
+        
+        .levelup-rays {
+            font-size: 28px;
+            margin-bottom: var(--space-md);
+            letter-spacing: 8px;
+            animation: rays 2s ease-in-out infinite;
+        }
+        
+        @keyframes rays {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+        
+        .levelup-icon {
+            font-size: 80px;
+            margin-bottom: var(--space-md);
+            animation: bloom 1s ease-out;
+        }
+        
+        @keyframes bloom {
+            0% { transform: scale(0); opacity: 0; }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1); opacity: 1; }
+        }
+        
+        .levelup-title {
+            font-family: var(--font-display);
+            font-size: 36px;
+            color: var(--ink);
+            margin-bottom: var(--space-sm);
+        }
+        
+        .levelup-message {
+            font-size: 16px;
+            color: rgba(61, 52, 40, 0.7);
+            margin-bottom: var(--space-xl);
+            font-style: italic;
+        }
+        
+        .levelup-reward {
+            background: linear-gradient(135deg, rgba(244, 228, 193, 0.3), rgba(212, 165, 137, 0.3));
+            border-radius: var(--radius-lg);
+            padding: var(--space-xl);
+            margin-bottom: var(--space-xl);
+        }
+        
+        .reward-envelope {
+            font-size: 64px;
+            margin-bottom: var(--space-md);
+        }
+        
+        .reward-text {
+            font-size: 16px;
+            font-weight: 600;
+            color: var(--ink);
+        }
     </style>
 </head>
 <body>
@@ -2773,6 +3236,20 @@
                 </div>
             </div>
 
+            <!-- Envelope Hero (shown only when available and not opened) -->
+            <div class="envelope-hero-card hidden" id="envelope-hero" onclick="app.openEnvelope()">
+                <div class="envelope-hero-visual">💌</div>
+                <h2 class="envelope-hero-title">Ta surprise quotidienne t'attend !</h2>
+                <p class="envelope-hero-description" id="envelope-hero-desc">
+                    Un nouveau trésor pour embellir tes pages
+                </p>
+                <button class="btn btn-primary btn-large" onclick="app.openEnvelope(); event.stopPropagation();">
+                    <span class="btn-icon">💫</span>
+                    Ouvrir mon enveloppe
+                    <span class="btn-arrow">→</span>
+                </button>
+            </div>
+
             <!-- HERO: WRITE YOUR JOURNAL - MAIN CTA -->
             <div class="journal-hero-cta">
                 <div class="journal-hero-content">
@@ -2830,22 +3307,24 @@
                 </div>
             </div>
 
-            <!-- Secondary: Daily Envelope (below journaling) -->
-            <div class="section-header">
-                <h3>Ta surprise quotidienne</h3>
-                <p>Débloque de nouveaux trésors pour embellir tes pages</p>
-            </div>
-
-            <div class="envelope-card-compact" id="envelope-card" onclick="app.openEnvelope()">
-                <div class="envelope-visual-small">💌</div>
-                <div class="envelope-content-small">
-                    <h4 class="envelope-title-small" id="envelope-title">Prête à découvrir ?</h4>
-                    <p class="envelope-description-small" id="envelope-description">Un nouveau trésor t'attend</p>
-                    <div class="countdown hidden" id="countdown">
-                        <span id="countdown-text">23:45:12</span>
-                    </div>
+            <!-- Secondary: Daily Envelope (shown when already opened) -->
+            <div id="envelope-compact-section">
+                <div class="section-header">
+                    <h3>Ta surprise quotidienne</h3>
+                    <p>Débloque de nouveaux trésors pour embellir tes pages</p>
                 </div>
-                <div class="envelope-arrow">→</div>
+
+                <div class="envelope-card-compact" id="envelope-card" onclick="app.openEnvelope()">
+                    <div class="envelope-visual-small">💌</div>
+                    <div class="envelope-content-small">
+                        <h4 class="envelope-title-small" id="envelope-title">Prête à découvrir ?</h4>
+                        <p class="envelope-description-small" id="envelope-description">Un nouveau trésor t'attend</p>
+                        <div class="countdown hidden" id="countdown">
+                            <span id="countdown-text">23:45:12</span>
+                        </div>
+                    </div>
+                    <div class="envelope-arrow">→</div>
+                </div>
             </div>
 
             <!-- Quick navigation -->
@@ -3048,6 +3527,38 @@
                 </div>
             </div>
 
+            <!-- Level 1 Filter: Type -->
+            <div class="collection-filters-level1">
+                <button class="filter-btn-level1 active" data-type="sticker" onclick="app.filterCollectionByType('sticker')">
+                    <span class="filter-icon">🎨</span>
+                    <span class="filter-label">Stickers</span>
+                </button>
+                <button class="filter-btn-level1" data-type="paper" onclick="app.filterCollectionByType('paper')">
+                    <span class="filter-icon">📄</span>
+                    <span class="filter-label">Fonds</span>
+                </button>
+                <button class="filter-btn-level1" data-type="washi" onclick="app.filterCollectionByType('washi')">
+                    <span class="filter-icon">🎀</span>
+                    <span class="filter-label">Washi</span>
+                </button>
+            </div>
+
+            <!-- Level 2 Filter: Collection (only shown for stickers) -->
+            <div class="collection-filters-level2" id="collection-filters-level2">
+                <button class="filter-btn-level2 active" data-collection="all" onclick="app.filterCollectionByCollection('all')">
+                    Toutes
+                </button>
+                <button class="filter-btn-level2" data-collection="japan-lofi" onclick="app.filterCollectionByCollection('japan-lofi')">
+                    🎌 Japan Lofi
+                </button>
+                <button class="filter-btn-level2" data-collection="dark-fantasy" onclick="app.filterCollectionByCollection('dark-fantasy')">
+                    🌙 Dark Fantasy
+                </button>
+                <button class="filter-btn-level2" data-collection="cottage-core" onclick="app.filterCollectionByCollection('cottage-core')">
+                    🌿 Cottage Core
+                </button>
+            </div>
+
             <div class="collection-grid" id="collection-grid">
                 <!-- Will be populated dynamically -->
             </div>
@@ -3147,37 +3658,122 @@
         </div>
 
         <!-- ============================================
-             SETTINGS SCREEN
+             PROFILE SCREEN (formerly Settings)
         ============================================ -->
-        <div id="settings-screen" class="screen">
-            <div class="editor-header">
-                <button class="icon-btn" onclick="app.navigateTo('home')">←</button>
-                <h3 style="margin: 0; font-family: var(--font-display);">Paramètres</h3>
-                <div style="width: 40px;"></div>
+        <div id="profile-screen" class="screen">
+            <div class="profile-header">
+                <div class="profile-avatar-large">
+                    <div class="avatar-circle">👤</div>
+                    <div class="level-badge" id="profile-level">Niveau 3</div>
+                </div>
+                <h2 class="profile-name" id="profile-name">Marie</h2>
+                <p class="profile-subtitle">En quête d'harmonie</p>
             </div>
 
-            <div style="padding: var(--space-lg); flex: 1; overflow-y: auto;">
-                <!-- Profile Section -->
-                <div class="card" style="margin-bottom: var(--space-lg);">
-                    <div style="display: flex; align-items: center; gap: var(--space-md); margin-bottom: var(--space-lg);">
-                        <div style="width: 60px; height: 60px; background: var(--terracotta); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 28px;">
-                            👤
-                        </div>
-                        <div>
-                            <h3 style="margin-bottom: 4px;" id="settings-name">Marie</h3>
-                            <p style="font-size: 14px; color: rgba(61, 52, 40, 0.6); margin: 0;" id="settings-email">marie@exemple.com</p>
-                        </div>
+            <!-- Harmonie Progress -->
+            <div class="harmonie-card card-elevated">
+                <div class="harmonie-header">
+                    <div>
+                        <h3 style="margin: 0; margin-bottom: 4px;">Ton Harmonie</h3>
+                        <p style="font-size: 13px; color: rgba(61, 52, 40, 0.6); margin: 0;">
+                            Ta sérénité grandit avec toi
+                        </p>
                     </div>
-                    
-                    <div id="subscription-badge">
-                        <div class="badge badge-primary" style="font-size: 11px;">Gratuit</div>
-                        <button class="btn btn-primary" style="width: 100%; margin-top: var(--space-md);" onclick="app.showPaywall()">
-                            Passer Premium
-                        </button>
+                    <div class="harmonie-icon">🌸</div>
+                </div>
+                
+                <div class="level-progress">
+                    <div class="level-progress-bar">
+                        <div class="level-progress-fill" id="harmonie-progress" style="width: 65%;"></div>
+                    </div>
+                    <div class="level-progress-text">
+                        <span id="harmonie-current">325</span> / <span id="harmonie-next">500</span>
                     </div>
                 </div>
+                
+                <div class="level-info">
+                    <span>Niveau <strong id="current-level">3</strong></span>
+                    <span id="level-up-text">175 jusqu'au niveau 4</span>
+                </div>
+                
+                <p style="text-align: center; font-size: 13px; color: rgba(61, 52, 40, 0.6); margin-top: var(--space-md);">
+                    💌 À chaque niveau, une nouvelle enveloppe t'attend
+                </p>
+            </div>
 
-                <!-- Settings List -->
+            <!-- Today's Intentions -->
+            <div class="intentions-section">
+                <h3 class="section-title">Intentions du jour</h3>
+                <p class="section-description">Prends soin de toi, pas à pas</p>
+                
+                <div class="intentions-list">
+                    <div class="intention-card" id="intention-write">
+                        <div class="intention-icon">✍️</div>
+                        <div class="intention-content">
+                            <div class="intention-title">Déposer une pensée</div>
+                            <div class="intention-description">Écrire dans ton journal</div>
+                        </div>
+                        <div class="intention-reward">
+                            <span class="reward-value">+50</span>
+                            <span class="reward-icon">🌸</span>
+                        </div>
+                        <div class="intention-check">✓</div>
+                    </div>
+                    
+                    <div class="intention-card" id="intention-envelope">
+                        <div class="intention-icon">💌</div>
+                        <div class="intention-content">
+                            <div class="intention-title">Accueillir son cadeau</div>
+                            <div class="intention-description">Ouvrir ton enveloppe</div>
+                        </div>
+                        <div class="intention-reward">
+                            <span class="reward-value">+20</span>
+                            <span class="reward-icon">🌸</span>
+                        </div>
+                        <div class="intention-check">✓</div>
+                    </div>
+                    
+                    <div class="intention-card" id="intention-react">
+                        <div class="intention-icon">💫</div>
+                        <div class="intention-content">
+                            <div class="intention-title">Envoyer de la lumière</div>
+                            <div class="intention-description">Réagir à 3 publications</div>
+                            <div class="intention-progress">
+                                <span id="reactions-count">0</span> / 3
+                            </div>
+                        </div>
+                        <div class="intention-reward">
+                            <span class="reward-value">+30</span>
+                            <span class="reward-icon">🌸</span>
+                        </div>
+                        <div class="intention-check">✓</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Grid -->
+            <div class="profile-stats-grid">
+                <div class="profile-stat-card">
+                    <div class="stat-icon">🔥</div>
+                    <div class="stat-value" id="profile-streak">3</div>
+                    <div class="stat-label">jours d'affilée</div>
+                </div>
+                <div class="profile-stat-card">
+                    <div class="stat-icon">📖</div>
+                    <div class="stat-value" id="profile-entries">12</div>
+                    <div class="stat-label">pages écrites</div>
+                </div>
+                <div class="profile-stat-card">
+                    <div class="stat-icon">💫</div>
+                    <div class="stat-value" id="profile-reactions">47</div>
+                    <div class="stat-label">lumières envoyées</div>
+                </div>
+            </div>
+
+            <!-- Settings Section -->
+            <div class="settings-section">
+                <h3 class="section-title">Paramètres</h3>
+                
                 <div class="settings-list">
                     <div class="setting-item" onclick="app.toggleNotifications()">
                         <div>
@@ -3212,38 +3808,39 @@
                         </div>
                     </div>
                 </div>
-
-                <!-- Links -->
-                <div class="card" style="margin-top: var(--space-xl);">
-                    <div class="link-item" onclick="app.navigateTo('wellness')">
-                        <span>💚 Mon bien-être</span>
-                        <span>→</span>
-                    </div>
-                    <div class="link-item" onclick="app.showPrivacyPolicy()">
-                        <span>🔒 Confidentialité</span>
-                        <span>→</span>
-                    </div>
-                    <div class="link-item" onclick="app.exportData()">
-                        <span>📥 Exporter mes données</span>
-                        <span>→</span>
-                    </div>
-                    <div class="link-item" onclick="app.contactSupport()">
-                        <span>💌 Nous contacter</span>
-                        <span>→</span>
-                    </div>
-                    <div class="link-item" style="color: var(--alert);" onclick="app.deleteAccount()">
-                        <span>🗑️ Supprimer mon compte</span>
-                        <span>→</span>
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: var(--space-xl); color: rgba(61, 52, 40, 0.4); font-size: 12px;">
-                    YORI v1.0.0 POC<br>
-                    Fait avec 🌸 par ton équipe
-                </div>
-
-                <div style="height: 80px;"></div>
             </div>
+
+            <!-- Links -->
+            <div class="card" style="margin: var(--space-lg);">
+                <div class="link-item" onclick="app.navigateTo('wellness')">
+                    <span>💚 Mon bien-être</span>
+                    <span>→</span>
+                </div>
+                <div class="link-item" onclick="app.showPrivacyPolicy()">
+                    <span>🔒 Confidentialité</span>
+                    <span>→</span>
+                </div>
+                <div class="link-item" onclick="app.exportData()">
+                    <span>📥 Exporter mes données</span>
+                    <span>→</span>
+                </div>
+                <div class="link-item" onclick="app.contactSupport()">
+                    <span>💌 Nous contacter</span>
+                    <span>→</span>
+                </div>
+            </div>
+
+            <div style="text-align: center; margin: var(--space-xl) var(--space-lg); color: rgba(61, 52, 40, 0.4); font-size: 12px;">
+                YORI v1.0.0 POC<br>
+                Fait avec 🌸 par ton équipe
+            </div>
+
+            <div style="height: 80px;"></div>
+        </div>
+
+        <!-- Settings screen kept for backwards compatibility but redirects to profile -->
+        <div id="settings-screen" class="screen" style="display: none;">
+            <!-- Empty - navigateTo('settings') will redirect to 'profile' -->
         </div>
 
         <!-- ============================================
@@ -3375,9 +3972,9 @@
                 <div class="nav-icon">🎨</div>
                 <div class="nav-label">Collection</div>
             </a>
-            <a class="nav-item" onclick="app.navigateTo('settings')" data-screen="settings">
-                <div class="nav-icon">⚙️</div>
-                <div class="nav-label">Réglages</div>
+            <a class="nav-item" onclick="app.navigateTo('profile')" data-screen="profile">
+                <div class="nav-icon">✨</div>
+                <div class="nav-label">Profil</div>
             </a>
         </nav>
 
@@ -3725,6 +4322,25 @@
             </div>
         </div>
 
+        <!-- Level Up Modal -->
+        <div class="modal-overlay" id="levelup-modal">
+            <div class="modal levelup-modal">
+                <div class="levelup-rays">✨ 💫 ✨ 💫 ✨</div>
+                <div class="levelup-icon">🌸</div>
+                <h2 class="levelup-title">Niveau <span id="levelup-number">4</span> !</h2>
+                <p class="levelup-message">Ton harmonie grandit</p>
+                
+                <div class="levelup-reward">
+                    <div class="reward-envelope">💌</div>
+                    <p class="reward-text">Une nouvelle enveloppe t'attend !</p>
+                </div>
+
+                <button class="btn btn-primary btn-full" onclick="app.closeLevelUpAndClaim()">
+                    Ouvrir mon cadeau ✨
+                </button>
+            </div>
+        </div>
+
         <!-- Loading -->
         <div class="loading" id="loading">
             <div class="spinner"></div>
@@ -3756,37 +4372,85 @@
                     currentAmbiance: null,
                     magicBlurEnabled: false,
                 },
+                
+                // Harmonie / Level system
+                harmonie: 325,
+                level: 3,
+                totalReactions: 47,
+                
+                // Daily intentions tracking
+                dailyIntentions: {
+                    date: null, // Will be set to today's date
+                    write: false,
+                    envelope: false,
+                    reactCount: 0, // Need 3 for completion
+                },
             },
             
             // Available assets database (simplified)
             availableAssets: [
-                { id: 1, icon: '🌸', name: 'Fleur rose', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
-                { id: 2, icon: '🌿', name: 'Feuille', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature' },
-                { id: 3, icon: '☕', name: 'Café', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'cozy' },
-                { id: 4, icon: '📖', name: 'Livre', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'cozy' },
-                { id: 5, icon: '🌙', name: 'Lune', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'celestial' },
-                { id: 6, icon: '⭐', name: 'Étoile', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'celestial' },
-                { id: 7, icon: '🎨', name: 'Palette', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'art' },
-                { id: 8, icon: '🕯️', name: 'Bougie', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'cozy' },
-                { id: 9, icon: '🌺', name: 'Hibiscus', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature' },
-                { id: 10, icon: '🦋', name: 'Papillon', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
-                { id: 11, icon: '🍃', name: 'Branche', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature' },
-                { id: 12, icon: '💫', name: 'Éclat', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'celestial' },
-                { id: 13, icon: '🌻', name: 'Tournesol', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature' },
-                { id: 14, icon: '🎭', name: 'Masque', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'art' },
-                { id: 15, icon: '🎪', name: 'Tente', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'fun' },
+                // ========================================
+                // JAPAN LOFI COLLECTION - Real assets
+                // ========================================
+                // Commons
+                { id: 101, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Onigiri.png', name: 'Onigiri', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi' },
+                { id: 102, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Parapluie.png', name: 'Parapluie', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi' },
+                { id: 103, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Sakura.png', name: 'Sakura', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi' },
                 
-                // Paper backgrounds (locked for demo)
-                { id: 16, icon: '📄', name: 'Papier vintage', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'paper', locked: true },
-                { id: 17, icon: '📃', name: 'Parchemin', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'paper', locked: true },
+                // Rares
+                { id: 104, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Brique_de_lait.png', name: 'Brique de lait', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi' },
+                { id: 105, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Lanterne_de_rue.png', name: 'Lanterne de rue', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi' },
+                { id: 106, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Rare_Bureau.png', name: 'Bureau', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi' },
+                { id: 107, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Rare_Food.png', name: 'Food', type: 'sticker', rarity: 'rare', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'japan', collection: 'japan-lofi' },
                 
-                // Washi tape (locked for demo)
-                { id: 18, icon: '🎀', name: 'Washi floral', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'decoration', locked: true },
-                { id: 19, icon: '🎗️', name: 'Washi étoiles', type: 'washi', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'decoration', locked: true },
+                // Légendaires
+                { id: 108, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Legendaire_Cozy_Bedroom.png', name: 'Cozy Bedroom', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'japan', collection: 'japan-lofi' },
+                { id: 109, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/Legendaire_Porte_Torii.png', name: 'Porte Torii', type: 'sticker', rarity: 'legendary', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi' },
+                { id: 110, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/Japan%20lofi/L%C3%A9gendaire_Rue_de_Tokyo.png', name: 'Rue de Tokyo', type: 'sticker', rarity: 'legendary', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi' },
                 
-                // Frames (locked for demo)
-                { id: 20, icon: '🖼️', name: 'Cadre polaroid', type: 'frame', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'photo', locked: true },
-                { id: 21, icon: '🔲', name: 'Cadre floral', type: 'frame', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'photo', locked: true },
+                // ========================================
+                // DARK FANTASY COLLECTION - Temporary emojis
+                // ========================================
+                // Commons
+                { id: 201, icon: '🌑', name: 'Lune sombre', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'dark', collection: 'dark-fantasy' },
+                { id: 202, icon: '🕯️', name: 'Chandelle', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'dark', collection: 'dark-fantasy' },
+                { id: 203, icon: '💀', name: 'Crâne', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'dark', collection: 'dark-fantasy' },
+                
+                // Rares
+                { id: 204, icon: '🔮', name: 'Cristal magique', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'dark', collection: 'dark-fantasy' },
+                { id: 205, icon: '🏰', name: 'Château gothique', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'dark', collection: 'dark-fantasy' },
+                
+                // Légendaires
+                { id: 206, icon: '🐉', name: 'Dragon noir', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'dark', collection: 'dark-fantasy' },
+                { id: 207, icon: '🧙‍♀️', name: 'Sorcière', type: 'sticker', rarity: 'legendary', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'dark', collection: 'dark-fantasy' },
+                
+                // ========================================
+                // COTTAGE CORE COLLECTION - Temporary emojis
+                // ========================================
+                // Commons
+                { id: 301, icon: '🍄', name: 'Champignon', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature', collection: 'cottage-core' },
+                { id: 302, icon: '🧺', name: 'Panier', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature', collection: 'cottage-core' },
+                { id: 303, icon: '🥖', name: 'Pain frais', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'cozy', collection: 'cottage-core' },
+                
+                // Rares
+                { id: 304, icon: '🏡', name: 'Maisonnette', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature', collection: 'cottage-core' },
+                { id: 305, icon: '🌻', name: 'Jardin fleuri', type: 'sticker', rarity: 'rare', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature', collection: 'cottage-core' },
+                
+                // Légendaires
+                { id: 306, icon: '🧚', name: 'Fée des bois', type: 'sticker', rarity: 'legendary', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature', collection: 'cottage-core' },
+                { id: 307, icon: '🌈', name: 'Arc-en-ciel', type: 'sticker', rarity: 'legendary', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature', collection: 'cottage-core' },
+                
+                // ========================================
+                // ESSENTIALS - Papers, Washi, Frames (Premium)
+                // ========================================
+                { id: 401, icon: '📄', name: 'Papier vintage', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'paper', collection: 'essentials', locked: true },
+                { id: 402, icon: '📃', name: 'Parchemin', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'paper', collection: 'essentials', locked: true },
+                
+                { id: 403, icon: '🎀', name: 'Washi floral', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'decoration', collection: 'essentials', locked: true },
+                { id: 404, icon: '🎗️', name: 'Washi étoiles', type: 'washi', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'decoration', collection: 'essentials', locked: true },
+                
+                { id: 405, icon: '🖼️', name: 'Cadre polaroid', type: 'frame', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'photo', collection: 'essentials', locked: true },
+                { id: 406, icon: '🔲', name: 'Cadre floral', type: 'frame', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'photo', collection: 'essentials', locked: true },
             ],
             
             // Artists database
@@ -4078,11 +4742,17 @@
                         this.renderWellnessDashboard();
                     } else if (screenId === 'community') {
                         this.renderCommunityFeed();
+                    } else if (screenId === 'profile') {
+                        this.updateProfileUI();
+                    } else if (screenId === 'settings') {
+                        // Redirect to profile
+                        this.navigateTo('profile');
+                        return;
                     }
                     
                     // Hide nav for some screens
                     const nav = document.getElementById('bottom-nav');
-                    if (['envelope-opening', 'journal-editor', 'pixel-year', 'journal-history', 'wellness'].includes(screenId)) {
+                    if (['envelope-opening', 'journal-editor', 'pixel-year', 'wellness'].includes(screenId)) {
                         nav.style.display = 'none';
                     } else {
                         nav.style.display = 'flex';
@@ -4145,24 +4815,34 @@
                     if (moodBtn) moodBtn.classList.add('selected');
                 }
                 
-                // Update envelope status
+                // Determine envelope display mode
                 const canOpen = this.canUserOpenEnvelope();
-                const title = document.getElementById('envelope-title');
-                const desc = document.getElementById('envelope-description');
-                const countdown = document.getElementById('countdown');
-                const envelopeCard = document.getElementById('envelope-card');
+                const envelopeHero = document.getElementById('envelope-hero');
+                const envelopeCompact = document.getElementById('envelope-compact-section');
                 
                 if (canOpen) {
-                    title.textContent = 'Prête à découvrir ?';
-                    desc.textContent = this.user.isPremium ? '3 nouveaux trésors t\'attendent' : 'Un nouveau trésor t\'attend';
-                    countdown.classList.add('hidden');
-                    envelopeCard.style.pointerEvents = 'auto';
-                    envelopeCard.style.opacity = '1';
+                    // Show hero, hide compact
+                    envelopeHero.classList.remove('hidden');
+                    envelopeCompact.classList.add('hidden');
+                    
+                    const heroDesc = document.getElementById('envelope-hero-desc');
+                    if (heroDesc) {
+                        heroDesc.textContent = this.user.isPremium ? '3 nouveaux trésors pour embellir tes pages' : 'Un nouveau trésor pour embellir tes pages';
+                    }
                 } else {
+                    // Hide hero, show compact
+                    envelopeHero.classList.add('hidden');
+                    envelopeCompact.classList.remove('hidden');
+                    
+                    // Update compact envelope status
+                    const title = document.getElementById('envelope-title');
+                    const desc = document.getElementById('envelope-description');
+                    const countdown = document.getElementById('countdown');
+                    const envelopeCard = document.getElementById('envelope-card');
+                    
                     title.textContent = 'À demain';
-                    desc.textContent = 'Ton prochain trésor arrive dans';
-                    countdown.classList.remove('hidden');
-                    this.updateCountdown();
+                    desc.textContent = 'Ton prochain trésor arrive bientôt';
+                    countdown.classList.add('hidden');
                     envelopeCard.style.pointerEvents = 'none';
                     envelopeCard.style.opacity = '0.6';
                 }
@@ -4187,9 +4867,9 @@
                     const heroDesc = document.querySelector('.hero-description');
                     const heroBtn = document.querySelector('.journal-hero-cta .btn-large');
                     
-                    heroTitle.textContent = 'Continue ta page';
-                    heroDesc.textContent = 'Tu as déjà commencé à écrire aujourd\'hui. Continue ton écriture ou relis ce que tu as écrit.';
-                    heroBtn.innerHTML = '<span class="btn-icon">✏️</span>Continuer à écrire<span class="btn-arrow">→</span>';
+                    if (heroTitle) heroTitle.textContent = 'Continue ta page';
+                    if (heroDesc) heroDesc.textContent = 'Tu as déjà commencé à écrire aujourd\'hui. Continue ton écriture ou relis ce que tu as écrit.';
+                    if (heroBtn) heroBtn.innerHTML = '<span class="btn-icon">✏️</span>Continuer à écrire<span class="btn-arrow">→</span>';
                 } else {
                     // Hide preview
                     preview.classList.add('hidden');
@@ -4199,9 +4879,9 @@
                     const heroDesc = document.querySelector('.hero-description');
                     const heroBtn = document.querySelector('.journal-hero-cta .btn-large');
                     
-                    heroTitle.textContent = 'Écris ta page du jour';
-                    heroDesc.textContent = 'Prends un moment pour toi. Exprime ce que tu ressens, ce que tu vis, ce dont tu rêves.';
-                    heroBtn.innerHTML = '<span class="btn-icon">✨</span>Commencer à écrire<span class="btn-arrow">→</span>';
+                    if (heroTitle) heroTitle.textContent = 'Écris ta page du jour';
+                    if (heroDesc) heroDesc.textContent = 'Prends un moment pour toi. Exprime ce que tu ressens, ce que tu vis, ce dont tu rêves.';
+                    if (heroBtn) heroBtn.innerHTML = '<span class="btn-icon">✨</span>Commencer à écrire<span class="btn-arrow">→</span>';
                 }
             },
             
@@ -4300,6 +4980,9 @@
                     this.showToast('Tu as déjà ouvert ton enveloppe aujourd\'hui');
                     return;
                 }
+                
+                // Complete "envelope" intention and award harmonie
+                this.completeIntention('envelope');
                 
                 this.navigateTo('envelope-opening');
             },
@@ -4434,8 +5117,18 @@
             updateStreak() {
                 // Simplified streak logic
                 this.user.streak++;
-                document.getElementById('streak-badge').textContent = 
-                    `🔥 ${this.user.streak} jour${this.user.streak > 1 ? 's' : ''} d'affilée`;
+                
+                // Update streak display if element exists
+                const streakBadge = document.getElementById('streak-badge');
+                if (streakBadge) {
+                    streakBadge.textContent = `🔥 ${this.user.streak} jour${this.user.streak > 1 ? 's' : ''} d'affilée`;
+                }
+                
+                // Update streak in home screen
+                const streakDisplay = document.getElementById('streak-display');
+                if (streakDisplay) {
+                    streakDisplay.textContent = `${this.user.streak} jours`;
+                }
             },
             
             giveStarterPack() {
@@ -4807,6 +5500,10 @@
                 );
                 
                 this.user.journalEntries.push(entry);
+                
+                // Complete "write" intention and award harmonie
+                this.completeIntention('write');
+                
                 this.saveToStorage();
                 
                 // Show celebration modal instead of just toast
@@ -4949,6 +5646,7 @@
                 // Remove previous reaction
                 if (previousReaction) {
                     post.reactions[previousReaction]--;
+                    this.user.totalReactions--;
                 }
                 
                 // Toggle or add new reaction
@@ -4957,6 +5655,10 @@
                 } else {
                     this.userReactions[postId] = reactionType;
                     post.reactions[reactionType]++;
+                    this.user.totalReactions++;
+                    
+                    // Award harmonie for sending light
+                    this.completeIntention('react');
                 }
                 
                 this.saveToStorage();
@@ -4964,7 +5666,7 @@
                 
                 // Haptic feedback simulation
                 if (this.userReactions[postId]) {
-                    this.showToast('💫');
+                    // Don't show toast here, completeIntention already does
                 }
             },
             
@@ -4977,6 +5679,173 @@
                 this.renderCommunityFeed();
                 
                 this.showToast(post.following ? `Tu suis maintenant ${post.username}` : `Tu ne suis plus ${post.username}`);
+            },
+            
+            // ============================================
+            // HARMONIE / LEVEL SYSTEM
+            // ============================================
+            
+            getLevelRequirement(level) {
+                // Progressive difficulty curve
+                // Levels 1-5: Fast (100, 200, 300, 400, 500)
+                // Levels 6+: Slower (600, 750, 900, 1100, 1300...)
+                if (level <= 5) {
+                    return level * 100;
+                }
+                return 500 + ((level - 5) * 150);
+            },
+            
+            addHarmonie(amount, reason) {
+                this.user.harmonie += amount;
+                
+                // Check for level up
+                const currentLevel = this.user.level;
+                const requiredForNext = this.getLevelRequirement(currentLevel + 1);
+                
+                if (this.user.harmonie >= requiredForNext) {
+                    this.user.level++;
+                    this.user.harmonie -= requiredForNext; // Carry over excess
+                    this.showLevelUpModal(this.user.level);
+                } else {
+                    // Just show harmonie gain toast
+                    this.showToast(`+${amount} Harmonie 🌸`);
+                }
+                
+                this.saveToStorage();
+                this.updateProfileUI();
+            },
+            
+            showLevelUpModal(newLevel) {
+                document.getElementById('levelup-number').textContent = newLevel;
+                document.getElementById('levelup-modal').classList.add('active');
+            },
+            
+            closeLevelUpAndClaim() {
+                document.getElementById('levelup-modal').classList.remove('active');
+                // Force open envelope (level up reward)
+                this.user.lastEnvelopeOpened = null; // Reset to allow opening
+                this.navigateTo('envelope-opening');
+                this.showToast('Ton cadeau de niveau t\'attend ! 💌');
+            },
+            
+            resetDailyIntentions() {
+                const today = this.getDateKey(new Date());
+                
+                if (this.user.dailyIntentions.date !== today) {
+                    this.user.dailyIntentions = {
+                        date: today,
+                        write: false,
+                        envelope: false,
+                        reactCount: 0,
+                    };
+                    this.saveToStorage();
+                }
+            },
+            
+            completeIntention(type) {
+                this.resetDailyIntentions();
+                
+                if (type === 'write' && !this.user.dailyIntentions.write) {
+                    this.user.dailyIntentions.write = true;
+                    this.addHarmonie(50, 'Déposer une pensée');
+                } else if (type === 'envelope' && !this.user.dailyIntentions.envelope) {
+                    this.user.dailyIntentions.envelope = true;
+                    this.addHarmonie(20, 'Accueillir son cadeau');
+                } else if (type === 'react') {
+                    this.user.dailyIntentions.reactCount++;
+                    
+                    // Award harmonie for every 3 reactions
+                    if (this.user.dailyIntentions.reactCount % 3 === 0) {
+                        this.addHarmonie(30, 'Envoyer de la lumière');
+                    } else {
+                        // Small harmonie for single reaction
+                        this.addHarmonie(10, 'Lumière envoyée');
+                    }
+                }
+                
+                this.saveToStorage();
+                this.updateProfileUI();
+            },
+            
+            updateProfileUI() {
+                // Update level badge
+                const levelBadge = document.getElementById('profile-level');
+                if (levelBadge) levelBadge.textContent = `Niveau ${this.user.level}`;
+                
+                // Update harmonie progress
+                const currentHarmonie = this.user.harmonie;
+                const nextLevelReq = this.getLevelRequirement(this.user.level + 1);
+                const percentage = (currentHarmonie / nextLevelReq) * 100;
+                
+                const progressBar = document.getElementById('harmonie-progress');
+                if (progressBar) progressBar.style.width = `${percentage}%`;
+                
+                const currentSpan = document.getElementById('harmonie-current');
+                if (currentSpan) currentSpan.textContent = currentHarmonie;
+                
+                const nextSpan = document.getElementById('harmonie-next');
+                if (nextSpan) nextSpan.textContent = nextLevelReq;
+                
+                const currentLevelSpan = document.getElementById('current-level');
+                if (currentLevelSpan) currentLevelSpan.textContent = this.user.level;
+                
+                const levelUpText = document.getElementById('level-up-text');
+                if (levelUpText) {
+                    const remaining = nextLevelReq - currentHarmonie;
+                    levelUpText.textContent = `${remaining} jusqu'au niveau ${this.user.level + 1}`;
+                }
+                
+                // Update stats
+                const streakSpan = document.getElementById('profile-streak');
+                if (streakSpan) streakSpan.textContent = this.user.streak;
+                
+                const entriesSpan = document.getElementById('profile-entries');
+                if (entriesSpan) entriesSpan.textContent = this.user.journalEntries.length;
+                
+                const reactionsSpan = document.getElementById('profile-reactions');
+                if (reactionsSpan) reactionsSpan.textContent = this.user.totalReactions;
+                
+                const profileName = document.getElementById('profile-name');
+                if (profileName) profileName.textContent = this.user.name;
+                
+                // Update intentions UI
+                this.updateIntentionsUI();
+            },
+            
+            updateIntentionsUI() {
+                this.resetDailyIntentions();
+                
+                const writeCard = document.getElementById('intention-write');
+                const envelopeCard = document.getElementById('intention-envelope');
+                const reactCard = document.getElementById('intention-react');
+                
+                if (writeCard) {
+                    if (this.user.dailyIntentions.write) {
+                        writeCard.classList.add('completed');
+                    } else {
+                        writeCard.classList.remove('completed');
+                    }
+                }
+                
+                if (envelopeCard) {
+                    if (this.user.dailyIntentions.envelope) {
+                        envelopeCard.classList.add('completed');
+                    } else {
+                        envelopeCard.classList.remove('completed');
+                    }
+                }
+                
+                if (reactCard) {
+                    const count = this.user.dailyIntentions.reactCount;
+                    const reactCountSpan = document.getElementById('reactions-count');
+                    if (reactCountSpan) reactCountSpan.textContent = count;
+                    
+                    if (count >= 3) {
+                        reactCard.classList.add('completed');
+                    } else {
+                        reactCard.classList.remove('completed');
+                    }
+                }
             },
             
             autoSaveJournal() {
@@ -5001,9 +5870,67 @@
             // COLLECTION
             // ============================================
             
+            // Collection filter state
+            collectionFilter: {
+                type: 'sticker', // sticker, paper, washi
+                collection: 'all', // all, japan-lofi, dark-fantasy, cottage-core
+            },
+            
+            filterCollectionByType(type) {
+                this.collectionFilter.type = type;
+                this.collectionFilter.collection = 'all'; // Reset collection filter
+                
+                // Update UI
+                document.querySelectorAll('.filter-btn-level1').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.filter-btn-level1[data-type="${type}"]`).classList.add('active');
+                
+                // Show/hide level 2 filter based on type
+                const level2 = document.getElementById('collection-filters-level2');
+                if (type === 'sticker') {
+                    level2.classList.remove('hidden');
+                } else {
+                    level2.classList.add('hidden');
+                }
+                
+                // Reset level 2 to 'all'
+                document.querySelectorAll('.filter-btn-level2').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector('.filter-btn-level2[data-collection="all"]').classList.add('active');
+                
+                this.renderCollection();
+            },
+            
+            filterCollectionByCollection(collection) {
+                this.collectionFilter.collection = collection;
+                
+                // Update UI
+                document.querySelectorAll('.filter-btn-level2').forEach(btn => {
+                    btn.classList.remove('active');
+                });
+                document.querySelector(`.filter-btn-level2[data-collection="${collection}"]`).classList.add('active');
+                
+                this.renderCollection();
+            },
+            
             renderCollection() {
                 const grid = document.getElementById('collection-grid');
                 grid.innerHTML = '';
+                
+                // Filter assets based on current filters
+                let filteredAssets = this.user.collection.filter(asset => {
+                    // Type filter
+                    if (asset.type !== this.collectionFilter.type) return false;
+                    
+                    // Collection filter (only for stickers)
+                    if (this.collectionFilter.type === 'sticker' && this.collectionFilter.collection !== 'all') {
+                        if (asset.collection !== this.collectionFilter.collection) return false;
+                    }
+                    
+                    return true;
+                });
                 
                 // Update stats
                 document.getElementById('total-assets').textContent = this.user.collection.length;
@@ -5012,12 +5939,29 @@
                 document.getElementById('legendary-count').textContent = 
                     this.user.collection.filter(a => a.rarity === 'legendary').length;
                 
+                // Show empty state if no assets
+                if (filteredAssets.length === 0) {
+                    grid.innerHTML = `
+                        <div style="grid-column: 1/-1; text-align: center; padding: var(--space-2xl); color: rgba(61, 52, 40, 0.5);">
+                            <p style="font-size: 48px; margin-bottom: var(--space-md);">📦</p>
+                            <p>Aucun asset de ce type</p>
+                        </div>
+                    `;
+                    return;
+                }
+                
                 // Render items
-                this.user.collection.forEach(asset => {
+                filteredAssets.forEach(asset => {
                     const item = document.createElement('div');
                     item.className = 'collection-item';
+                    
+                    // Check if icon is URL (image) or emoji
+                    const isImage = asset.icon.startsWith('http');
+                    
                     item.innerHTML = `
-                        <div class="collection-item-icon">${asset.icon}</div>
+                        <div class="collection-item-icon">
+                            ${isImage ? `<img src="${asset.icon}" alt="${asset.name}" style="width: 100%; height: 100%; object-fit: contain;">` : asset.icon}
+                        </div>
                         <div class="collection-item-name">${asset.name}</div>
                     `;
                     
@@ -5038,8 +5982,13 @@
                 const timesUsed = owned ? (owned.timesUsed || 0) : 0;
                 const unlockedDate = owned ? new Date(owned.unlockedAt) : null;
                 
+                // Check if icon is URL (image) or emoji
+                const isImage = asset.icon.startsWith('http');
+                
                 content.innerHTML = `
-                    <div class="asset-detail-visual">${asset.icon}</div>
+                    <div class="asset-detail-visual">
+                        ${isImage ? `<img src="${asset.icon}" alt="${asset.name}" style="width: 100%; height: 100%; object-fit: contain;">` : asset.icon}
+                    </div>
                     
                     <div class="rarity-badge rarity-${asset.rarity}" style="margin: 0 auto var(--space-md); display: inline-block;">
                         ${asset.rarity.toUpperCase()}
@@ -5053,7 +6002,7 @@
                     
                     <div class="asset-detail-tags">
                         <span class="asset-tag">${this.getAssetTypeLabel(asset.type)}</span>
-                        <span class="asset-tag">${asset.theme}</span>
+                        ${asset.collection ? `<span class="asset-tag">${this.getCollectionLabel(asset.collection)}</span>` : ''}
                     </div>
                     
                     ${owned ? `
@@ -5084,6 +6033,16 @@
                 `;
                 
                 document.getElementById('asset-detail-modal').classList.add('active');
+            },
+            
+            getCollectionLabel(collection) {
+                const labels = {
+                    'japan-lofi': '🎌 Japan Lofi',
+                    'dark-fantasy': '🌙 Dark Fantasy',
+                    'cottage-core': '🌿 Cottage Core',
+                    'essentials': '✨ Essentials',
+                };
+                return labels[collection] || collection;
             },
             
             getAssetTypeLabel(type) {
