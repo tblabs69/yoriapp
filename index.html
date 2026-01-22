@@ -3987,6 +3987,9 @@
                 <button class="filter-btn-level2" data-collection="cottage-core" onclick="app.filterCollectionByCollection('cottage-core')">
                     🌿 Cottage Core
                 </button>
+                <button class="filter-btn-level2" data-collection="emotions" onclick="app.filterCollectionByCollection('emotions')">
+                    💝 Émotions
+                </button>
             </div>
 
             <div class="collection-grid" id="collection-grid">
@@ -4871,6 +4874,30 @@
                 { id: 307, icon: '🌈', name: 'Arc-en-ciel', type: 'sticker', rarity: 'legendary', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature', collection: 'cottage-core' },
                 
                 // ========================================
+                // EMOTIONS COLLECTION - Real assets
+                // ========================================
+                // Commons
+                { id: 501, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/amour.png', name: 'Amour', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'emotions', collection: 'emotions' },
+                { id: 502, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/creativite.png', name: 'Créativité', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'emotions', collection: 'emotions' },
+                { id: 503, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/douleur.png', name: 'Douleur', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'emotions', collection: 'emotions' },
+                { id: 504, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/doute.png', name: 'Doute', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'emotions', collection: 'emotions' },
+                { id: 505, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/energie.png', name: 'Énergie', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'emotions', collection: 'emotions' },
+                { id: 506, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/fatigue.png', name: 'Fatigue', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'emotions', collection: 'emotions' },
+                { id: 507, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/joie.png', name: 'Joie', type: 'sticker', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'emotions', collection: 'emotions' },
+                { id: 508, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/sommeil.png', name: 'Sommeil', type: 'sticker', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'emotions', collection: 'emotions' },
+                { id: 509, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/tristesse.png', name: 'Tristesse', type: 'sticker', rarity: 'common', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'emotions', collection: 'emotions' },
+                
+                // Rares
+                { id: 510, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/rare_anxiete.png', name: 'Anxiété', type: 'sticker', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'emotions', collection: 'emotions' },
+                { id: 511, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/rare_protection.png', name: 'Protection', type: 'sticker', rarity: 'rare', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'emotions', collection: 'emotions' },
+                { id: 512, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/rare_resilience.png', name: 'Résilience', type: 'sticker', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'emotions', collection: 'emotions' },
+                
+                // Légendaires
+                { id: 513, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/legendaire_guerison.png', name: 'Guérison', type: 'sticker', rarity: 'legendary', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'emotions', collection: 'emotions' },
+                { id: 514, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/legendaire_imagination.png', name: 'Imagination', type: 'sticker', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'emotions', collection: 'emotions' },
+                { id: 515, icon: 'https://raw.githubusercontent.com/tblabs69/yoriapp/refs/heads/main/assets/stickers/emotions/legendaire_liberation.png', name: 'Libération', type: 'sticker', rarity: 'legendary', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'emotions', collection: 'emotions' },
+                
+                // ========================================
                 // ESSENTIALS - Papers, Washi, Frames (Premium)
                 // ========================================
                 // Generic papers
@@ -5092,6 +5119,10 @@
                     301, 302, 304,
                     // Cottage Core papers & washi
                     430, 432,
+                    // Emotions stickers (ALL 15)
+                    501, 502, 503, 504, 505, 506, 507, 508, 509, // Commons
+                    510, 511, 512, // Rares
+                    513, 514, 515, // Légendaires
                     // Essentials
                     401, 403
                 ];
@@ -7037,6 +7068,7 @@
                     'japan-lofi': '🎌 Japan Lofi',
                     'dark-fantasy': '🌙 Dark Fantasy',
                     'cottage-core': '🌿 Cottage Core',
+                    'emotions': '💝 Émotions',
                     'essentials': '✨ Essentials',
                 };
                 return labels[collection] || collection;
