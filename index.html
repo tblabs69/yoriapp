@@ -1256,6 +1256,424 @@
             border-color: var(--terracotta);
         }
         
+        /* ============================================
+           ZEN JOURNAL EDITOR
+        ============================================ */
+        
+        /* Minimal Header */
+        .editor-header-minimal {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) var(--space-lg);
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .icon-btn-minimal {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(61, 52, 40, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 20px;
+            transition: all 0.2s ease;
+        }
+        
+        .icon-btn-minimal:hover {
+            background: rgba(61, 52, 40, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .editor-date-badge {
+            font-size: 13px;
+            color: rgba(61, 52, 40, 0.6);
+            font-weight: 500;
+        }
+        
+        .editor-autosave {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            font-size: 12px;
+            color: var(--sage);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .editor-autosave.show {
+            opacity: 1;
+        }
+        
+        .autosave-text {
+            font-weight: 500;
+        }
+        
+        /* Canvas Zen */
+        .journal-canvas-zen {
+            position: relative;
+            flex: 1;
+            overflow-y: auto;
+            background: #FAFAF8;
+            z-index: 1;
+        }
+        
+        .canvas-background-zen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: white;
+            transition: background 0.3s ease;
+            z-index: 1;
+        }
+        
+        /* Writing Container */
+        .writing-container-zen {
+            position: relative;
+            max-width: 600px;
+            margin: 0 auto;
+            padding: var(--space-2xl) var(--space-lg);
+            min-height: calc(100vh - 200px);
+            z-index: 2;
+        }
+        
+        .journal-textarea-zen {
+            width: 100%;
+            min-height: 400px;
+            border: none;
+            background: transparent;
+            font-family: 'Caveat', cursive;
+            font-size: 20px;
+            line-height: 1.8;
+            color: var(--ink);
+            resize: none;
+            outline: none;
+            padding: 0;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .journal-textarea-zen::placeholder {
+            color: rgba(61, 52, 40, 0.3);
+            font-style: italic;
+        }
+        
+        .word-count-zen {
+            text-align: center;
+            font-size: 12px;
+            color: rgba(61, 52, 40, 0.4);
+            margin-top: var(--space-lg);
+        }
+        
+        /* Stickers Layer */
+        .stickers-layer-zen {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            pointer-events: none; /* Let clicks pass through to textarea */
+            z-index: 10;
+        }
+        
+        .sticker-zen {
+            position: absolute;
+            cursor: move;
+            pointer-events: auto; /* But stickers themselves are clickable */
+            user-select: none;
+            transition: transform 0.2s ease;
+            z-index: 1;
+        }
+        
+        .sticker-zen:hover {
+            transform: scale(1.05);
+        }
+        
+        .sticker-zen.selected {
+            outline: 2px dashed var(--terracotta);
+            outline-offset: 4px;
+        }
+        
+        .sticker-zen-icon {
+            font-size: 48px;
+            filter: drop-shadow(0 2px 4px rgba(0,0,0,0.1));
+        }
+        
+        .sticker-zen-delete {
+            position: absolute;
+            top: -8px;
+            right: -8px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            background: var(--alert);
+            color: white;
+            border: 2px solid white;
+            display: none;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 12px;
+        }
+        
+        .sticker-zen.selected .sticker-zen-delete {
+            display: flex;
+        }
+        
+        /* Floating Toolbar */
+        .editor-toolbar-floating {
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: var(--space-sm);
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(20px);
+            padding: var(--space-sm);
+            border-radius: var(--radius-full);
+            box-shadow: 0 8px 32px rgba(61, 52, 40, 0.15);
+            transition: all 0.3s ease;
+            z-index: 100;
+        }
+        
+        .editor-toolbar-floating.hidden {
+            transform: translateX(-50%) translateY(100px);
+            opacity: 0;
+        }
+        
+        .toolbar-btn-zen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            padding: var(--space-sm) var(--space-md);
+            border: none;
+            background: transparent;
+            border-radius: var(--radius-md);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            min-width: 70px;
+        }
+        
+        .toolbar-btn-zen:hover {
+            background: rgba(212, 165, 137, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .toolbar-btn-primary-zen {
+            background: var(--terracotta);
+            color: white;
+        }
+        
+        .toolbar-btn-primary-zen:hover {
+            background: var(--ink);
+            transform: translateY(-2px) scale(1.05);
+        }
+        
+        .toolbar-icon-zen {
+            font-size: 24px;
+        }
+        
+        .toolbar-label-zen {
+            font-size: 11px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        
+        .toolbar-btn-primary-zen .toolbar-label-zen {
+            color: white;
+        }
+        
+        /* Bottom Sheet */
+        .bottom-sheet-zen {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: white;
+            border-radius: var(--radius-2xl) var(--radius-2xl) 0 0;
+            max-height: 70vh;
+            transform: translateY(100%);
+            transition: transform 0.3s cubic-bezier(0.32, 0.72, 0, 1);
+            box-shadow: 0 -4px 20px rgba(0,0,0,0.1);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .modal-overlay.active .bottom-sheet-zen {
+            transform: translateY(0);
+        }
+        
+        .bottom-sheet-compact-zen {
+            max-height: 50vh;
+        }
+        
+        .bottom-sheet-handle {
+            width: 40px;
+            height: 4px;
+            background: rgba(61, 52, 40, 0.2);
+            border-radius: 2px;
+            margin: var(--space-md) auto var(--space-sm);
+        }
+        
+        .bottom-sheet-header-zen {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: var(--space-md) var(--space-xl);
+            border-bottom: 1px solid rgba(61, 52, 40, 0.08);
+        }
+        
+        .bottom-sheet-header-zen h3 {
+            font-family: var(--font-display);
+            font-size: 18px;
+            margin: 0;
+        }
+        
+        .modal-close-zen {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: none;
+            background: rgba(61, 52, 40, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 18px;
+            transition: all 0.2s ease;
+        }
+        
+        .modal-close-zen:hover {
+            background: rgba(61, 52, 40, 0.1);
+            transform: scale(1.05);
+        }
+        
+        .bottom-sheet-content-zen {
+            flex: 1;
+            overflow-y: auto;
+            padding: var(--space-xl);
+        }
+        
+        /* Stickers Grid in Picker */
+        .stickers-grid-zen {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+            gap: var(--space-md);
+        }
+        
+        .sticker-picker-item {
+            aspect-ratio: 1;
+            border-radius: var(--radius-md);
+            border: 2px solid rgba(61, 52, 40, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            font-size: 40px;
+            background: white;
+        }
+        
+        .sticker-picker-item:hover {
+            border-color: var(--terracotta);
+            transform: scale(1.05);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .sticker-picker-item img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+        }
+        
+        /* Backgrounds Carousel */
+        .backgrounds-carousel-zen {
+            display: flex;
+            gap: var(--space-lg);
+            overflow-x: auto;
+            padding-bottom: var(--space-md);
+        }
+        
+        .background-option-zen {
+            flex-shrink: 0;
+            width: 120px;
+            height: 160px;
+            border-radius: var(--radius-lg);
+            border: 3px solid rgba(61, 52, 40, 0.1);
+            cursor: pointer;
+            transition: all 0.2s ease;
+            position: relative;
+        }
+        
+        .background-option-zen:hover {
+            transform: scale(1.05);
+            border-color: var(--terracotta);
+        }
+        
+        .background-option-zen.active {
+            border-color: var(--terracotta);
+            box-shadow: 0 0 0 3px rgba(212, 165, 137, 0.2);
+        }
+        
+        .background-option-zen.locked {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .background-option-zen.locked::after {
+            content: '🔒';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            font-size: 32px;
+        }
+        
+        /* Mood Picker Grid */
+        .mood-picker-grid-zen {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: var(--space-md);
+        }
+        
+        .mood-picker-btn-zen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-sm);
+            padding: var(--space-xl) var(--space-md);
+            border-radius: var(--radius-lg);
+            border: 2px solid rgba(61, 52, 40, 0.1);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        
+        .mood-picker-btn-zen:hover {
+            border-color: var(--terracotta);
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-md);
+        }
+        
+        .mood-picker-emoji-zen {
+            font-size: 40px;
+        }
+        
+        .mood-picker-label-zen {
+            font-size: 13px;
+            font-weight: 600;
+            color: var(--ink);
+        }
+        
         .collection-grid {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -3380,125 +3798,137 @@
         <!-- ============================================
              JOURNAL EDITOR SCREEN
         ============================================ -->
+        <!-- ============================================
+             JOURNAL EDITOR SCREEN - ZEN MODE
+        ============================================ -->
         <div id="journal-editor-screen" class="screen">
-            <div class="editor-header">
-                <button class="icon-btn" onclick="app.confirmExitEditor()">✕</button>
-                <div class="editor-actions">
-                    <button class="icon-btn" onclick="app.showAmbiancePicker()" title="Ambiance">
-                        🎵
-                    </button>
-                    <button class="icon-btn" onclick="app.showBackgroundPicker()" title="Fond">
-                        🎨
-                    </button>
-                    <button class="icon-btn" onclick="app.saveJournalEntry()" title="Sauvegarder">
-                        ✓
-                    </button>
+            <!-- Minimalist header -->
+            <div class="editor-header-minimal">
+                <button class="icon-btn-minimal" onclick="app.exitEditor()">←</button>
+                <div class="editor-date-badge" id="editor-date">Aujourd'hui</div>
+                <div class="editor-autosave" id="autosave-indicator">
+                    <span class="autosave-text">Sauvegardé ✓</span>
                 </div>
             </div>
 
-            <div class="editor-canvas-container">
-                <!-- Formatting Toolbar -->
-                <div class="formatting-toolbar">
-                    <div class="toolbar-section">
-                        <button class="toolbar-btn" onclick="app.changeTextStyle('handwritten')" title="Écriture à la main">
-                            ✍️
-                        </button>
-                        <button class="toolbar-btn" onclick="app.changeTextStyle('typed')" title="Machine à écrire">
-                            ⌨️
-                        </button>
-                        <button class="toolbar-btn" onclick="app.changeTextStyle('elegant')" title="Élégant">
-                            ✨
-                        </button>
-                    </div>
+            <!-- Main writing area -->
+            <div class="journal-canvas-zen" id="journal-canvas-zen">
+                <!-- Background layer -->
+                <div class="canvas-background-zen" id="canvas-background-zen"></div>
+                
+                <!-- Writing container -->
+                <div class="writing-container-zen">
+                    <textarea 
+                        id="journal-text" 
+                        class="journal-textarea-zen" 
+                        placeholder="Laisse tes pensées couler doucement..."
+                        spellcheck="false"
+                    ></textarea>
                     
-                    <div class="toolbar-divider"></div>
-                    
-                    <div class="toolbar-section">
-                        <button class="toolbar-btn" onclick="app.changeTextSize('small')" title="Petit">
-                            A
-                        </button>
-                        <button class="toolbar-btn" onclick="app.changeTextSize('medium')" title="Moyen">
-                            <span style="font-size: 18px;">A</span>
-                        </button>
-                        <button class="toolbar-btn" onclick="app.changeTextSize('large')" title="Grand">
-                            <span style="font-size: 20px;">A</span>
-                        </button>
-                    </div>
-                    
-                    <div class="toolbar-divider"></div>
-                    
-                    <div class="toolbar-section">
-                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('bold')" title="Gras">
-                            <strong>B</strong>
-                        </button>
-                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('italic')" title="Italique">
-                            <em>I</em>
-                        </button>
-                        <button class="toolbar-btn" onclick="app.toggleTextDecoration('underline')" title="Souligné">
-                            <u>U</u>
-                        </button>
-                    </div>
-                    
-                    <div class="toolbar-divider"></div>
-                    
-                    <div class="toolbar-section">
-                        <button class="toolbar-btn" onclick="app.addPhoto()" title="Ajouter photo">
-                            📷
-                        </button>
-                        <button class="toolbar-btn locked" onclick="app.showLockedFeature('drawing')" title="Dessiner">
-                            ✏️
-                            <span class="premium-badge" style="font-size: 8px; position: absolute; top: -4px; right: -4px;">Pro</span>
-                        </button>
-                    </div>
+                    <!-- Word count -->
+                    <div class="word-count-zen" id="word-count-zen">0 mots</div>
                 </div>
                 
-                <div class="canvas-wrapper">
-                    <div class="canvas" id="canvas">
-                        <div class="canvas-background" id="canvas-background"></div>
-                        <textarea 
-                            class="canvas-textarea" 
-                            id="journal-text"
-                            placeholder="Écris tes pensées..."
-                        ></textarea>
-                        <div class="canvas-stickers" id="canvas-stickers">
-                            <!-- Stickers will be added here -->
-                        </div>
-                    </div>
+                <!-- Stickers layer -->
+                <div class="stickers-layer-zen" id="stickers-layer-zen">
+                    <!-- Stickers added here -->
                 </div>
             </div>
 
-            <div class="asset-palette">
-                <div class="palette-header">
-                    <h3 class="palette-title">Ta collection</h3>
-                    <button class="icon-btn" onclick="app.togglePalette()">
-                        <span id="palette-toggle-icon">−</span>
-                    </button>
+            <!-- Floating toolbar -->
+            <div class="editor-toolbar-floating" id="editor-toolbar-floating">
+                <button class="toolbar-btn-zen" onclick="app.openStickerPicker()">
+                    <span class="toolbar-icon-zen">🎨</span>
+                    <span class="toolbar-label-zen">Sticker</span>
+                </button>
+                
+                <button class="toolbar-btn-zen" onclick="app.openBackgroundPicker()">
+                    <span class="toolbar-icon-zen">🖼️</span>
+                    <span class="toolbar-label-zen">Fond</span>
+                </button>
+                
+                <button class="toolbar-btn-zen" onclick="app.openMoodPicker()">
+                    <span class="toolbar-icon-zen" id="current-mood-icon-zen">😊</span>
+                    <span class="toolbar-label-zen">Humeur</span>
+                </button>
+                
+                <button class="toolbar-btn-zen toolbar-btn-primary-zen" onclick="app.saveAndExitEditor()">
+                    <span class="toolbar-icon-zen">✨</span>
+                    <span class="toolbar-label-zen">Terminer</span>
+                </button>
+            </div>
+        </div>
+
+        <!-- Sticker Picker Bottom Sheet -->
+        <div class="modal-overlay" id="sticker-picker-modal-zen" onclick="app.closeStickerPickerIfOverlay(event)">
+            <div class="bottom-sheet-zen" onclick="event.stopPropagation()">
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header-zen">
+                    <h3>Ajouter un sticker</h3>
+                    <button class="modal-close-zen" onclick="app.closeStickerPicker()">✕</button>
                 </div>
                 
-                <!-- Asset Type Tabs -->
-                <div class="palette-tabs" id="palette-tabs">
-                    <button class="palette-tab active" data-type="all" onclick="app.filterPaletteByType('all')">
-                        Tout
-                    </button>
-                    <button class="palette-tab" data-type="sticker" onclick="app.filterPaletteByType('sticker')">
-                        🎨 Stickers
-                    </button>
-                    <button class="palette-tab locked" data-type="paper" onclick="app.showLockedFeature('paper')">
-                        📄 Papiers
-                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
-                    </button>
-                    <button class="palette-tab locked" data-type="washi" onclick="app.showLockedFeature('washi')">
-                        🎀 Washi
-                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
-                    </button>
-                    <button class="palette-tab locked" data-type="frame" onclick="app.showLockedFeature('frame')">
-                        🖼️ Cadres
-                        <span class="premium-badge" style="font-size: 9px; margin-left: 4px;">Pro</span>
-                    </button>
+                <div class="bottom-sheet-content-zen">
+                    <div class="stickers-grid-zen" id="stickers-grid-zen">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Background Picker Bottom Sheet -->
+        <div class="modal-overlay" id="background-picker-modal-zen" onclick="app.closeBackgroundPickerIfOverlay(event)">
+            <div class="bottom-sheet-zen" onclick="event.stopPropagation()">
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header-zen">
+                    <h3>Choisir un fond</h3>
+                    <button class="modal-close-zen" onclick="app.closeBackgroundPicker()">✕</button>
                 </div>
                 
-                <div class="palette-grid" id="palette-grid">
-                    <!-- Will be populated from user collection -->
+                <div class="bottom-sheet-content-zen">
+                    <div class="backgrounds-carousel-zen" id="backgrounds-carousel-zen">
+                        <!-- Populated dynamically -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mood Picker Bottom Sheet -->
+        <div class="modal-overlay" id="mood-picker-modal-zen" onclick="app.closeMoodPickerIfOverlay(event)">
+            <div class="bottom-sheet-zen bottom-sheet-compact-zen" onclick="event.stopPropagation()">
+                <div class="bottom-sheet-handle"></div>
+                <div class="bottom-sheet-header-zen">
+                    <h3>Comment te sens-tu ?</h3>
+                    <button class="modal-close-zen" onclick="app.closeMoodPicker()">✕</button>
+                </div>
+                
+                <div class="bottom-sheet-content-zen">
+                    <div class="mood-picker-grid-zen">
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('calm', '#B4C7D9', '☁️')">
+                            <span class="mood-picker-emoji-zen">☁️</span>
+                            <span class="mood-picker-label-zen">Calme</span>
+                        </button>
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('happy', '#F4E4C1', '😊')">
+                            <span class="mood-picker-emoji-zen">😊</span>
+                            <span class="mood-picker-label-zen">Joyeux</span>
+                        </button>
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('sad', '#D1C9D9', '😢')">
+                            <span class="mood-picker-emoji-zen">😢</span>
+                            <span class="mood-picker-label-zen">Triste</span>
+                        </button>
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('energetic', '#E8C5C0', '⚡')">
+                            <span class="mood-picker-emoji-zen">⚡</span>
+                            <span class="mood-picker-label-zen">Énergique</span>
+                        </button>
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('peaceful', '#C9D1BC', '🧘')">
+                            <span class="mood-picker-emoji-zen">🧘</span>
+                            <span class="mood-picker-label-zen">Paisible</span>
+                        </button>
+                        <button class="mood-picker-btn-zen" onclick="app.selectEditorMood('anxious', '#DDDAD3', '😰')">
+                            <span class="mood-picker-emoji-zen">😰</span>
+                            <span class="mood-picker-label-zen">Anxieux</span>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -4443,12 +4873,39 @@
                 // ========================================
                 // ESSENTIALS - Papers, Washi, Frames (Premium)
                 // ========================================
-                { id: 401, icon: '📄', name: 'Papier vintage', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'paper', collection: 'essentials', locked: true },
+                // Generic papers
+                { id: 401, icon: '📄', name: 'Papier blanc', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'paper', collection: 'essentials', locked: true },
                 { id: 402, icon: '📃', name: 'Parchemin', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'paper', collection: 'essentials', locked: true },
                 
-                { id: 403, icon: '🎀', name: 'Washi floral', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'decoration', collection: 'essentials', locked: true },
+                // Japan Lofi themed papers
+                { id: 410, icon: '📄', name: 'Papier Washi', type: 'paper', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi', locked: true },
+                { id: 411, icon: '📜', name: 'Papier Sakura', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi', locked: true },
+                
+                // Dark Fantasy themed papers
+                { id: 420, icon: '📜', name: 'Parchemin Sombre', type: 'paper', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'dark', collection: 'dark-fantasy', locked: true },
+                { id: 421, icon: '📃', name: 'Papier Gothique', type: 'paper', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'dark', collection: 'dark-fantasy', locked: true },
+                
+                // Cottage Core themed papers
+                { id: 430, icon: '📄', name: 'Papier Floral', type: 'paper', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature', collection: 'cottage-core', locked: true },
+                { id: 431, icon: '📃', name: 'Papier Vintage', type: 'paper', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'nature', collection: 'cottage-core', locked: true },
+                
+                // Generic washi
+                { id: 403, icon: '🎀', name: 'Washi basique', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'decoration', collection: 'essentials', locked: true },
                 { id: 404, icon: '🎗️', name: 'Washi étoiles', type: 'washi', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'decoration', collection: 'essentials', locked: true },
                 
+                // Japan Lofi themed washi
+                { id: 412, icon: '🎀', name: 'Washi Sakura', type: 'washi', rarity: 'common', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'japan', collection: 'japan-lofi', locked: true },
+                { id: 413, icon: '🎗️', name: 'Washi Torii', type: 'washi', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'japan', collection: 'japan-lofi', locked: true },
+                
+                // Dark Fantasy themed washi
+                { id: 422, icon: '🎀', name: 'Washi Lune', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'dark', collection: 'dark-fantasy', locked: true },
+                { id: 423, icon: '🎗️', name: 'Washi Étoiles Noires', type: 'washi', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'dark', collection: 'dark-fantasy', locked: true },
+                
+                // Cottage Core themed washi
+                { id: 432, icon: '🎀', name: 'Washi Fleurs', type: 'washi', rarity: 'common', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'nature', collection: 'cottage-core', locked: true },
+                { id: 433, icon: '🎗️', name: 'Washi Champignon', type: 'washi', rarity: 'rare', artist: 'Sophie Martin', artistId: 'artist_1', theme: 'nature', collection: 'cottage-core', locked: true },
+                
+                // Frames
                 { id: 405, icon: '🖼️', name: 'Cadre polaroid', type: 'frame', rarity: 'rare', artist: 'Lucas Bernard', artistId: 'artist_2', theme: 'photo', collection: 'essentials', locked: true },
                 { id: 406, icon: '🔲', name: 'Cadre floral', type: 'frame', rarity: 'legendary', artist: 'Emma Laurent', artistId: 'artist_3', theme: 'photo', collection: 'essentials', locked: true },
             ],
@@ -4603,7 +5060,47 @@
             init() {
                 console.log('🌸 YORI POC initialized');
                 this.loadFromStorage();
+                
+                // Initialize starter collection if user has no assets
+                if (this.user.collection.length === 0) {
+                    this.initStarterCollection();
+                }
+                
                 this.setupEventListeners();
+            },
+            
+            initStarterCollection() {
+                // Add starter assets to collection
+                const starterIds = [
+                    // Japan Lofi stickers
+                    101, 102, 103, 104, 108,
+                    // Japan Lofi papers & washi  
+                    410, 412,
+                    // Dark Fantasy stickers
+                    201, 204,
+                    // Dark Fantasy papers & washi
+                    420, 422,
+                    // Cottage Core stickers
+                    301, 302, 304,
+                    // Cottage Core papers & washi
+                    430, 432,
+                    // Essentials
+                    401, 403
+                ];
+                
+                starterIds.forEach(id => {
+                    const asset = this.availableAssets.find(a => a.id === id);
+                    if (asset) {
+                        this.user.collection.push({
+                            ...asset,
+                            unlockedAt: new Date('2026-01-20').toISOString(),
+                            timesUsed: 0
+                        });
+                    }
+                });
+                
+                this.saveToStorage();
+                console.log('Starter collection initialized:', this.user.collection.length, 'assets');
             },
             
             loadFromStorage() {
@@ -4727,9 +5224,19 @@
                     } else if (screenId === 'collection') {
                         this.renderCollection();
                     } else if (screenId === 'journal-editor') {
-                        // Show inspiration prompt first
-                        this.showInspirationPrompt();
-                        return; // Don't navigate yet
+                        // Show inspiration prompt first, then setup editor
+                        const today = this.getDateKey(new Date());
+                        const todayEntry = this.user.journalEntries.find(e => 
+                            this.getDateKey(new Date(e.date)) === today
+                        );
+                        
+                        if (!todayEntry) {
+                            this.showInspirationPrompt();
+                            return; // Will navigate after prompt
+                        } else {
+                            // Already has entry, go directly to editor
+                            setTimeout(() => this.setupEditorZen(), 100);
+                        }
                     } else if (screenId === 'envelope-opening') {
                         this.resetEnvelopeScreen();
                     } else if (screenId === 'journal-history') {
@@ -5475,13 +5982,18 @@
                     return;
                 }
                 
-                // Get stickers from canvas
-                const stickerElements = document.querySelectorAll('.sticker');
-                const stickers = Array.from(stickerElements).map(el => ({
-                    icon: el.textContent,
-                    x: parseInt(el.style.left),
-                    y: parseInt(el.style.top),
-                }));
+                // Get stickers from canvas (both old and zen styles)
+                const stickerElements = document.querySelectorAll('.sticker, .sticker-zen');
+                const stickers = Array.from(stickerElements).map(el => {
+                    const icon = el.querySelector('.sticker-zen-icon') ? 
+                        el.querySelector('.sticker-zen-icon').textContent || el.querySelector('.sticker-zen-icon img')?.src :
+                        el.textContent;
+                    return {
+                        icon: icon,
+                        x: parseInt(el.style.left) || 0,
+                        y: parseInt(el.style.top) || 0,
+                    };
+                });
                 
                 const today = this.getDateKey(new Date());
                 
@@ -5508,6 +6020,466 @@
                 
                 // Show celebration modal instead of just toast
                 this.showCelebrationModal();
+            },
+            
+            // ============================================
+            // ZEN EDITOR FUNCTIONS
+            // ============================================
+            
+            setupEditorZen() {
+                const textarea = document.getElementById('journal-text');
+                
+                // Update date badge
+                const dateDisplay = document.getElementById('editor-date');
+                if (dateDisplay) {
+                    const today = new Date();
+                    const options = { weekday: 'long', day: 'numeric', month: 'long' };
+                    dateDisplay.textContent = today.toLocaleDateString('fr-FR', options);
+                }
+                
+                // Load today's entry if exists
+                const today = this.getDateKey(new Date());
+                const todayEntry = this.user.journalEntries.find(e => 
+                    this.getDateKey(new Date(e.date)) === today
+                );
+                
+                if (todayEntry) {
+                    textarea.value = todayEntry.text;
+                    
+                    // Restore background
+                    if (todayEntry.background) {
+                        this.changeBackgroundZen(todayEntry.background);
+                    }
+                    
+                    // Restore stickers
+                    if (todayEntry.stickers) {
+                        todayEntry.stickers.forEach(sticker => {
+                            this.addStickerToCanvasZen(sticker.icon, sticker.x, sticker.y);
+                        });
+                    }
+                }
+                
+                // Update placeholder based on mood
+                const todayMood = this.user.moods[today];
+                if (todayMood) {
+                    this.updatePlaceholderForMood(todayMood.mood);
+                    const moodIcon = document.getElementById('current-mood-icon-zen');
+                    if (moodIcon) moodIcon.textContent = todayMood.emoji || '😊';
+                }
+                
+                // Setup word count
+                this.updateWordCount();
+                textarea.addEventListener('input', () => this.updateWordCount());
+                
+                // Setup auto-save (every 3 seconds)
+                this.startAutoSave();
+                
+                // Setup toolbar hide on typing
+                this.setupToolbarHiding();
+            },
+            
+            updateWordCount() {
+                const textarea = document.getElementById('journal-text');
+                const wordCountEl = document.getElementById('word-count-zen');
+                if (!textarea || !wordCountEl) return;
+                
+                const text = textarea.value.trim();
+                const words = text ? text.split(/\s+/).length : 0;
+                wordCountEl.textContent = `${words} mot${words > 1 ? 's' : ''}`;
+            },
+            
+            startAutoSave() {
+                // Clear any existing interval
+                if (this.autoSaveInterval) clearInterval(this.autoSaveInterval);
+                
+                this.autoSaveInterval = setInterval(() => {
+                    const text = document.getElementById('journal-text')?.value;
+                    if (text && text.trim()) {
+                        this.autoSaveEntry();
+                    }
+                }, 3000);
+            },
+            
+            autoSaveEntry() {
+                const indicator = document.getElementById('autosave-indicator');
+                if (indicator) {
+                    indicator.classList.add('show');
+                    setTimeout(() => indicator.classList.remove('show'), 2000);
+                }
+                // Note: Actual save happens on exit to avoid performance issues
+            },
+            
+            setupToolbarHiding() {
+                const textarea = document.getElementById('journal-text');
+                const toolbar = document.getElementById('editor-toolbar-floating');
+                let typingTimer;
+                
+                if (!textarea || !toolbar) return;
+                
+                textarea.addEventListener('input', () => {
+                    // Hide toolbar while typing
+                    toolbar.classList.add('hidden');
+                    
+                    // Show again after 2 seconds of no typing
+                    clearTimeout(typingTimer);
+                    typingTimer = setTimeout(() => {
+                        toolbar.classList.remove('hidden');
+                    }, 2000);
+                });
+            },
+            
+            updatePlaceholderForMood(mood) {
+                const textarea = document.getElementById('journal-text');
+                if (!textarea) return;
+                
+                const placeholders = {
+                    calm: 'Laisse tes pensées couler doucement...',
+                    happy: 'Qu\'est-ce qui t\'a fait sourire aujourd\'hui ?',
+                    sad: 'Prends le temps d\'accueillir ce que tu ressens...',
+                    energetic: 'Ton énergie déborde ! Raconte-moi tout...',
+                    peaceful: 'Dans ce moment de paix, que ressens-tu ?',
+                    anxious: 'Dépose ici ce qui t\'inquiète, sans jugement...',
+                };
+                
+                textarea.placeholder = placeholders[mood] || placeholders.calm;
+            },
+            
+            exitEditor() {
+                // Stop auto-save
+                if (this.autoSaveInterval) {
+                    clearInterval(this.autoSaveInterval);
+                    this.autoSaveInterval = null;
+                }
+                
+                // Save if there's content
+                const text = document.getElementById('journal-text')?.value;
+                if (text && text.trim()) {
+                    // Silent save without celebration
+                    this.silentSaveEntry();
+                }
+                
+                // Clear any selected stickers
+                document.querySelectorAll('.sticker-zen.selected').forEach(s => s.classList.remove('selected'));
+                
+                this.navigateTo('home');
+            },
+            
+            saveAndExitEditor() {
+                // Close all modals first
+                this.closeStickerPicker();
+                this.closeBackgroundPicker();
+                this.closeMoodPicker();
+                
+                // Stop auto-save
+                if (this.autoSaveInterval) {
+                    clearInterval(this.autoSaveInterval);
+                    this.autoSaveInterval = null;
+                }
+                
+                this.saveJournalEntry();
+            },
+            
+            silentSaveEntry() {
+                const text = document.getElementById('journal-text').value;
+                if (!text.trim()) return;
+                
+                const stickerElements = document.querySelectorAll('.sticker-zen');
+                const stickers = Array.from(stickerElements).map(el => {
+                    const iconEl = el.querySelector('.sticker-zen-icon');
+                    const icon = iconEl.querySelector('img')?.src || iconEl.textContent;
+                    return {
+                        icon: icon,
+                        x: parseInt(el.style.left) || 0,
+                        y: parseInt(el.style.top) || 0,
+                    };
+                });
+                
+                const today = this.getDateKey(new Date());
+                
+                const entry = {
+                    id: Date.now(),
+                    date: new Date().toISOString(),
+                    text: text,
+                    background: this.editor.currentBackground,
+                    mood: this.user.moods[today] || null,
+                    stickers: stickers,
+                };
+                
+                this.user.journalEntries = this.user.journalEntries.filter(e => 
+                    !this.isSameDay(new Date(e.date), new Date())
+                );
+                
+                this.user.journalEntries.push(entry);
+                this.saveToStorage();
+            },
+            
+            // ============================================
+            // STICKER PICKER
+            // ============================================
+            
+            openStickerPicker() {
+                document.getElementById('sticker-picker-modal-zen').classList.add('active');
+                this.renderStickerPickerZen();
+            },
+            
+            closeStickerPicker() {
+                document.getElementById('sticker-picker-modal-zen').classList.remove('active');
+            },
+            
+            closeStickerPickerIfOverlay(event) {
+                // Only close if clicking directly on overlay, not on bottom sheet
+                if (event.target.id === 'sticker-picker-modal-zen') {
+                    this.closeStickerPicker();
+                }
+            },
+            
+            renderStickerPickerZen() {
+                const grid = document.getElementById('stickers-grid-zen');
+                if (!grid) return;
+                
+                grid.innerHTML = '';
+                
+                // Filter only stickers from user collection
+                const stickers = this.user.collection.filter(asset => asset.type === 'sticker');
+                
+                if (stickers.length === 0) {
+                    grid.innerHTML = '<p style="text-align: center; color: rgba(61,52,40,0.5); grid-column: 1/-1;">Ouvre des enveloppes pour débloquer des stickers ! 💌</p>';
+                    return;
+                }
+                
+                stickers.forEach(sticker => {
+                    const item = document.createElement('div');
+                    item.className = 'sticker-picker-item';
+                    
+                    const isImage = sticker.icon.startsWith('http');
+                    item.innerHTML = isImage ? 
+                        `<img src="${sticker.icon}" alt="${sticker.name}">` : 
+                        sticker.icon;
+                    
+                    item.onclick = () => {
+                        this.addStickerToCanvasZen(sticker.icon);
+                        this.closeStickerPicker();
+                    };
+                    
+                    grid.appendChild(item);
+                });
+            },
+            
+            addStickerToCanvasZen(icon, x = null, y = null) {
+                const layer = document.getElementById('stickers-layer-zen');
+                if (!layer) return;
+                
+                const sticker = document.createElement('div');
+                sticker.className = 'sticker-zen';
+                
+                // Random position if not specified
+                const posX = x !== null ? x : Math.random() * (window.innerWidth - 100);
+                const posY = y !== null ? y : Math.random() * 300 + 100;
+                
+                sticker.style.left = posX + 'px';
+                sticker.style.top = posY + 'px';
+                
+                const isImage = icon && icon.startsWith('http');
+                
+                sticker.innerHTML = `
+                    <div class="sticker-zen-icon">
+                        ${isImage ? `<img src="${icon}" style="width: 48px; height: 48px; object-fit: contain;">` : icon}
+                    </div>
+                    <button class="sticker-zen-delete" onclick="app.deleteStickerZen(this, event)">✕</button>
+                `;
+                
+                // Make draggable
+                this.makeElementDraggable(sticker);
+                
+                // Select on click
+                sticker.onclick = (e) => {
+                    if (e.target.classList.contains('sticker-zen-delete')) return;
+                    document.querySelectorAll('.sticker-zen').forEach(s => s.classList.remove('selected'));
+                    sticker.classList.add('selected');
+                };
+                
+                layer.appendChild(sticker);
+                
+                // Animate in
+                setTimeout(() => sticker.style.opacity = '1', 10);
+            },
+            
+            deleteStickerZen(button, event) {
+                if (event) event.stopPropagation();
+                const sticker = button.closest('.sticker-zen');
+                if (sticker) {
+                    sticker.style.transform = 'scale(0)';
+                    sticker.style.opacity = '0';
+                    setTimeout(() => sticker.remove(), 200);
+                }
+            },
+            
+            makeElementDraggable(element) {
+                let isDragging = false;
+                let hasMoved = false;
+                let currentX;
+                let currentY;
+                let initialX;
+                let initialY;
+                
+                element.addEventListener('mousedown', dragStart);
+                element.addEventListener('touchstart', dragStart, { passive: false });
+                
+                function dragStart(e) {
+                    if (e.target.classList.contains('sticker-zen-delete')) return;
+                    
+                    hasMoved = false;
+                    
+                    if (e.type === 'touchstart') {
+                        initialX = e.touches[0].clientX - element.offsetLeft;
+                        initialY = e.touches[0].clientY - element.offsetTop;
+                    } else {
+                        initialX = e.clientX - element.offsetLeft;
+                        initialY = e.clientY - element.offsetTop;
+                    }
+                    
+                    isDragging = true;
+                    element.style.cursor = 'grabbing';
+                    
+                    document.addEventListener('mousemove', drag);
+                    document.addEventListener('touchmove', drag, { passive: false });
+                    document.addEventListener('mouseup', dragEnd);
+                    document.addEventListener('touchend', dragEnd);
+                }
+                
+                function drag(e) {
+                    if (!isDragging) return;
+                    
+                    e.preventDefault();
+                    hasMoved = true;
+                    
+                    if (e.type === 'touchmove') {
+                        currentX = e.touches[0].clientX - initialX;
+                        currentY = e.touches[0].clientY - initialY;
+                    } else {
+                        currentX = e.clientX - initialX;
+                        currentY = e.clientY - initialY;
+                    }
+                    
+                    element.style.left = currentX + 'px';
+                    element.style.top = currentY + 'px';
+                }
+                
+                function dragEnd() {
+                    isDragging = false;
+                    element.style.cursor = 'move';
+                    
+                    document.removeEventListener('mousemove', drag);
+                    document.removeEventListener('touchmove', drag);
+                    document.removeEventListener('mouseup', dragEnd);
+                    document.removeEventListener('touchend', dragEnd);
+                }
+            },
+            
+            // ============================================
+            // BACKGROUND PICKER
+            // ============================================
+            
+            openBackgroundPicker() {
+                document.getElementById('background-picker-modal-zen').classList.add('active');
+                this.renderBackgroundPickerZen();
+            },
+            
+            closeBackgroundPicker() {
+                document.getElementById('background-picker-modal-zen').classList.remove('active');
+            },
+            
+            closeBackgroundPickerIfOverlay(event) {
+                // Only close if clicking directly on overlay, not on bottom sheet
+                if (event.target.id === 'background-picker-modal-zen') {
+                    this.closeBackgroundPicker();
+                }
+            },
+            
+            renderBackgroundPickerZen() {
+                const carousel = document.getElementById('backgrounds-carousel-zen');
+                if (!carousel) return;
+                
+                const backgrounds = [
+                    { id: 'white', color: '#FFFFFF', name: 'Blanc', locked: false },
+                    { id: 'cream', color: '#FFF8E7', name: 'Crème', locked: false },
+                    { id: 'pink', color: '#FFE4E1', name: 'Rose', locked: false },
+                    { id: 'blue', color: '#E6F3FF', name: 'Bleu', locked: true },
+                    { id: 'green', color: '#E8F5E9', name: 'Vert', locked: true },
+                    { id: 'lavender', color: '#F3E5F5', name: 'Lavande', locked: true },
+                ];
+                
+                carousel.innerHTML = backgrounds.map(bg => `
+                    <div class="background-option-zen ${this.editor.currentBackground === bg.id ? 'active' : ''} ${bg.locked ? 'locked' : ''}"
+                         style="background: ${bg.color};"
+                         onclick="app.changeBackgroundZen('${bg.id}', ${bg.locked})">
+                    </div>
+                `).join('');
+            },
+            
+            changeBackgroundZen(bgId, locked = false) {
+                if (locked && !this.user.isPremium) {
+                    this.closeBackgroundPicker();
+                    this.showPaywall();
+                    return;
+                }
+                
+                const backgrounds = {
+                    'white': '#FFFFFF',
+                    'cream': '#FFF8E7',
+                    'pink': '#FFE4E1',
+                    'blue': '#E6F3FF',
+                    'green': '#E8F5E9',
+                    'lavender': '#F3E5F5',
+                };
+                
+                const bg = document.getElementById('canvas-background-zen');
+                if (bg && backgrounds[bgId]) {
+                    bg.style.background = backgrounds[bgId];
+                    this.editor.currentBackground = bgId;
+                }
+                
+                this.closeBackgroundPicker();
+            },
+            
+            // ============================================
+            // MOOD PICKER
+            // ============================================
+            
+            openMoodPicker() {
+                document.getElementById('mood-picker-modal-zen').classList.add('active');
+            },
+            
+            closeMoodPicker() {
+                document.getElementById('mood-picker-modal-zen').classList.remove('active');
+            },
+            
+            closeMoodPickerIfOverlay(event) {
+                // Only close if clicking directly on overlay, not on bottom sheet
+                if (event.target.id === 'mood-picker-modal-zen') {
+                    this.closeMoodPicker();
+                }
+            },
+            
+            selectEditorMood(mood, color, emoji) {
+                const today = this.getDateKey(new Date());
+                
+                this.user.moods[today] = {
+                    mood: mood,
+                    color: color,
+                    emoji: emoji,
+                };
+                
+                // Update icon in toolbar
+                const moodIcon = document.getElementById('current-mood-icon-zen');
+                if (moodIcon) moodIcon.textContent = emoji;
+                
+                // Update placeholder
+                this.updatePlaceholderForMood(mood);
+                
+                this.saveToStorage();
+                this.closeMoodPicker();
+                this.showToast(`Humeur enregistrée : ${emoji}`);
             },
             
             // ============================================
@@ -5886,13 +6858,9 @@
                 });
                 document.querySelector(`.filter-btn-level1[data-type="${type}"]`).classList.add('active');
                 
-                // Show/hide level 2 filter based on type
+                // Show level 2 filter for all types (not just stickers)
                 const level2 = document.getElementById('collection-filters-level2');
-                if (type === 'sticker') {
-                    level2.classList.remove('hidden');
-                } else {
-                    level2.classList.add('hidden');
-                }
+                level2.classList.remove('hidden');
                 
                 // Reset level 2 to 'all'
                 document.querySelectorAll('.filter-btn-level2').forEach(btn => {
@@ -5924,8 +6892,8 @@
                     // Type filter
                     if (asset.type !== this.collectionFilter.type) return false;
                     
-                    // Collection filter (only for stickers)
-                    if (this.collectionFilter.type === 'sticker' && this.collectionFilter.collection !== 'all') {
+                    // Collection filter (applies to all types now)
+                    if (this.collectionFilter.collection !== 'all') {
                         if (asset.collection !== this.collectionFilter.collection) return false;
                     }
                     
@@ -6143,14 +7111,6 @@
             // ============================================
             // MOOD PICKER
             // ============================================
-            
-            showMoodPicker() {
-                document.getElementById('mood-modal').classList.add('active');
-            },
-            
-            closeMoodPicker() {
-                document.getElementById('mood-modal').classList.remove('active');
-            },
             
             selectMood(mood, color) {
                 // Remove previous selection
@@ -6408,7 +7368,7 @@
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
                 document.getElementById('journal-editor-screen').classList.add('active');
                 this.currentScreen = 'journal-editor';
-                this.setupEditor();
+                this.setupEditorZen();
                 document.getElementById('bottom-nav').style.display = 'none';
             },
             
@@ -6484,7 +7444,7 @@
                 document.querySelectorAll('.screen').forEach(s => s.classList.remove('active'));
                 document.getElementById('journal-editor-screen').classList.add('active');
                 this.currentScreen = 'journal-editor';
-                this.setupEditor();
+                this.setupEditorZen();
                 document.getElementById('bottom-nav').style.display = 'none';
                 
                 // Pre-fill with prompt
