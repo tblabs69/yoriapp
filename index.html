@@ -1329,8 +1329,11 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: white;
-            transition: background 0.3s ease;
+            background-color: white;
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            transition: all 0.3s ease;
             z-index: 1;
         }
         
@@ -5094,18 +5097,19 @@
             init() {
                 console.log('🌸 YORI POC initialized');
                 
-                // Check if we need to initialize collection BEFORE loading from storage
-                const stored = localStorage.getItem('yori_data');
-                const needsInit = !stored || (stored && JSON.parse(stored).collection?.length === 0);
-                
-                // Load from storage
+                // Load from storage first
                 this.loadFromStorage();
                 
-                // FORCE initialize starter collection if needed
-                if (needsInit || this.user.collection.length === 0) {
-                    console.log('🎯 Initializing starter collection...');
+                // Check if collection needs initialization
+                const hasPapers = this.user.collection.some(a => a.type === 'paper');
+                const needsInit = this.user.collection.length === 0 || !hasPapers;
+                
+                if (needsInit) {
+                    console.log('🎯 Initializing starter collection... (hasPapers:', hasPapers, ', total:', this.user.collection.length, ')');
                     this.user.collection = []; // Clear any existing
                     this.initStarterCollection();
+                } else {
+                    console.log('✅ Collection already initialized:', this.user.collection.length, 'assets');
                 }
                 
                 this.setupEventListeners();
@@ -6472,28 +6476,40 @@
             changeBackgroundZen(paperId) {
                 // Find the paper asset
                 const paper = this.user.collection.find(a => a.id === paperId);
-                if (!paper) return;
-                
-                const bg = document.getElementById('canvas-background-zen');
-                if (bg) {
-                    const isImage = paper.icon && paper.icon.startsWith('http');
-                    
-                    if (isImage) {
-                        // Apply image as background
-                        bg.style.backgroundImage = `url('${paper.icon}')`;
-                        bg.style.backgroundSize = 'cover';
-                        bg.style.backgroundPosition = 'center';
-                        bg.style.backgroundRepeat = 'no-repeat';
-                        bg.style.background = 'none'; // Clear solid color
-                    } else {
-                        // Fallback to solid color if emoji
-                        bg.style.background = '#FFFFFF';
-                        bg.style.backgroundImage = 'none';
-                    }
-                    
-                    this.editor.currentBackground = paperId;
+                if (!paper) {
+                    console.warn('Paper not found:', paperId);
+                    return;
                 }
                 
+                const bg = document.getElementById('canvas-background-zen');
+                if (!bg) {
+                    console.warn('canvas-background-zen not found');
+                    return;
+                }
+                
+                const isImage = paper.icon && paper.icon.startsWith('http');
+                
+                console.log('Applying background:', paper.name, isImage ? 'IMAGE' : 'EMOJI');
+                
+                if (isImage) {
+                    // Clear any previous background color
+                    bg.style.backgroundColor = 'transparent';
+                    
+                    // Apply image as background
+                    bg.style.backgroundImage = `url('${paper.icon}')`;
+                    bg.style.backgroundSize = 'cover';
+                    bg.style.backgroundPosition = 'center';
+                    bg.style.backgroundRepeat = 'no-repeat';
+                } else {
+                    // Fallback to white if emoji
+                    bg.style.backgroundColor = '#FFFFFF';
+                    bg.style.backgroundImage = 'none';
+                }
+                
+                this.editor.currentBackground = paperId;
+                
+                // Re-render picker to update active state
+                this.renderBackgroundPickerZen();
                 this.closeBackgroundPicker();
             },
             
