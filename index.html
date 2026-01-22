@@ -5059,10 +5059,14 @@
             
             init() {
                 console.log('🌸 YORI POC initialized');
+                
+                // Load from storage first
                 this.loadFromStorage();
                 
-                // Initialize starter collection if user has no assets
+                // ALWAYS initialize starter collection if empty (even after loading)
+                // This ensures new users or users with old empty data get assets
                 if (this.user.collection.length === 0) {
+                    console.log('Collection is empty, initializing starter pack...');
                     this.initStarterCollection();
                 }
                 
@@ -5088,6 +5092,8 @@
                     401, 403
                 ];
                 
+                console.log('Available assets count:', this.availableAssets.length);
+                
                 starterIds.forEach(id => {
                     const asset = this.availableAssets.find(a => a.id === id);
                     if (asset) {
@@ -5096,11 +5102,13 @@
                             unlockedAt: new Date('2026-01-20').toISOString(),
                             timesUsed: 0
                         });
+                    } else {
+                        console.warn('Asset not found:', id);
                     }
                 });
                 
                 this.saveToStorage();
-                console.log('Starter collection initialized:', this.user.collection.length, 'assets');
+                console.log('✅ Starter collection initialized:', this.user.collection.length, 'assets');
             },
             
             loadFromStorage() {
@@ -6887,6 +6895,10 @@
                 const grid = document.getElementById('collection-grid');
                 grid.innerHTML = '';
                 
+                console.log('=== RENDER COLLECTION DEBUG ===');
+                console.log('Total user collection:', this.user.collection.length);
+                console.log('Current filter:', this.collectionFilter);
+                
                 // Filter assets based on current filters
                 let filteredAssets = this.user.collection.filter(asset => {
                     // Type filter
@@ -6899,6 +6911,8 @@
                     
                     return true;
                 });
+                
+                console.log('Filtered assets count:', filteredAssets.length);
                 
                 // Update stats
                 document.getElementById('total-assets').textContent = this.user.collection.length;
@@ -6913,6 +6927,9 @@
                         <div style="grid-column: 1/-1; text-align: center; padding: var(--space-2xl); color: rgba(61, 52, 40, 0.5);">
                             <p style="font-size: 48px; margin-bottom: var(--space-md);">📦</p>
                             <p>Aucun asset de ce type</p>
+                            <button class="btn btn-secondary" onclick="app.forceResetCollection()" style="margin-top: var(--space-lg);">
+                                🔄 Réinitialiser (Debug)
+                            </button>
                         </div>
                     `;
                     return;
@@ -6938,7 +6955,15 @@
                     });
                     
                     grid.appendChild(item);
-                });
+                })
+;
+            },
+            
+            forceResetCollection() {
+                console.log('🔄 Force resetting collection...');
+                this.user.collection = [];
+                this.initStarterCollection();
+                this.renderCollection();
             },
             
             showAssetDetail(asset) {
