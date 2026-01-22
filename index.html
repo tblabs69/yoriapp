@@ -5060,13 +5060,17 @@
             init() {
                 console.log('🌸 YORI POC initialized');
                 
-                // Load from storage first
+                // Check if we need to initialize collection BEFORE loading from storage
+                const stored = localStorage.getItem('yori_data');
+                const needsInit = !stored || (stored && JSON.parse(stored).collection?.length === 0);
+                
+                // Load from storage
                 this.loadFromStorage();
                 
-                // ALWAYS initialize starter collection if empty (even after loading)
-                // This ensures new users or users with old empty data get assets
-                if (this.user.collection.length === 0) {
-                    console.log('Collection is empty, initializing starter pack...');
+                // FORCE initialize starter collection if needed
+                if (needsInit || this.user.collection.length === 0) {
+                    console.log('🎯 Initializing starter collection...');
+                    this.user.collection = []; // Clear any existing
                     this.initStarterCollection();
                 }
                 
@@ -5076,8 +5080,8 @@
             initStarterCollection() {
                 // Add starter assets to collection
                 const starterIds = [
-                    // Japan Lofi stickers
-                    101, 102, 103, 104, 108,
+                    // Japan Lofi stickers (ALL 10)
+                    101, 102, 103, 104, 105, 106, 107, 108, 109, 110,
                     // Japan Lofi papers & washi  
                     410, 412,
                     // Dark Fantasy stickers
